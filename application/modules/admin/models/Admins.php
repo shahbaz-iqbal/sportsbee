@@ -1,8 +1,17 @@
 <?php
 
 Class Admins extends CI_Model {
-
-    function player_request() {
+    function all_player(){
+         $query = $this->db->get('player');
+        $result = $query->result();
+         return $result;
+    }
+    function all_teams(){
+         $query = $this->db->get('team');
+        $result = $query->result();
+         return $result;
+    }
+                function player_request() {
         $this->db->order_by('id', 'DESC');
         $this->db->where('status', 3);
         $query = $this->db->get('player');

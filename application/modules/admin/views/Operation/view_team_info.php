@@ -12,16 +12,16 @@ $this->load->view('admin/header');
                     <div class="row">
                         <div class="col-md-4">
                             <div>
-                                <img src="" alt="profile_image">
+                                <img src="<?php echo base_url(); ?>assets/images/dummy.jpg" alt="profile_image" height="200" width="200">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="profile-head">
                                 <h5>
-                                    Name:
+                                    Name:Shahbaz
                                 </h5>
                                 <h6>
-                                    Gmail:
+                                    Email:shahbaz@gmail.com
                                 </h6>
                                 <p class="proile-rating">Address : <span></span></p>
                                 <p class="proile-rating">City : <span></span></p>
@@ -49,10 +49,10 @@ $this->load->view('admin/header');
                                     <a href="#" class="social-list-item border-danger text-danger" style="margin-left: 45px;"><i class="mdi mdi-youtube" style="padding: 5px;"></i></a>
                                 </div>
                                 <p>Sports Details:</p>
-                                <a href="">Playing Style:</a><br/>
+                                <a href="">Playing Style:left hand</a><br/>
                                 <a href="">Sport: </a><br/>
                                 <p>History/Interested in:</p>
-                                <a href="">Play in:</a><br/>
+                                <a href="">Play in:school team , university team</a><br/>
                                 <a href="">Matches:</a><br/>     
                             </div>
                         </div>
@@ -70,7 +70,7 @@ $this->load->view('admin/header');
                                     <label>DOB:</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p></p>
+                                    <p>26/6/1995</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -78,7 +78,7 @@ $this->load->view('admin/header');
                                     <label>Father Name:</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p></p>
+                                    <p>Iqbal</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -86,7 +86,7 @@ $this->load->view('admin/header');
                                     <label>Bload Group:</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p></p>
+                                    <p>a+</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -94,7 +94,7 @@ $this->load->view('admin/header');
                                     <label>Phone:</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p></p>
+                                    <p>036628292922</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -107,7 +107,7 @@ $this->load->view('admin/header');
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>Bio:</label>
+                                    <label>Bio: at last</label>
                                 </div>
                                 <div class="col-md-6">
                                     <p></p>
@@ -115,11 +115,11 @@ $this->load->view('admin/header');
                             </div>
                         </div>
                     </div>
-                    <input type="button" class="btn-primary hide" onclick="printDiv('printMe')" value="print">
+                   
                 </div>
             <?php } ?>
         <?php } ?>
-
+ <input type="button" class="btn-primary hide" onclick="printDiv('printMe')" value="print">
     </div>
 </div>   
 

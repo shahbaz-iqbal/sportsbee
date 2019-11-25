@@ -99,10 +99,10 @@
                                                 University Team,<br> <b class='text-primary'> Matches: </b> Tape Ball,                                        </td>
                                             <td>
                                                 <div class="row">
-                                                    <form method="post" action="<?php echo base_url(); ?>admin/player_req_accept/<?php echo $user->id; ?>">
+                                                    <form method="post" action="<?php echo base_url(); ?>admin/dashboard/player_req_accept/<?php echo $user->id; ?>">
                                                         <input type="submit" value="Accept" class="btn btn-success ">
                                                     </form>
-                                                    <form method="post" action="<?php echo base_url(); ?>admin/player_req_reject/<?php echo $user->id; ?>">
+                                                    <form method="post" action="<?php echo base_url(); ?>admin/dashboard/player_req_reject/<?php echo $user->id; ?>">
                                                         <input type="submit" value="Reject" class="btn btn-danger " style="margin-left: 5px;">
                                                     </form>
                                                 </div>

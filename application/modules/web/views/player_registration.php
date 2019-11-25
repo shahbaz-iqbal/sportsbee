@@ -61,8 +61,8 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="firstname">Name<span style="color:red;">..*</span></label>
-                                                    <input type="text" onfocusout="checkfullname()" class="form-control" id="fullname" maxlength="190" name="fullname" placeholder="Enter first name">
+                                                    <label for="firstname">Full Name<span style="color:red;">..*</span></label>
+                                                    <input type="text" onfocusout="checkfullname()" class="form-control" id="fullname" maxlength="190" name="fullname" placeholder="Enter full name">
                                                     <span id="fullnamespan" style="color: red;"></span>
                                                 </div>
                                             </div>
@@ -271,12 +271,12 @@
                                                <!--       <?php if (count($users) > 0) { ?>
                                                <?php foreach ($users as $user) { ?> -->
                                                    
-                                             <option class="bloodgrouplist"  selected value="<?php echo $user->sport_id; ?>"> <?php echo $user->sport_name; ?></option>
+                                           <!--   <option class="bloodgrouplist"  selected value="<?php echo $user->sport_id; ?>"> <?php echo $user->sport_name; ?></option>
                                                        <?php } ?>
                                                        <?php } ?>
-                                                       <!-- <label for="">Select Sports</label>
-                                                    <select class="form-control" name="" id="playtype">-->
-                                                    <option class="bloodgrouplist"  selected disabled value="">Select Option</option> -->
+                                                        <label for="">Select Sports</label>
+                                                    <select class="form-control" name="" id="playtype"> -->                                      
+                                                     <option class="bloodgrouplist"  selected  value="Cricket">Cricket</option> -->
                                                         <option class="bloodgrouplist" disabled value="Football">Football (Coming Soon)</option>
                                                         <option class="bloodgrouplist" disabled value="Kabbadi">Kabbadi (Coming Soon)</option>
                                                         <option class="bloodgrouplist" disabled value="BaseBall">BaseBall (Coming Soon)</option>
@@ -463,7 +463,7 @@
                     $('#addressspan').text("Please Enter Address!");
                     document.forms["msform"]["address"].style.border = "1px solid red";
                     check = 1;
-                } check=0;
+                }// check=0;
                 if (check == 1) {
                     swal('missing fields', 'Please Fill the Required Fields', 'error');
                 } else {
@@ -575,39 +575,59 @@
                   var Postalcode=$('#postalcode').val();
                   var Bio=$('#bio').val();
                   var Gender=$("input[name='gender']:checked").val();
-
+          
 
                  //..................Setting Pop up Information Content ........//
-                 
-                 var textt = '<div class="row" ><div class="col-md-6" ><fieldset class="savepop-border"><legend class="savepop-border">Personal Information</legend>'+
-              '<div class="table-responsive">'+'<table  class="border border-light table table-condensed cellspacing="0" cellpadding="5" border="1">'+
-                            '<tr><td>Fist name</td><td>'+Fullname+'</td></tr>'+                                 
-                            '<tr><td>Father name</td><td>'+Fathername +'</td></tr>'+
-                           '<tr><td>Cnic</td><td>'+Cnic+'</td></tr>'+
-                           '<tr><td>Birthday</td><td>'+Dob+'</td></tr>'+
-                           '<tr><td>Gender</td><td>'+Gender+ '</td></tr>'+
-                           '<tr><td>Bloodgroup</td><td>'+Bloodgroup+'</td></tr>'+
-                           '<tr><td>Staus/Bio</td><td>'+Bio+'</td></tr>'+
-                           '</table></div></fieldset></div>'+
-                           '<div class="col-md-6" ><fieldset class="savepop-border">'+
-                           '<legend class="savepop-border">Sportsbee Account</legend>'+
-                           '<div class="table-responsive">'+
-    ' <table  class="border border-light table  table-condensed cellspacing="0" cellpadding="5" border="1">'+
-                           ' <tr><td>Email</td><td>'+Gmail+'</td></tr>'+
-                           '<tr><td>Username</td><td>'+Username +'</td></tr>'+
-                           '<tr><td>Password</td><td>'+Password+'</td></tr>'+
-                           '<tr><td>Mobile #</td><td>'+ Phone1+'</td></tr>'+
-                           '<tr><td>Address</td><td>'+Address+'</td></tr>'+
-                           '</table></div></fieldset></div></div>'+
-                           '<div class="row"><div class="col-md-6" ><fieldset class="savepop-border">'+
-                           '<legend class="savepop-border">Sportsbee Account</legend><div class="table-responsive">'+
-    ' <table  class="border border-light table  table-condensed cellspacing="0" cellpadding="5" border="1">'+
-                           ' <tr><td>Selected sport</td><td>'+playt+'</td></tr>'+
-                           '<tr><td>Play as a</td><td>'+playert +'</td></tr>'+
-                           '<tr><td>Preferable playing side</td><td>'+handis+'</td></tr>'+
-                           '</table></div></fieldset></div></div>';
-         
 
+                 // var textt = '<div class="row" ><div class="col-md-6" ><fieldset class="savepop-border"><legend class="savepop-border">Personal Information</legend>'+
+                 // '<span>Fullname </span><p>'+Fullname+'</p>';
+                 
+    //              var textt = '<div class="row" ><div class="col-md-6" ><fieldset class="savepop-border"><legend class="savepop-border">Personal Information</legend>'+
+    //           '<div class="table-responsive">'+'<table  class="border border-light table table-condensed cellspacing="0" cellpadding="5" border="1">'+
+    //                         '<tr><td>Fist name</td><td>'+Fullname+'</td></tr>'+                                 
+    //                         '<tr><td>Father name</td><td>'+Fathername +'</td></tr>'+
+    //                        '<tr><td>Cnic</td><td>'+Cnic+'</td></tr>'+
+    //                        '<tr><td>Birthday</td><td>'+Dob+'</td></tr>'+
+    //                        '<tr><td>Gender</td><td>'+Gender+ '</td></tr>'+
+    //                        '<tr><td>Bloodgroup</td><td>'+Bloodgroup+'</td></tr>'+
+    //                        '<tr><td>Staus/Bio</td><td>'+Bio+'</td></tr>'+
+    //                        '</table></div></fieldset></div>'+
+    //                        '<div class="col-md-6" ><fieldset class="savepop-border">'+
+    //                        '<legend class="savepop-border">Sportsbee Account</legend>'+
+    //                        '<div class="table-responsive">'+
+    // ' <table  class="border border-light table  table-condensed cellspacing="0" cellpadding="5" border="1">'+
+    //                        ' <tr><td>Email</td><td>'+Gmail+'</td></tr>'+
+    //                        '<tr><td>Username</td><td>'+Username +'</td></tr>'+
+    //                        '<tr><td>Password</td><td>'+Password+'</td></tr>'+
+    //                        '<tr><td>Mobile #</td><td>'+ Phone1+'</td></tr>'+
+    //                        '<tr><td>Address</td><td>'+Address+'</td></tr>'+
+    //                        '</table></div></fieldset></div></div>'+
+    //                        '<div class="row"><div class="col-md-6" ><fieldset class="savepop-border">'+
+    //                        '<legend class="savepop-border">Sportsbee Account</legend><div class="table-responsive">'+
+    // ' <table  class="border border-light table  table-condensed cellspacing="0" cellpadding="5" border="1">'+
+    //                        ' <tr><td>Selected sport</td><td>'+playt+'</td></tr>'+
+    //                        '<tr><td>Play as a</td><td>'+playert +'</td></tr>'+
+    //                        '<tr><td>Preferable playing side</td><td>'+handis+'</td></tr>'+
+    //                        '</table></div></fieldset></div></div>';
+       
+               var textt='<div class="row" ><div class="col-md-6" ><fieldset class="savepop-border"><legend class="savepop-border">Basic Information</legend>'+
+                                              '<div class="table-responsive">'+'<table  class="border border-light  table-condensed cellspacing="0"  border="1">'+
+                                                            '<tr><td>Fist name</td><td>'+Fullname+'</td></tr>'+                                 
+                                                           '<tr><td>Cnic</td><td>'+Cnic+'</td></tr>'+   
+                                                           ' <tr><td>Email</td><td>'+Gmail+'</td></tr>'+
+                                                           '<tr><td>Username</td><td>'+Username +'</td></tr>'+
+                                                           '<tr><td>Password</td><td>'+Password+'</td></tr>'+
+                                                           '<tr><td>Mobile #</td><td>'+ Phone1+'</td></tr>'+
+                                                           '</table></div></fieldset></div>'+
+                                                           
+                                                           '<div class="col-md-6" ><fieldset class="savepop-border">'+
+                                                           '<legend class="savepop-border">Sport information</legend><div class="table-responsive">'+
+                                    ' <table  class="border border-light   table-condensed cellspacing="0" border="1">'+
+                                                           ' <tr><td>Selected sport</td><td>'+playt+'</td></tr>'+
+                                                           '<tr><td>Play as a</td><td>'+playert +'</td></tr>'+
+                                                           '<tr><td>Preferable playing side</td><td>'+handis+'</td></tr>'+
+                                                           
+                                                           '</table></div></fieldset></div>';
 
 /* If want to run without fill fields 
             var textt = '<fieldset class="savepop-border"><legend class="savepop-border">Personal Information</legend>'+
@@ -661,38 +681,33 @@
                          confirmButtonText: 'Yes, Submit it!'
                        }).then((result) => {
                          if (result.value) {
-                            console.log(msform);
-                            $('#msform').attr('action', '<?php echo base_url('web/registration/insert_player'); ?>');
-                            $('#msform').submit();
+                            //congrats_msg();
+                            //console.log(msform);
+                            // $('#msform').attr('action', '<?php echo base_url('web/registration/insert_player'); ?>');
+                            // $('#msform').submit();
+
+                            //....//
+                             Swal.fire({title:"Good job!",
+                            text:"Congratulation you registered successfully!",
+                            type:"success",
+                            confirmButtonClass:"btn btn-confirm mt-2"}).then((result)=>{
+                                if(result.value){
+                                    $('#msform').attr('action', '<?php echo base_url('web/registration/insert_player'); ?>');
+                                   $('#msform').submit();
+                                }
+                            })
+
+                            //...//
                             
-                           //var form = $("#add_form").serialize();
-                           // alert();
-                          /* $.ajax({
-                               type:"POST",
-                               url:base_url+"do_add",
-                               data:form,
-                               success:function(response){
-                                   console.log(response);
-                                   if (response != 'error') {
-                                       Swal.fire(
-                                         'Submited!',
-                                         'Your form has been submited.',
-                                         'success'
-                                       );
-                                       setTimeout(function(){ window.location.href=response; },3000);
-                                   }else{
-                                       Swal.fire(
-                                         'ERROR!',
-                                         'Your form did not submited.',
-                                         'error'
-                                       )
-                                   }
-                               }
-                           });*/
-                         }
+                          
+                           }
                        })
 
              }); //save button action and confirm validation code
+
+                  //  function congrats_msg(){
+                       
+                    // }
 
 
 
@@ -713,7 +728,7 @@
 
                     if (x.match(alphaExp)) {
 
-                        document.forms["msform"]["fullname"].style.border = "1px solid #fda81a";
+                        document.forms["msform"]["fullname"].style.border = "1px solid green";
                         $('#fullnamespan').text("");
                     } else {
                         $('#fullname').val("");
@@ -762,25 +777,27 @@
             function checkcnic() {
                 var x = document.forms["msform"]["cnic"].value;
                // var x = document.forms["msform"]["city"].value;
-               var alphaExp = /^\d{5}-\d{7}-\d+$/;
+             //  var alphaExp = /^\d{5}-\d{7}-\d+$/;
                
                     
                 if (document.forms["msform"]["cnic"].value.length != 15) {
 
                     document.forms["msform"]["cnic"].style.border = "1px solid red";
                     $('#cnic').val("");
-                    document.forms["msform"]["cnic"].placeholder = "Invalid ! :Cnic must be contain 15 digits!";
-                } else {
-                    if (x.match(alphaExp)) {
-                    document.forms["msform"]["cnic"].style.border = "1px solid green";
-                    $('#cnicspan').text("");
-                       }else{
-                          document.forms["msform"]["cnic"].style.border = "1px solid red";
-                    $('#cnic').val("");
-                    document.forms["msform"]["cnic"].placeholder = "Invalid cnic can't contain !" ;
-                    $('#cnicspan').html("");
-                       }
-                }
+                    document.forms["msform"]["cnic"].placeholder = "Invalid ! :Cnic must contain 15 digits!";
+                } 
+                // else {
+                //     if (x.match(alphaExp)) {
+                //     document.forms["msform"]["cnic"].style.border = "1px solid green";
+                //     //$('#cnicspan').text("");
+                //        }else{
+                //         console.log('i am abc');
+                //           document.forms["msform"]["cnic"].style.border = "1px solid red";
+                //     $('#cnic').val("");
+                //     document.forms["msform"]["cnic"].placeholder = "Invalid cnic abc !" ;
+                //     $('#cnicspan').html("");
+                //        }
+                // }
             }
             $(function () {
                     
@@ -810,6 +827,13 @@
                                 data:{cnic:cnic_},
                                 success:function(data){
                                     $('#cnicspan').html(data);
+
+                                    if(data == '<label class="text-danger"><span class="glyphicon glyphicon-remove"></span> Cnic Already registered</label>'){
+                                        $('#cnic').val("");
+                                        document.forms["msform"]["cnic"].style.border = "1px solid red";
+                                    }else{
+                                        document.forms["msform"]["cnic"].style.border = "1px solid green";
+                                    }
                                 }
                             });
                             var temp = $text.val();
@@ -829,7 +853,7 @@
                             console.log('i am not match with regs');
                             document.forms["msform"]["cnic"].style.border = "1px solid red";
                                 $('#cnic').val("");
-                                document.forms["msform"]["cnic"].placeholder = "Invalid cnic can't contain !" ;
+                                document.forms["msform"]["cnic"].placeholder = "Invalid cnic!" ;
                                 $('#cnicspan').html("");
                         }
                     }}
@@ -859,6 +883,12 @@
                                  data:{phone1:phn1},
                                  success:function(data){
                                      $('#phone1span').html(data);
+                                     if(data =='<label class="text-danger"><span class="glyphicon glyphicon-remove"></span> Mobile# Already registered</label>'){
+                                        document.forms["msform"]["phone1"].style.border = "1px solid red";
+                                        $('#phone1').val("");
+                                     }else{
+                                         document.forms["msform"]["phone1"].style.border = "1px solid green";
+                                     }
 
                                  }
                              });
@@ -978,6 +1008,12 @@
                                 document.forms["msform"]["email"].style.border = "1px solid red";
                                 $('#email').val('');
                              //console.log('i am already regiterded');
+                               }else if(str =='<label class="text-success"><span class="glyphicon glyphicon-ok"></span> Email Available</label>'){
+                                 document.forms["msform"]["email"].style.border = "1px solid green";
+                               }else{
+
+                                   document.forms["msform"]["email"].style.border = "1px solid red";
+                                   $('#email').val('');
                                }
                           }
                        });
@@ -1001,7 +1037,8 @@
                 var x1 = document.forms["msform"]["password"].value;
                 if (document.forms["msform"]["password"].value.length > 3) {
                     if (x1.match(alphaExp)) {
-                        document.forms["msform"]["password"].style.border = "1px solid blue";
+                        document.forms["msform"]["password"].style.border = "1px solid green";
+                         $('#passwordspan').text('');
                     } else {
                         $('#password').val("");
                         document.forms["msform"]["password"].style.border = "1px solid red";
@@ -1054,6 +1091,13 @@
                             data:{Uname:Uname},
                             success:function(data){
                                 $('#usernamespan').html(data);
+                                if(data == '<label class="text-danger"><span class="glyphicon glyphicon-remove"></span> Username Already registered</label>'){
+
+                                        document.forms["msform"]["username"].style.border = "1px solid red";
+                                         $('#username').val("");
+                                }else{
+                                     document.forms["msform"]["username"].style.border = "1px solid green";
+                                }
                             }
                         });
 
@@ -1126,9 +1170,12 @@
                     $('#dobspan').text("Select Date of Birth!");
                 } else {
                     if (diffDays < 5475) {
-                        $('#dob').val("");
+                        //$('#dob').val("");
+                        document.forms["msform"]["dob"].value="";
+
                         $('#dobspan').text("Too young! : You must be atleast 15 year old!");
                         document.forms["msform"]["dob"].style.border = "1px solid red";
+
                     } else {
                         document.forms["msform"]["dob"].style.border = "1px solid green";
                         $('#dobspan').text("");

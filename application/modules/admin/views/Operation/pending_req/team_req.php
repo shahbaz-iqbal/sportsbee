@@ -117,10 +117,10 @@
                                             </td>
                                             <td>
                                                <div class="row">
-                                                    <form method="post" action="<?php echo base_url(); ?>admin/team_req_accept/<?php echo $user->id; ?>">
+                                                    <form method="post" action="<?php echo base_url(); ?>admin/dashboard/team_req_accept/<?php echo $user->id; ?>">
                                                         <input type="submit" value="Accept" class="btn btn-success ">
                                                     </form>
-                                                    <form method="post" action="<?php echo base_url(); ?>admin/team_req_reject/<?php echo $user->id; ?>">
+                                                    <form method="post" action="<?php echo base_url(); ?>admin/dashboard/team_req_reject/<?php echo $user->id; ?>">
                                                         <input type="submit" value="Reject" class="btn btn-danger " style="margin-left: 5px;">
                                                     </form>
                                                 </div>

@@ -41,7 +41,7 @@
                                     <?php } ?>
                                 </div>
                             </div>
-                            <form id="msform" name="msform" action="<?php echo base_url('registration/insert_team'); ?>" method="POST">
+                            <form id="msform" name="msform"  method="POST">
                                 <ul class="nav nav-pills navtab-bg nav-justified">
                                     <li class="nav-item ">
                                         <a href="#aboutme" style="pointer-events: none !important;" data-toggle="tab" aria-expanded="true" class="nav-link active aboutme">
@@ -67,7 +67,7 @@
                                                 <div class="form-group">
                                                     <label for="playertype">Select Sports</label>
                                                     <select class="form-control" name="playertype" id="playertype">
-                                                        <option class="bloodgrouplist"  selected value="1">Cricket</option>
+                                                        <option class="bloodgrouplist"  selected value="Cricket">Cricket</option>
                                                         <option class="bloodgrouplist" disabled value="2">Football (Coming Soon)</option>
                                                         <option class="bloodgrouplist" disabled value="3">Kabbadi (Coming Soon)</option>
                                                         <option class="bloodgrouplist" disabled value="4">BaseBall (Coming Soon)</option>
@@ -418,7 +418,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                  <div class="text-right">
-                                                            <button  type="button" class="btn btn-outline-warning waves-effect waves-light mt-2"><i class="mdi mdi-content-save" id="sa-warning" onclick="movetosavelevel()"> Save </i> </button>
+                                                            <button  type="button" class="btn btn-outline-warning waves-effect waves-light mt-2"><i class="mdi mdi-content-save" id="sa-warnin" onclick="movetosavelevel()"> Save </i> </button>
                                                         </div>
                                             </div>
                                         </div>
@@ -460,12 +460,21 @@
                                                                 $('#teamaddressspan').text("Please Enter father name!");
                                                                 document.forms["msform"]["teamaddress"].style.border = "1px solid red";
                                                                 check = 1;
-                                                            }check=0;
+                                                            }//check=0;
                                                             if (check == 1) {
                                                                 swal('missing fields', 'Please Fill the Required Fields', 'error');
                                                             } else {
+                                                                 // alert();
+                                                                         var t;
+                                                                        Swal.fire({
+                                                                        title:"Moving to next step!",
+                                                                        html:"",
+                                                                        timer:1e3,
+                                                                        onBeforeOpen:function(){
+                                                                        Swal.showLoading()}
+                                                                        });
                                                                 document.getElementsByClassName("timeline")[0].click();
-                                                                document.getElementsByClassName("aboutme")[0].style.background = "#00b318";
+                                                                document.getElementsByClassName("aboutme")[0].style.background = "#fda81a";
                                                                 document.getElementsByClassName("timeline")[0].style.background = "#B22E06";
                                                             }
                                                         }
@@ -525,397 +534,674 @@
                                                                 $('#addressspan').text("Please Enter Address!");
                                                                 document.forms["msform"]["address"].style.border = "1px solid red";
                                                                 check = 1;
-                                                            }check=0;
+                                                            }//check=0;
                                                             if (check == 1) {
-                                                                swal('missing fields', 'one of field', 'error');
+                                                                swal('missing fields', 'Please Fill the Required Fields', 'error');
                                                             } else {
                                                                 // document.getElementsByClassName("settings")[0].click();
                                                                 // document.getElementsByClassName("timeline")[0].style.background = "#00b318";
 
+                                                                //Get values of sport detail form 
+                                                                   var check2level=0;
+                                                                   var handis="";
+                                                                   var typeofmatches=[];
+                                                                   var typeofteam=[];
+                                                                   var playt="";
+                                                                   var playert="";
+                                                                   var teamname=$('#teamname').val();
+                                                                          //playtype & playertype
+                                                                             playt=$('#playas').val();
+                                                                             playert=$('#playertype').val();
+                                                                        
+                                                                            //console.log(playt);
+                                                                            //console.log(playert);
+                                                                           
+                                                                            //handis
+                                                                             handis=$("input[name='switch']:checked").val();
+                                                                            // console.log(handis);
+                                                                          
+                                                                           //matchtype
+                                                                           $.each($("input[name='matchtype[]']:checked"), function(){
+
+                                                                                               typeofmatches.push($(this).val());
+
+                                                                                      });
+                                                                                          //console.log(typeofmatches[1]);
+
+                                                                           //teamtype[]
+                                                                              
+                                                                             
+                                                                            $.each($("input[name='teamtype[]']:checked"),function(){
+                                                                                typeofteam.push($(this).val());
+                                                                            });
+                                                                                           // $.each(typeofteam, function(i, val) {
+                                                                                           //     test += val +'<br>';          
+                                                                                           //     });
+                                                                                           // console.log(test);
+                                                //Get values of basic information form
 
 
-                $('#sa-warning').click(function(){
+                                                  var Fullname=$('#fullname').val();
+                                                  var City=$('#city').val();
+                                                  var Fathername=$('#fathername').val();
+                                                  var Cnic=$('#cnic').val();
+                                                  var Dob=$('#dob').val();
+                                                  var Gmail=$('#email').val();
+                                                  var Password=$('#password').val();
+                                                  var Username=$('#username').val();
+                                                  var Phone1=$('#phone1').val();
+                                                  var Phone2=$('#phone2').val();
+                                                  var Address=$('#address').val();
+                                                  var Bloodgroup=$('#bloodgroup').val();
+                                                  var Postalcode=$('#postalcode').val();
+                                                  var Bio=$('#bio').val();
+                                                  var Gender=$("input[name='gender']:checked").val();
+                                          
 
-                Swal.fire({
-                         title: 'You want to submit these details?',
-                         html: 'heyyy',
-                         type: 'warning',
-                         showCancelButton: true,
-                         confirmButtonColor: '#fda81a',
-                         cancelButtonColor: '#B22E06',
-                         confirmButtonText: 'Yes, Submit it!'
-                       }).then((result) => {
-                         if (result.value) {
-                            console.log(msform);
-                            $('#msform').attr('action', '<?php echo base_url('web/registration/insert_player'); ?>');
-                            $('#msform').submit();
-                            
-                           //var form = $("#add_form").serialize();
-                           // alert();
-                          /* $.ajax({
-                               type:"POST",
-                               url:base_url+"do_add",
-                               data:form,
-                               success:function(response){
-                                   console.log(response);
-                                   if (response != 'error') {
-                                       Swal.fire(
-                                         'Submited!',
-                                         'Your form has been submited.',
-                                         'success'
-                                       );
-                                       setTimeout(function(){ window.location.href=response; },3000);
-                                   }else{
-                                       Swal.fire(
-                                         'ERROR!',
-                                         'Your form did not submited.',
-                                         'error'
-                                       )
-                                   }
-                               }
-                           });*/
-                         }
-                       })
-                        }); 
+                                                 //..................Setting Pop up Information Content ........//
+
+                                                 // var textt = '<div class="row" ><div class="col-md-6" ><fieldset class="savepop-border"><legend class="savepop-border">Personal Information</legend>'+
+                                                 // '<span>Fullname </span><p>'+Fullname+'</p>';
+                                                 
+                                                 var textt = '<div class="row" ><div class="col-md-6" ><fieldset class="savepop-border"><legend class="savepop-border">Basic Information</legend>'+
+                                              '<div class="table-responsive">'+'<table  class="border border-light table-condensed cellspacing="0"  border="1">'+
+                                                            '<tr><td>Fist name</td><td>'+Fullname+'</td></tr>'+                                 
+                                                           '<tr><td>Cnic</td><td>'+Cnic+'</td></tr>'+   
+                                                           ' <tr><td>Email</td><td>'+Gmail+'</td></tr>'+
+                                                           '<tr><td>Username</td><td>'+Username +'</td></tr>'+
+                                                           '<tr><td>Password</td><td>'+Password+'</td></tr>'+
+                                                           '<tr><td>Mobile #</td><td>'+ Phone1+'</td></tr>'+
+                                                           '</table></div></fieldset></div>'+
+                                                           
+                                                           '<div class="col-md-6" ><fieldset class="savepop-border">'+
+                                                           '<legend class="savepop-border">Sport information</legend><div class="table-responsive">'+
+                                    ' <table  class="border border-light   table-condensed cellspacing="0" border="1">'+
+                                                           ' <tr><td>Selected sport</td><td>'+playert+'</td></tr>'+
+                                                           '<tr><td>Play as a</td><td>'+playt +'</td></tr>'+
+                                                           '<tr><td>Preferable playing side</td><td>'+handis+'</td></tr>'+
+                                                           '<tr><td>Team name</td><td>'+teamname+'</td></tr>'+
+                                                           '</table></div></fieldset></div>';
+       
+
+                                                               //saveon();
+
+                                                               $('#sa-warnin').click(function(){
+                                                                   console.log('i am save btn');
+
+                                                                Swal.fire({
+                                                                         title: 'You want to submit these details?',
+                                                                         html: textt,
+                                                                         type: 'warning',
+                                                                         showCancelButton: true,
+                                                                         confirmButtonColor: '#fda81a',
+                                                                         cancelButtonColor: '#B22E06',
+                                                                         confirmButtonText: 'Yes, Submit it!'
+                                                                       }).then((result) => {
+                                                                         if (result.value) {
+                                                                            //congrats_msg();
+                                                                            //console.log(msform);
+                                                     // $('#msform').attr('action', '<?php echo base_url('web/registration/insert_player'); ?>');
+                                                                            // $('#msform').submit();
+
+                                                                            //....//
+                                                                             Swal.fire({title:"Good job!",
+                                                                            text:"Congratulation you registered successfully!",
+                                                                            type:"success",
+                                                                            confirmButtonClass:"btn btn-confirm mt-2"}).then((result)=>{
+                                                                         if(result.value){
+                                                      $('#msform').attr('action', '<?php echo base_url('web/registration/insert_team'); ?>');
+                                                                                   $('#msform').submit();
+                                                                                }
+                                                                            })
+
+                                                                            //...//
+                                                                            
+                                                                          
+                                                                           }
+                                                                       })
+
+                                                             }); //save button action and confirm validation code
+                                                                   
+
+                                           
+                                                        }
+                                                    }
+                                                        //1 { is for move to next level deli and 2nd is for else}
+                                                        //movetosavelevel end
+                                                       // function saveon(){
+                                                               // $('#sa-warning').click(function(){
+
                                                             
-                                                        }}
+                             
+                                                       // }
                                                         function backto2level() {
                                                             document.getElementsByClassName("timeline")[0].click();
                                                             document.getElementsByClassName("timeline")[0].style.background = "#B22E06";
                                                         }
-                                                        function checkteamname() {
-                                                            var x = document.forms["msform"]["teamname"].value;
-                                                            var alphaExp = /^\w+$/;
-                                                            if (document.forms["msform"]["teamname"].value.length > 2) {
 
-                                                                if (x.match(alphaExp)) {
+                // ............................................................................................//
+                  
 
-                                                                    document.forms["msform"]["teamname"].style.border = "1px solid green";
-                                                                    $('#teamnamespan').text("");
-                                                                } else {
-                                                                    $('#teamname').val("");
-                                                                    document.forms["msform"]["teamname"].placeholder = "only alphabets and numbers allowed in team name!";
-                                                                    document.forms["msform"]["teamname"].style.border = "1px solid red";
-                                                                }
-                                                            } else {
-                                                                $('#teamname').val("");
-                                                                document.forms["msform"]["teamname"].style.border = "1px solid red";
-                                                                document.forms["msform"]["teamname"].placeholder = "team name must be greater then 2 digit!";
+                  function checkteamname(){
 
-                                                            }
-                                                        }
-                                                        function checkfullname() {
-                                                            var x = document.forms["msform"]["fullname"].value;
-                                                            var alphaExp = /^[a-zA-Z][a-zA-Z\s]+$/;
-                                                            if (document.forms["msform"]["fullname"].value.length > 2) {
+                     var x = document.forms["msform"]["teamname"].value;
+                    var alphaExp = /^([a-zA-Z])[a-zA-Z\s]{2,20}$/;
 
-                                                                if (x.match(alphaExp)) {
+                    if (x.match(alphaExp)) {
 
-                                                                    document.forms["msform"]["fullname"].style.border = "1px solid green";
-                                                                    $('#fullnamespan').text("");
-                                                                } else {
-                                                                    $('#fullname').val("");
-                                                                    document.forms["msform"]["fullname"].placeholder = "only alphabet put in name!";
-                                                                    document.forms["msform"]["fullname"].style.border = "1px solid red";
+                        document.forms["msform"]["teamname"].style.border = "1px solid green";
+                        $('#teamnamespan').text("");
+                    } else {
+                        $('#teamname').val("");
+                        document.forms["msform"]["teamname"].placeholder = "Invalid! only alphabets are allowed";
+                        document.forms["msform"]["teamname"].style.border = "1px solid red";
+                    }
 
-                                                                }
-                                                            } else {
-                                                                $('#fullname').val("");
-                                                                document.forms["msform"]["fullname"].style.border = "1px solid red";
-                                                                document.forms["msform"]["fullname"].placeholder = "name must be greater then 2 digit!";
+                  }
+                   function checkfullname() {
+                var x = document.forms["msform"]["fullname"].value;
+                var alphaExp = /^([a-zA-Z])[a-zA-Z\s]{2,20}$/;
+                
 
-                                                            }
-                                                        }
-                                                        function checkcity() {
-                                                            var x = document.forms["msform"]["city"].value;
-                                                            var alphaExp = /^[a-zA-Z][a-zA-Z\s]+$/;
-                                                            if (document.forms["msform"]["city"].value.length > 2) {
+                    if (x.match(alphaExp)) {
 
-                                                                if (x.match(alphaExp)) {
+                        document.forms["msform"]["fullname"].style.border = "1px solid green";
+                        $('#fullnamespan').text("");
+                    } else {
+                        $('#fullname').val("");
+                        document.forms["msform"]["fullname"].placeholder = "Invalid!";
+                        document.forms["msform"]["fullname"].style.border = "1px solid red";
+                    }
+                } 
 
-                                                                    document.forms["msform"]["city"].style.border = "1px solid green";
-                                                                    $('#cityspan').text("");
-                                                                } else {
-                                                                    $('#city').val("");
-                                                                    document.forms["msform"]["city"].placeholder = "only alphabet put in city!";
-                                                                    document.forms["msform"]["city"].style.border = "1px solid red";
-                                                                }
-                                                            } else {
-                                                                $('#city').val("");
-                                                                document.forms["msform"]["city"].style.border = "1px solid red";
-                                                                document.forms["msform"]["city"].placeholder = "city name must be greater then 2 digit!";
+                function checkteamcity(){
+                    var x = document.forms["msform"]["teamcity"].value;
+                var alphaExp = /^[a-zA-Z][a-zA-Z\s]+$/;
+                if (document.forms["msform"]["teamcity"].value.length > 2) {
 
-                                                            }
-                                                        }
-                                                        function checkteamcity() {
-                                                            var x = document.forms["msform"]["teamcity"].value;
-                                                            var alphaExp = /^[a-zA-Z][a-zA-Z\s]+$/;
-                                                            if (document.forms["msform"]["teamcity"].value.length > 2) {
+                    if (x.match(alphaExp)) {
 
-                                                                if (x.match(alphaExp)) {
+                        document.forms["msform"]["teamcity"].style.border = "1px solid green";
+                        $('#teamcityspan').text("");
+                    } else {
+                        $('#teamcity').val("");
+                        document.forms["msform"]["teamcity"].placeholder = "Invalid!";
+                        document.forms["msform"]["teamcity"].style.border = "1px solid red";
+                    }
+                } else {
+                    $('#teamcity').val("");
+                    document.forms["msform"]["teamcity"].style.border = "1px solid red";
+                    document.forms["msform"]["teamcity"].placeholder = "Invalid!";
 
-                                                                    document.forms["msform"]["teamcity"].style.border = "1px solid green";
-                                                                    $('#teamcityspan').text("");
-                                                                } else {
-                                                                    $('#teamcity').val("");
-                                                                    document.forms["msform"]["teamcity"].placeholder = "only alphabet put in city!";
-                                                                    document.forms["msform"]["teamcity"].style.border = "1px solid red";
-                                                                }
-                                                            } else {
-                                                                $('#teamcity').val("");
-                                                                document.forms["msform"]["teamcity"].style.border = "1px solid red";
-                                                                document.forms["msform"]["teamcity"].placeholder = "city name must be greater then 2 digit!";
+                  }
+                }
+            
+            function checkcity() {
+                var x = document.forms["msform"]["city"].value;
+                var alphaExp = /^[a-zA-Z][a-zA-Z\s]+$/;
+                if (document.forms["msform"]["city"].value.length > 2) {
 
-                                                            }
-                                                        }
-                                                        function checkfathername() {
-                                                            var x = document.forms["msform"]["fathername"].value;
-                                                            var alphaExp = /^[a-zA-Z][a-zA-Z\s]+$/;
-                                                            if (document.forms["msform"]["fathername"].value.length > 2) {
+                    if (x.match(alphaExp)) {
 
-                                                                if (x.match(alphaExp)) {
+                        document.forms["msform"]["city"].style.border = "1px solid green";
+                        $('#cityspan').text("");
+                    } else {
+                        $('#city').val("");
+                        document.forms["msform"]["city"].placeholder = "Invalid!";
+                        document.forms["msform"]["city"].style.border = "1px solid red";
+                    }
+                } else {
+                    $('#city').val("");
+                    document.forms["msform"]["city"].style.border = "1px solid red";
+                    document.forms["msform"]["city"].placeholder = "Invalid!";
 
-                                                                    document.forms["msform"]["fathername"].style.border = "1px solid green";
-                                                                    $('#fathernamespan').text("");
-                                                                } else {
-                                                                    $('#fathername').val("");
-                                                                    document.forms["msform"]["fathername"].placeholder = "only alphabet put in name!";
-                                                                    document.forms["msform"]["fathername"].style.border = "1px solid red";
-                                                                }
-                                                            } else {
-                                                                $('#fathername').val("");
-                                                                document.forms["msform"]["fathername"].style.border = "1px solid red";
-                                                                document.forms["msform"]["fathername"].placeholder = "name must be greater then 2 digit!";
+                }
+            }
+            function checkfathername() {
+                var x = document.forms["msform"]["fathername"].value;
+                var alphaExp = /^[a-zA-Z][a-zA-Z\s]{2,20}$/;
+               
 
-                                                            }
-                                                        }
-                                                        function checkcnic() {
-                                                            var x = document.forms["msform"]["cnic"].value;
-                                                            if (document.forms["msform"]["cnic"].value.length != 15) {
+                    if (x.match(alphaExp)) {
 
-                                                                document.forms["msform"]["cnic"].style.border = "1px solid red";
-                                                                $('#cnic').val("");
-                                                                document.forms["msform"]["cnic"].placeholder = "cnic must be contain 15 digits!";
-                                                            } else {
-                                                                document.forms["msform"]["cnic"].style.border = "1px solid green";
-                                                                $('#cnicspan').text("");
-                                                            }
-                                                        }
-                                                        $(function () {
+                        document.forms["msform"]["fathername"].style.border = "1px solid green";
+                        $('#fathernamespan').text("");
+                    } else {
+                        $('#fathername').val("");
+                        document.forms["msform"]["fathername"].placeholder = "Invalid!";
+                        document.forms["msform"]["fathername"].style.border = "1px solid red";
+                    }
+                } 
 
-                                                            $('#cnic').keydown(function (e) {
-                                                                var key = e.charCode || e.keyCode || 0;
-                                                                $text = $(this);
-                                                                if (key !== 8 && key !== 9) {
-                                                                    if ($text.val().length === 5) {
-                                                                        $text.val($text.val() + '-');
-                                                                    }
-                                                                    if ($text.val().length === 13) {
-                                                                        $text.val($text.val() + '-');
-                                                                    }
-                                                                    if ($text.val().length === 15) {
-                                                                        var temp = $text.val();
-                                                                        var lastChar = temp.substr(temp.length - 1);
-                                                                        if (lastChar % 2 == 0) {
-                                                                            radiobtn = document.getElementById("female");
-                                                                            radiobtn.checked = true;
-                                                                        } else {
-                                                                            radiobtn = document.getElementById("male");
-                                                                            radiobtn.checked = true;
-                                                                        }
-                                                                    }
-                                                                }
+            function checkcnic() {
+                var x = document.forms["msform"]["cnic"].value;
+               // var x = document.forms["msform"]["city"].value;
+             //  var alphaExp = /^\d{5}-\d{7}-\d+$/;
+               
+                    
+                if (document.forms["msform"]["cnic"].value.length != 15) {
 
-                                                                return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
-                                                            })
-                                                        });
-                                                        $(function () {
+                    document.forms["msform"]["cnic"].style.border = "1px solid red";
+                    $('#cnic').val("");
+                    document.forms["msform"]["cnic"].placeholder = "Invalid ! :Cnic must contain 15 digits!";
+                } 
+                // else {
+                //     if (x.match(alphaExp)) {
+                //     document.forms["msform"]["cnic"].style.border = "1px solid green";
+                //     //$('#cnicspan').text("");
+                //        }else{
+                //         console.log('i am abc');
+                //           document.forms["msform"]["cnic"].style.border = "1px solid red";
+                //     $('#cnic').val("");
+                //     document.forms["msform"]["cnic"].placeholder = "Invalid cnic abc !" ;
+                //     $('#cnicspan').html("");
+                //        }
+                // }
+            }
+            $(function () {
+                    
+                $('#cnic').keyup(function (e) {
+                    var key = e.charCode || e.keyCode || 0;
+                    $text = $(this);
+                      
+                    if (key !== 8 && key !== 9) {
+                        if ($text.val().length === 5) {
+                            $text.val($text.val() + '-');
+                        }
+                        if ($text.val().length === 13) {
+                            $text.val($text.val() + '-');
+                        }
+                        if ($text.val().length === 15) {
+                            //console.log('i am in ===15 tag testing');
+                           
 
-                                                            $('#phone1').keydown(function (e) {
-                                                                var key = e.charCode || e.keyCode || 0;
-                                                                $text = $(this);
-                                                                if (key !== 8 && key !== 9) {
-                                                                    if ($text.val().length === 0) {
-                                                                        $text.val($text.val() + '(');
-                                                                    }
-                                                                    if ($text.val().length === 5) {
-                                                                        $text.val($text.val() + ')');
-                                                                    }
-                                                                    if ($text.val().length === 6) {
-                                                                        $text.val($text.val() + ' ');
-                                                                    }
-                                                                    if ($text.val().length === 10) {
-                                                                        $text.val($text.val() + '-');
-                                                                    }
 
-                                                                }
+                            console.log('i am runing for ajax in 15 digits');
+                            var cnic_ = $text.val();
+                            var alphaExp = /^\d{5}-\d{7}-\d+$/;
+                            if (cnic_.match(alphaExp)) {
+                            $.ajax({
+                                url:'<?php echo base_url() ?>web/Registration/check_cnic_availbility',
+                                method:'post',
+                                data:{cnic:cnic_},
+                                success:function(data){
+                                    $('#cnicspan').html(data);
 
-                                                                return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
-                                                            })
-                                                        });
-                                                        $(function () {
+                                    if(data == '<label class="text-danger"><span class="glyphicon glyphicon-remove"></span> Cnic Already registered</label>'){
+                                        $('#cnic').val("");
+                                        document.forms["msform"]["cnic"].style.border = "1px solid red";
+                                    }else{
+                                        document.forms["msform"]["cnic"].style.border = "1px solid green";
+                                    }
+                                }
+                            });
+                            var temp = $text.val();
+                            var lastChar = temp.substr(temp.length - 1);
+                            if (lastChar % 2 == 0) {
+                                radiobtn = document.getElementById("female");
+                                radiobtn.checked = true;
+                            } else {
+                                radiobtn = document.getElementById("male");
+                                radiobtn.checked = true;
+                            }
 
-                                                            $('#phone2').keydown(function (e) {
-                                                                var key = e.charCode || e.keyCode || 0;
-                                                                $text = $(this);
-                                                                if (key !== 8 && key !== 9) {
-                                                                    if ($text.val().length === 0) {
-                                                                        $text.val($text.val() + '(');
-                                                                    }
-                                                                    if ($text.val().length === 5) {
-                                                                        $text.val($text.val() + ')');
-                                                                    }
-                                                                    if ($text.val().length === 6) {
-                                                                        $text.val($text.val() + ' ');
-                                                                    }
-                                                                    if ($text.val().length === 10) {
-                                                                        $text.val($text.val() + '-');
-                                                                    }
+                            //Checking availablity
 
-                                                                }
+                            
+                        }else{
+                            console.log('i am not match with regs');
+                            document.forms["msform"]["cnic"].style.border = "1px solid red";
+                                $('#cnic').val("");
+                                document.forms["msform"]["cnic"].placeholder = "Invalid cnic!" ;
+                                $('#cnicspan').html("");
+                        }
+                    }}
+       var abc=(key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+    
+                    return abc; 
+                });
+            });
+            $(function () {
+                $('#phone1').keyup(function (e) {
+                    var key = e.charCode || e.keyCode || 0;
+                    $text = $(this);
+                     var alphaExp = /^[0-9]+$/;
+                     var x=$text.val();
+           // function check_phone_availbility(){
+                console.log('i am check of phn 1');
+               // phn1_val=$('#phone1').val();
+               if (x.match(alphaExp)) {
+                if( $text.val().length ===11){
 
-                                                                return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
-                                                            })
-                                                        });
-                                                        function checkdob() {
+                    console.log('i am runing for ajax phn numbers');
+                             var phn1 = $text.val();
+                             console.log(phn1);
+                             $.ajax({
+                            url:'<?php echo base_url() ?>web/Registration/check_phone1_availbility',
+                                 method:'post',
+                                 data:{phone1:phn1},
+                                 success:function(data){
+                                     $('#phone1span').html(data);
+                                     if(data =='<label class="text-danger"><span class="glyphicon glyphicon-remove"></span> Mobile# Already registered</label>'){
+                                        document.forms["msform"]["phone1"].style.border = "1px solid red";
+                                        $('#phone1').val("");
+                                     }else{
+                                         document.forms["msform"]["phone1"].style.border = "1px solid green";
+                                     }
 
-                                                            var today = new Date();
-                                                            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-                                                            var x = document.forms["msform"]["dob"].value;
-                                                                    const date1 = new Date(x);
-                                                                    const date2 = new Date(date);
-                                                                    const diffTime = Math.abs(date2 - date1);
-                                                                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                                                                    if (x == "") {
-                                                                document.forms["msform"]["dob"].style.border = "1px solid red";
-                                                                document.forms["msform"]["dob"].placeholder = "must be required!";
-                                                                $('#dobspan').text("Please Enter Your Age!");
-                                                            } else {
-                                                                if (diffDays < 5475) {
-                                                                    $('#dob').val("");
-                                                                    $('#dobspan').text("Your must be 15 year old!");
-                                                                    document.forms["msform"]["dob"].style.border = "1px solid red";
-                                                                } else {
-                                                                    document.forms["msform"]["dob"].style.border = "1px solid green";
-                                                                    $('#dobspan').text("");
-                                                                }
-                                                            }
-                                                        }
-                                                        function checkgmail() {
-                                                            var alphaExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-                                                            if (document.forms["msform"]["gmail"].value.length > 8 && document.forms["msform"]["gmail"].value.match(alphaExp)) {
-                                                                document.forms["msform"]["gmail"].style.border = "1px solid green";
-                                                                $('#gmailspan').text("");
-                                                            } else {
-                                                                $('#gmail').val("");
-                                                                document.forms["msform"]["gmail"].placeholder = "gmail not valid!";
-                                                                document.forms["msform"]["gmail"].style.border = "1px solid red";
-                                                            }
+                                 }
+                             });
+                }}else{
+                    $('#phone1span').html('Inavlid!');
+                     document.forms["msform"]["phone1"].style.border = "1px solid red";
+                    $('#phone1').val("");
+                }
 
-                                                        }
-                                                        function checkpassword() {
-                                                            var alphaExp = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
-                                                            var x1 = document.forms["msform"]["password"].value;
-                                                            if (document.forms["msform"]["password"].value.length > 5) {
-                                                                if (x1.match(alphaExp)) {
-                                                                    document.forms["msform"]["password"].style.border = "1px solid blue";
-                                                                } else {
-                                                                    $('#password').val("");
-                                                                    document.forms["msform"]["password"].style.border = "1px solid red";
-                                                                    document.forms["msform"]["password"].placeholder = "contain at least one number and capital charater";
-                                                                }
-                                                            } else {
-                                                                $('#password').val("");
-                                                                document.forms["msform"]["password"].style.border = "1px solid red";
-                                                                document.forms["msform"]["password"].placeholder = "password must be greater then 5 digit!";
-                                                            }
-                                                        }
-                                                        function checkconformpassword() {
-                                                            var x1 = document.forms["msform"]["password"].value;
-                                                            var x2 = document.forms["msform"]["conformpassword"].value;
-                                                            if (document.forms["msform"]["password"].value.length > 5) {
-                                                                if (x1 == x2) {
-                                                                    document.forms["msform"]["password"].style.border = "1px solid green";
-                                                                    document.forms["msform"]["conformpassword"].style.border = "1px solid green";
-                                                                    $('#passwordspan').text("");
-                                                                } else {
-                                                                    $('#password').val("");
-                                                                    $('#conformpassword').val("");
-                                                                    document.forms["msform"]["password"].style.border = "1px solid red";
-                                                                    document.forms["msform"]["password"].placeholder = "password not match try again!";
-                                                                    document.forms["msform"]["conformpassword"].style.border = "1px solid red";
-                                                                    document.forms["msform"]["conformpassword"].placeholder = "password not match try again!";
+            })
+                })
+            // $(function () {
 
-                                                                }
-                                                            } else {
-                                                                $('#password').val("");
-                                                                $('#conformpassword').val("");
-                                                                document.forms["msform"]["password"].style.border = "1px solid red";
-                                                                document.forms["msform"]["password"].placeholder = "password must be greater then 5 digit!";
-                                                            }
-                                                        }
-                                                        function checkusername() {
-                                                            var x = document.forms["msform"]["username"].value;
-                                                            var alphaExp = /^\w+$/;
-                                                            if (document.forms["msform"]["username"].value.length > 2) {
+            //     $('#phone1').keydown(function (e) {
+            //         var key = e.charCode || e.keyCode || 0;
+            //         $text = $(this);
+            //         if (key !== 8 && key !== 9) {
+            //             if ($text.val().length === 0) {
+            //                 $text.val($text.val() + '(');
+            //             }
+            //             if ($text.val().length === 5) {
+            //                 $text.val($text.val() + ')');
+            //             }
+            //             if ($text.val().length === 6) {
+            //                 $text.val($text.val() + ' ');
+            //             }
+            //             if ($text.val().length === 10) {
+            //                 $text.val($text.val() + '-');
 
-                                                                if (x.match(alphaExp)) {
+                            
+            //             }
+            //             if(  $text.val().length === 14){
+            //                  console.log('i am runing for ajax at 10 numbers');
+            //                  var phn1 = $text.val();
+            //                  console.log(phn1);
+            //                  $.ajax({
+            //                 url:'<?php echo base_url() ?>web/Registration/check_phone1_availbility',
+            //                      method:'post',
+            //                      data:{phone1:phn1},
+            //                      success:function(data){
+            //                          $('#phone1span').html(data);
+            //                      }
+            //                  });
+            //             }
 
-                                                                    document.forms["msform"]["username"].style.border = "1px solid green";
-                                                                    $('#usernamespan').text("");
-                                                                } else {
-                                                                    $('#username').val("");
-                                                                    document.forms["msform"]["username"].placeholder = "only alphabets and numbers allowed in username!";
-                                                                    document.forms["msform"]["username"].style.border = "1px solid red";
-                                                                }
-                                                            } else {
-                                                                $('#username').val("");
-                                                                document.forms["msform"]["username"].style.border = "1px solid red";
-                                                                document.forms["msform"]["username"].placeholder = "name must be greater then 2 digit!";
+            //         }
 
-                                                            }
-                                                        }
-                                                        function checkaddress() {
-                                                            if (document.forms["msform"]["address"].value.length > 5) {
-                                                                document.forms["msform"]["address"].style.border = "1px solid green";
-                                                                $('#addressspan').text("");
-                                                            } else {
-                                                                $('#address').val("");
-                                                                document.forms["msform"]["address"].placeholder = "address must be greater then 5 digit!";
-                                                                document.forms["msform"]["address"].style.border = "1px solid red";
-                                                            }
+            //         return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+            //     })
+            // });
+            $(function () {
+                // if(preg_match("/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/", $phone)) {
+                //        // $phone is valid
+                //      }
 
-                                                        }
-                                                        function checkteamaddress() {
-                                                            if (document.forms["msform"]["teamaddress"].value.length > 5) {
-                                                                document.forms["msform"]["teamaddress"].style.border = "1px solid green";
-                                                                $('#teamaddressspan').text("");
-                                                            } else {
-                                                                $('#teamaddress').val("");
-                                                                document.forms["msform"]["teamaddress"].placeholder = "address must be greater then 5 digit!";
-                                                                document.forms["msform"]["teamaddress"].style.border = "1px solid red";
-                                                            }
+                $('#phone2').keydown(function (e) {
+                    var key = e.charCode || e.keyCode || 0;
+                    $text = $(this);
+                    if (key !== 8 && key !== 9) {
+                        if ($text.val().length === 0) {
+                            $text.val($text.val() + '(');
+                        }
+                        if ($text.val().length === 5) {
+                            $text.val($text.val() + ')');
+                        }
+                        if ($text.val().length === 6) {
+                            $text.val($text.val() + ' ');
+                        }
+                        if ($text.val().length === 10) {
+                            $text.val($text.val() + '-');
+                        }
 
-                                                        }
-                                                        function checkphone1() {
-                                                            if (document.forms["msform"]["phone1"].value.length < 14) {
+                    }
 
-                                                                document.forms["msform"]["phone1"].style.border = "1px solid red";
-                                                                $('#phone1').val("");
-                                                                document.forms["msform"]["phone1"].placeholder = "phone must greater then 9 digits!";
-                                                            } else {
-                                                                document.forms["msform"]["phone1"].style.border = "1px solid green";
-                                                                $('#phone1span').text("");
-                                                            }
-                                                        }
-                                                        function checkphone2() {
-                                                            if (document.forms["msform"]["phone2"].value.length < 14) {
+                    return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+                })
+            });
+           /* function checkdob() {
 
-                                                                $('#phone2').val("");
-                                                                document.forms["msform"]["phone2"].placeholder = "phone must greater then 9 digits!";
-                                                            }
-                                                        }
-                                                        $(document).ready(function(){
+                var today = new Date();
+                var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                var x = document.forms["msform"]["dob"].value;
+                        const date1 = new Date(x);
+                        const date2 = new Date(date);
+                        const diffTime = Math.abs(date2 - date1);
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                        if (x == "") {
+                    document.forms["msform"]["dob"].style.border = "1px solid red";
+                    document.forms["msform"]["dob"].placeholder = "must be required!";
+                    $('#dobspan').text("Please Enter Your Age!");
+                } else {
+                    if (diffDays < 5475) {
+                        $('#dob').val("");
+                        $('#dobspan').text("Your must be 15 year old!");
+                        document.forms["msform"]["dob"].style.border = "1px solid red";
+                    } else {
+                        document.forms["msform"]["dob"].style.border = "1px solid green";
+                        $('#dobspan').text("");
+                    }
+                }
+            }*/
+
+
+            function checkemail(){
+                    
+                    var email=$('#email').val();
+                if(email !=''){
+                      
+                       $.ajax({
+                        url:"<?php echo base_url() ?>/web/Registration/check_email_avalibility",
+                        method:"post",
+                        data:{email:email},
+                        success:function(data){
+                            $('#email_result').html(data);
+                            var str=data;
+                            if(str =='<label class="text-danger"><span class="glyphicon glyphicon-remove"></span> Email Already registered</label>'){
+                                document.forms["msform"]["email"].style.border = "1px solid red";
+                                $('#email').val('');
+                             //console.log('i am already regiterded');
+                               }else if(str =='<label class="text-success"><span class="glyphicon glyphicon-ok"></span> Email Available</label>'){
+                                 document.forms["msform"]["email"].style.border = "1px solid green";
+                               }else{
+
+                                   document.forms["msform"]["email"].style.border = "1px solid red";
+                                   $('#email').val('');
+                               }
+                          }
+                       });
+                   }
+            }
+             
+            // function checkgmail() {
+            //     var alphaExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            //     if (document.forms["msform"]["email"].value.length > 8 && document.forms["msform"]["gmail"].value.match(alphaExp)) {
+            //         document.forms["msform"]["email"].style.border = "1px solid green";
+            //         $('#email_result').text("");
+            //     } else {
+            //         $('#gmail').val("");
+            //         document.forms["msform"]["email"].placeholder = "Invalid!";
+            //         document.forms["msform"]["email"].style.border = "1px solid red";
+            //     }
+
+            // }
+           function checkpassword() {
+                var alphaExp = /((?=.*\d)|(?=.*[a-z])|(?=.*[A-Z]))(?=.{4,})/;
+                var x1 = document.forms["msform"]["password"].value;
+                if (document.forms["msform"]["password"].value.length > 3) {
+                    if (x1.match(alphaExp)) {
+                        document.forms["msform"]["password"].style.border = "1px solid green";
+                        $('#passwordspan').text('');
+                    } else {
+                        $('#password').val("");
+                        document.forms["msform"]["password"].style.border = "1px solid red";
+                        document.forms["msform"]["password"].placeholder = "Invalid Password";
+                    }
+                } else {
+                    $('#password').val("");
+                    document.forms["msform"]["password"].style.border = "1px solid red";
+                    document.forms["msform"]["password"].placeholder = "password must be greater then 3 digit!";
+                }
+             }
+            // function checkconformpassword() {
+            //     var x1 = document.forms["msform"]["password"].value;
+            //     var x2 = document.forms["msform"]["conformpassword"].value;
+            //     if (document.forms["msform"]["password"].value.length > 5) {
+            //         if (x1 == x2) {
+            //             document.forms["msform"]["password"].style.border = "1px solid green";
+            //             document.forms["msform"]["conformpassword"].style.border = "1px solid green";
+            //             $('#passwordspan').text("");
+            //         } else {
+            //             $('#password').val("");
+            //             $('#conformpassword').val("");
+            //             document.forms["msform"]["password"].style.border = "1px solid red";
+            //             document.forms["msform"]["password"].placeholder = "password not match try again!";
+            //             document.forms["msform"]["conformpassword"].style.border = "1px solid red";
+            //             document.forms["msform"]["conformpassword"].placeholder = "password not match try again!";
+
+            //         }
+            //     } else {
+            //         $('#password').val("");
+            //         $('#conformpassword').val("");
+            //         document.forms["msform"]["password"].style.border = "1px solid red";
+            //         document.forms["msform"]["password"].placeholder = "password must be greater then 5 digit!";
+            //     }
+            // }
+            function checkusername() {
+                var Uname = document.forms["msform"]["username"].value;
+                var alphaExp = /^\b[a-z][a-z0-9_-]{3,16}$/i;
+                // if (document.forms["msform"]["username"].value.length > 2) {
+                        var t=Uname.match(alphaExp);
+                        console.log(t);
+                    if (t != null) {
+                        
+                        // document.forms["msform"]["username"].style.border = "1px solid green";
+                        // $('#usernamespan').text("");
+
+                        $.ajax({
+                            url:'<?php echo base_url() ?>web/Registration/check_username_availbility',
+                            method:'post',
+                            data:{Uname:Uname},
+                            success:function(data){
+                                $('#usernamespan').html(data);
+                                if(data == '<label class="text-danger"><span class="glyphicon glyphicon-remove"></span> Username Already registered</label>'){
+
+                                        document.forms["msform"]["username"].style.border = "1px solid red";
+                                         $('#username').val("");
+                                }else{
+                                     document.forms["msform"]["username"].style.border = "1px solid green";
+                                }
+                            }
+                        });
+
+
+                    } else {
+                        $('#username').val("");
+                        document.forms["msform"]["username"].placeholder = "Invalid! :Only alphabets and numbers allow";
+                        document.forms["msform"]["username"].style.border = "1px solid red";
+                    }
+                // } else {
+                //     $('#username').val("");
+                //     document.forms["msform"]["username"].style.border = "1px solid red";
+                //     document.forms["msform"]["username"].placeholder = "Invalid!";
+
+                // }
+            }
+            
+            function checkteamaddress(){
+
+                 if (document.forms["msform"]["teamaddress"].value.length > 5) {
+                    document.forms["msform"]["teamaddress"].style.border = "1px solid green";
+                    $('#teamaddressspan').text("");
+                } else {
+                    $('#teamaddress').val("");
+                    document.forms["msform"]["teamaddress"].placeholder = "Invalid!";
+                    document.forms["msform"]["teamaddress"].style.border = "1px solid red";
+                }
+
+            }
+
+
+
+            function checkaddress() {
+                if (document.forms["msform"]["address"].value.length > 5) {
+                    document.forms["msform"]["address"].style.border = "1px solid green";
+                    $('#addressspan').text("");
+                } else {
+                    $('#address').val("");
+                    document.forms["msform"]["address"].placeholder = "Invalid!";
+                    document.forms["msform"]["address"].style.border = "1px solid red";
+                }
+
+            }
+            function checkphone1() {
+                var x=document.forms["msform"]["phone1"].value;
+                var alphaExp = /^[0-9]+$/;
+                if (x.match(alphaExp)) {
+                if (document.forms["msform"]["phone1"].value.length < 11) {
+
+                    document.forms["msform"]["phone1"].style.border = "1px solid red";
+                    $('#phone1').val("");
+                    document.forms["msform"]["phone1"].placeholder = "Invalid!";
+                } else {
+                    document.forms["msform"]["phone1"].style.border = "1px solid green";
+                    $('#phone1span').text("");
+                }
+            }else{
+
+                document.forms["msform"]["phone1"].style.border = "1px solid red";
+                    $('#phone1').val("");
+                    document.forms["msform"]["phone1"].placeholder = "Invalid!";
+                     $('#phone1span').text("");
+            }}
+            function checkphone2() {
+                if (document.forms["msform"]["phone2"].value.length < 14) {
+
+                    $('#phone2').val("");
+                    document.forms["msform"]["phone2"].placeholder = "Invalid!";
+                }
+            }
+            ///$("#datetime-datepicker").datepicker({maxDate: new Date, minDate: new Date(2007, 6, 12)}); 
+             function checkDate() {
+
+                var today = new Date();
+                var today_date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                var selectedDate = document.forms["msform"]["dob"].value;
+                //var selectedDate = $('#dob').val();
+                        const date1 = new Date(selectedDate);
+                        const date2 = new Date(today_date);
+                        const diffTime = Math.abs(date2 - date1);
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                        //console.log(today_date);
+                        if (selectedDate == "") {
+                    document.forms["msform"]["dob"].style.border = "1px solid red";
+                    document.forms["msform"]["dob"].placeholder = "must be required!";
+                    $('#dobspan').text("Select Date of Birth!");
+                } else {
+                    if (diffDays < 5475) {
+                        //$('#dob').val("");
+                        document.forms["msform"]["dob"].value="";
+
+                        $('#dobspan').text("Too young! : You must be atleast 15 year old!");
+                        document.forms["msform"]["dob"].style.border = "1px solid red";
+
+                    } else {
+                        document.forms["msform"]["dob"].style.border = "1px solid green";
+                        $('#dobspan').text("");
+                    }
+                }
+                               
+                 }  //end of checkdate function      
+
+                //.........................................................................................//                                        
+                                                       
+             $(document).ready(function(){
                 $("#register_as").change(function(){
                     var register_as = $(this).val();
                     if (register_as == "team") {
