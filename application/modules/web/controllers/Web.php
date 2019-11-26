@@ -43,6 +43,7 @@ class Web extends CI_Controller {
     }
     public function login() {
         $name = $this->input->post('user');
+        //$gmail=$this->input->post('gmail');
         $pass = $this->input->post('password');
         $user_login = [
             'username' => $name,
@@ -63,9 +64,15 @@ class Web extends CI_Controller {
                 $newdata = array(
                     'name' => $res->name,
                     'id' => $res->id,
+                    'email'=>$res->gmail,
+                    'address'=>$res->address,
+                    'mobile'=>$res->phone1,
+                    'username'=>$res->username,
                     'logged_in' => TRUE,
                     'user_type'=>'user'
                 );
+               
+               
                 $this->session->set_userdata($newdata);
 
                 redirect('User/Dashboard','refresh');

@@ -39,6 +39,7 @@
             .thumbnail-image{
                 height: 28px; 
                 width: 55px;
+             
             }
             /*  Print page css  */
 

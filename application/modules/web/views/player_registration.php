@@ -431,7 +431,7 @@
                     check = 1;
                 }
                
-                if ($('#dob').val() == '') {
+                if (document.forms["msform"]["dob"].value == '') {
                     $('#dobspan').text("Please Select Your Date Of Birth!");
                     document.forms["msform"]["dob"].style.border = "1px solid red";
                     check = 1;
@@ -670,7 +670,7 @@
 
 
                     $('#sa-warning').click(function(){
-
+                  
                 Swal.fire({
                          title: 'You want to submit these details?',
                          html: textt,
@@ -1154,6 +1154,7 @@
             }
             ///$("#datetime-datepicker").datepicker({maxDate: new Date, minDate: new Date(2007, 6, 12)}); 
              function checkDate() {
+                
 
                 var today = new Date();
                 var today_date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -1240,6 +1241,8 @@
 
 
                   //..............                .....//
+                  // console.log(document.forms["msform"]["dob"].value);
+                  // console.log('i am a thing');
 
         </script>
 

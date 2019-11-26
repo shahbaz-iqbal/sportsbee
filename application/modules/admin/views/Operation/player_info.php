@@ -1,5 +1,4 @@
-<?php $this->load->view('admin/header');
-?>
+<?php $this->load->view('admin/header');?>
 <div class="wrapper">
     <div class="container-fluid">
         <!-- start page title -->
@@ -8,11 +7,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="">Accounts</a></li>                  
-                            <li class="breadcrumb-item active">Active Players</li>
+                            <li class="breadcrumb-item"><a href="">Operation</a></li>                  
+                            <li class="breadcrumb-item active">Players</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Active Players</h4>
+                    <h4 class="page-title">Players</h4>
                 </div>
             </div>
         </div>     
@@ -23,7 +22,6 @@
                     <div class="card-body">
 
                         <table id="example" class="table table-bordered">  
-
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -43,19 +41,15 @@
                                     <?php foreach ($users as $user) { ?>
                                         <tr>
                                             <td></td>
-                                            <td><?php echo $user->id; ?></td>
+                                            <td><?php echo $user->player_id; ?></td>
                                             <td>
-
                                                 <?php $filename = $user->profile_image; ?>
-
                                                 <?php if (file_exists('http:localhost/sportsbee_portal/assets/images/' . $filename)) { ?>
-                                                    <img src=" <?php echo base_url(); ?>assets/images/<?php echo $user->profile_image; ?>"height="30" width="45"style="margin-left: 10px"/>
+                                                    <img src=" <?php echo base_url(); ?>assets/images/<?php echo $user->profile_image; ?>"height="30" width="45"style="margin-left: 10px; border-radius: 20px; "/>
                                                 <?php } else { ?>
-                                                    <img src=" <?php echo base_url(); ?>assets/images/dummy.jpg" height="30" width="45" style="margin-left: 10px"/>
-
+                                                    <img src=" <?php echo base_url(); ?>assets/images/dummy.jpg" height="30" width="45" style="margin-left: 10px; border-radius: 20px;"/>
                                                 <?php }
                                                 ?>
-
                                             </td>
                                             <td><?php echo $user->name; ?></td>
                                             <td><?php echo $user->phone1; ?></td>
@@ -73,9 +67,9 @@
                                             <td>
                                                 <?php $status = $user->status; ?>
                                                 <?php if ($status == 1) { ?>
-                                               <input type="button"  onclick="window.location.href='<?php echo base_url(); ?>admin/Dashboard/update_active_player/<?php echo $user->id; ?>'" class="btn btn-primary" style="background-color: #b22e06;"  value="Block">
+                                               <input type="button"  onclick="window.location.href='<?php echo base_url(); ?>admin/Dashboard/update_active_player/<?php echo $user->player_id; ?>'" class="btn btn-primary" style="background-color: #b22e06;"  value="Block">
                                                 <?php } else { ?>
-                                                 <input type="button"  onclick="window.location.href='<?php echo base_url(); ?>admin/Dashboard/update_block_player/<?php echo $user->id; ?>'" class="btn btn-primary" value="Active">
+                                                 <input type="button"  onclick="window.location.href='<?php echo base_url(); ?>admin/Dashboard/update_block_player/<?php echo $user->player_id; ?>'" class="btn btn-primary" value="Active">
                                                 <?php } ?>
                                             </td>  
                                         </tr>
@@ -148,8 +142,8 @@
 
         },
         order: [[1, 'desc']],
-        "lengthMenu": [10, 25, 50, 75, 100]
-
+        "lengthMenu": [10, 25, 50, 75, 100],
+          responsive: true
     });
 table.on( 'select deselect', function () {
         var selectedRows = table.rows( { selected: true } ).count();

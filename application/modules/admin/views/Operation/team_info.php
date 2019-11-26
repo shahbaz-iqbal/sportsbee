@@ -7,11 +7,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="">Accounts</a></li>                  
-                            <li class="breadcrumb-item active">Active Players</li>
+                            <li class="breadcrumb-item"><a href="">Operation</a></li>                  
+                            <li class="breadcrumb-item active">Players</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Active Players</h4>
+                    <h4 class="page-title">Teams</h4>
                 </div>
             </div>
         </div>     
@@ -38,7 +38,7 @@
                                     <?php foreach ($users as $user) { ?>
                                         <tr>
                                             <td></td>
-                                            <td><?php echo $user->id; ?></td>
+                                            <td><?php echo $user->team_id; ?></td>
         <!--                                            <td>
                                             <?php $filename = $user->profile_image; ?>
                                             <?php $fil = base_url(); ?>
@@ -52,7 +52,7 @@
                                             </td>-->
 
                                             <td>
-                                                <img src="<?php echo base_url(); ?>/assets/images/dummy.jpg" height="30" width="45" style="margin-left: 10px"/>
+                                                <img src="<?php echo base_url(); ?>/assets/images/dummy.jpg" height="30" width="45" style="margin-left: 10px; border-radius: 20px;"/>
                                             </td>
                                             <td><?php echo $user->name; ?></td>
                                             <td><?php echo $user->address; ?></td>                 
@@ -68,9 +68,9 @@
                                             <td>
                                                 <?php $status = $user->status; ?>
                                                 <?php if ($status == 1) { ?>
-                                               <input type="button"  onclick="window.location.href='<?php echo base_url(); ?>admin/Dashboard/update_active_player/<?php echo $user->id; ?>'" class="btn btn-primary" style="background-color: #b22e06;"  value="Block">
+                                               <input type="button"  onclick="window.location.href='<?php echo base_url(); ?>admin/Dashboard/update_active_team/<?php echo $user->team_id; ?>'" class="btn btn-primary" style="background-color: #b22e06;"  value="Block">
                                                 <?php } else { ?>
-                                                 <input type="button"  onclick="window.location.href='<?php echo base_url(); ?>admin/Dashboard/update_block_player/<?php echo $user->id; ?>'" class="btn btn-primary" value="Active">
+                                                 <input type="button"  onclick="window.location.href='<?php echo base_url(); ?>admin/Dashboard/update_block_team/<?php echo $user->team_id; ?>'" class="btn btn-primary" value="Active">
                                                 <?php } ?>
                                             </td>        
                                         </tr>

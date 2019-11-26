@@ -6,7 +6,7 @@ $this->load->view('admin/header');
         <!-- start page title -->
         <?php if (count($users) > 0) { ?>
             <?php foreach ($users as $user) { ?>
-                <div class="container emp-profile">
+        <div class="container emp-profile">
                     <div class="row">
                         <div class="col-md-4">
                             <div>
@@ -46,11 +46,22 @@ $this->load->view('admin/header');
                         <div class="col-md-4">
                             <div class="">
                                 <p>Sports Details:</p>
-                                <a href="">Playing Style:</a><br/>
-                                <a href="">Sport: </a><br/>
-                                <p>History/Interested in:</p>
-                                <a href="">Play in:</a><br/>
-                                <a href="">Matches:</a><br/>     
+                                <a href="">Matches:
+                                    <?php if ($user->mathes_type == 1) { ?>
+                                        <?php echo 'Hard Ball' ?>  <?php } elseif ($user->mathes_type == 2) { ?>
+                                        <?php echo 'Tape Ball' ?> <?php } elseif ($user->mathes_type == 3) { ?>
+                                        <?php echo 'Tennis Ball' ?> 
+                                    <?php } ?>
+                                </a><br/>
+                                <a href="">Team Type:  
+                                    <?php if ($user->team_type == 1) { ?>
+                                        <?php echo 'Local Team' ?>  <?php } elseif ($user->team_type == 2) { ?>
+                                        <?php echo 'School Team' ?> <?php } elseif ($user->team_type == 3) { ?>
+                                        <?php echo 'College Team' ?> <?php } elseif ($user->team_type == 4) { ?>
+                                        <?php echo 'University Team' ?> <?php } elseif ($user->team_type == 5) { ?>
+                                        <?php echo 'Organization' ?>
+                                    <?php } ?>
+                                </a><br/>    
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -108,6 +119,7 @@ $this->load->view('admin/header');
                     </div>
 
                 </div>
+        <div style="margin-top: -23px;"></div>
             <?php } ?>
         <?php } ?>
         <input type="button" class="btn-primary-a hide" onclick="printDiv('printMe')" value="print">

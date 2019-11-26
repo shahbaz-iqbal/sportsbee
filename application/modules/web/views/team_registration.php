@@ -505,7 +505,8 @@
                                                                 document.forms["msform"]["cnic"].style.border = "1px solid red";
                                                                 check = 1;
                                                             }
-                                                            if ($('#dob').val() == '') {
+                                                           
+                                                            if (document.forms["msform"]["dob"].value == '') {
                                                                 $('#dobspan').text("Please Select Your Date Of Birth!");
                                                                 document.forms["msform"]["dob"].style.border = "1px solid red";
                                                                 check = 1;
