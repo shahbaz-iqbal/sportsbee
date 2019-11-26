@@ -22,20 +22,31 @@ class Web extends CI_Controller {
 
 	public function player_registration() {
 
-       // $users = $this->Registrations->get_sport();
-       // $playas = $this->Registrations->get_playas();
-       // $passData = [
-       //     'users' => $users,
-       //     'playas' => $playas
-       // ];
+       $users = $this->Registrations->get_sport();
+       $playas = $this->Registrations->get_playas();
+       $cities=$this->Registrations->get_cities();
+       $passData = [
+           'users' => $users,
+           'playas' => $playas,
+           'cities'=>$cities
+       ];
 
        
        
-        $this->load->view('player_registration');
+        $this->load->view('player_registration',$passData);
     }
 
     public function team_registration() {
-        $this->load->view('team_registration');
+         $users = $this->Registrations->get_sport();
+       $playas = $this->Registrations->get_playas();
+       $cities=$this->Registrations->get_cities();
+       $passData = [
+           'users' => $users,
+           'playas' => $playas,
+           'cities'=>$cities,
+           'playercities'=>$cities,
+       ];
+        $this->load->view('team_registration',$passData);
     }
 
     public function user_login() {

@@ -67,11 +67,12 @@
                                                 <div class="form-group">
                                                     <label for="playertype">Select Sports</label>
                                                     <select class="form-control" name="playertype" id="playertype">
-                                                        <option class="bloodgrouplist"  selected value="Cricket">Cricket</option>
-                                                        <option class="bloodgrouplist" disabled value="2">Football (Coming Soon)</option>
-                                                        <option class="bloodgrouplist" disabled value="3">Kabbadi (Coming Soon)</option>
-                                                        <option class="bloodgrouplist" disabled value="4">BaseBall (Coming Soon)</option>
-                                                        <option class="bloodgrouplist" disabled value="5">Tennis (Coming Soon)</option>
+                                                        <?php if (count($users) > 0) { ?>
+                                                         <?php foreach ($users as $user) { ?> 
+                                                   
+                                   <option class="bloodgrouplist"   value="<?php echo $user->sport_id; ?>"> <?php echo $user->sport_name; ?></option>
+                                                       <?php } ?>
+                                                       <?php } ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -93,11 +94,32 @@
                                         </div> <!-- end row -->
                                         <h5 class="mb-4 text-uppercase"><i class="mdi mdi-home-variant mr-1"></i> Address</h5>
                                         <div class="row">
+
+                                            <?php //print_r($cities) ?>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="city">City<span style="color:red;">..*</span></label>
-                                                    <input type="text" id="teamcity" name="teamcity" placeholder="Enter City" class="form-control" onfocusout="checkteamcity()" maxlength="100" size="28" class="form-control">
-                                                    <span id="teamcityspan" style="color: red;"></span>
+                                                     <select class="custom-select"  name="teamcity" id="teamcity">
+                                                        <?php 
+                                                        if (!empty($cities)) {
+                                                            foreach ($cities as $city) {
+                                                        ?>
+                                                        <option class="bloodgrouplist" value="<?php echo $city->city_id; ?>"> <?php echo  $city->name; ?></option>
+                                                        <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                           <?php if (count($cities) > 0) { ?>
+                                                         <?php  foreach ($cities as $cities) { ?>
+                                                   
+                                        
+                                                       <?php } ?>
+                                                       <?php } ?>
+
+                                                       
+                                                    </select>
+                                                   <!--  <input type="text" id="teamcity" name="teamcity" placeholder="Enter City" class="form-control" onfocusout="checkteamcity()" maxlength="100" size="28" class="form-control">
+                                                    <span id="teamcityspan" style="color: red;"></span> -->
                                                 </div>
                                             </div> <!-- end col -->
                                             <div class="col-md-6">
@@ -278,17 +300,31 @@
                                         </div> <!-- end row -->
                                         <h5 class="mb-4 text-uppercase"><i class="mdi mdi-home-variant mr-1"></i> Address</h5>
                                         <div class="row">
+                                            <?php //print_r($playercities) ?>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="city">City<span style="color:red;">..*</span></label>
-                                                    <input type="text" id="city" name="city" placeholder="Enter City" class="form-control" onfocusout="checkcity()" maxlength="100" size="28" class="form-control">
-                                                    <span id="cityspan" style="color: red;"></span>
+                                                   <label for="city">City<span style="color:red;">..*</span></label>
+                                                     <select class="custom-select"  name="city" id="city">
+                                                           <?php 
+                                                                if (!empty($playercities)) {
+                                                                    foreach ($playercities as $city) {
+                                                                ?>
+                                                                <option class="bloodgrouplist" value="<?php echo $city->city_id; ?>"> <?php echo  $city->name; ?></option>
+                                                                <?php
+                                                                    }
+                                                                }
+                                                                ?>
+
+                                                       
+                                                    </select>
+                                                   <!--  <input type="text" id="city" name="city" placeholder="Enter City" class="form-control" onfocusout="checkcity()" maxlength="100" size="28" class="form-control">
+                                                    <span id="cityspan" style="color: red;"></span> -->
                                                 </div>
                                             </div> <!-- end col -->
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="city">Postal Code</label>
-                                                    <input type="number" id="postalcode" name="postalcode" placeholder="Enter Postal Code" class="form-control" onfocusout="checkcity()" maxlength="10" size="28" class="form-control">
+                                                    <input type="number" id="postalcode" name="postalcode" placeholder="Enter Postal Code" class="form-control" maxlength="10" size="28" class="form-control">
                                                 </div>
                                             </div> <!-- end col -->
                                         </div> <!-- end row -->
@@ -358,17 +394,17 @@
                                                 <div class="form-group">
                                                     <label for="playtype">Play as a</label>
                                                    <select class="custom-select"  name="playtype" id="playas">
-                                                          <!-- <?php if (count($playas) > 0) { ?>
+                                                          <?php if (count($playas) > 0) { ?>
                                                    <?php foreach ($playas as $playas) { ?>
                                                    
                                              <option class="bloodgrouplist"  selected value="<?php echo
                                              $playas->play_as_id; ?>"> <?php echo  $playas->name; ?></option>
                                                        <?php } ?>
-                                                       <?php } ?> -->
+                                                       <?php } ?> 
 
-                                                        <option value="BatsMan">BatsMan</option>
+                                                       <!--  <option value="BatsMan">BatsMan</option>
                                                         <option value="Bowler">Bowler</option>
-                                                        <option value="All Rounder">All Rounder</option> -->
+                                                        <option value="All Rounder">All Rounder</option>  -->
                                                     </select>
                                                 </div>
                                             </div>
@@ -715,27 +751,27 @@
                     }
                 } 
 
-                function checkteamcity(){
-                    var x = document.forms["msform"]["teamcity"].value;
-                var alphaExp = /^[a-zA-Z][a-zA-Z\s]+$/;
-                if (document.forms["msform"]["teamcity"].value.length > 2) {
+                // function checkteamcity(){
+                //     var x = document.forms["msform"]["teamcity"].value;
+                // var alphaExp = /^[a-zA-Z][a-zA-Z\s]+$/;
+                // if (document.forms["msform"]["teamcity"].value.length > 2) {
 
-                    if (x.match(alphaExp)) {
+                //     if (x.match(alphaExp)) {
 
-                        document.forms["msform"]["teamcity"].style.border = "1px solid green";
-                        $('#teamcityspan').text("");
-                    } else {
-                        $('#teamcity').val("");
-                        document.forms["msform"]["teamcity"].placeholder = "Invalid!";
-                        document.forms["msform"]["teamcity"].style.border = "1px solid red";
-                    }
-                } else {
-                    $('#teamcity').val("");
-                    document.forms["msform"]["teamcity"].style.border = "1px solid red";
-                    document.forms["msform"]["teamcity"].placeholder = "Invalid!";
+                //         document.forms["msform"]["teamcity"].style.border = "1px solid green";
+                //         $('#teamcityspan').text("");
+                //     } else {
+                //         $('#teamcity').val("");
+                //         document.forms["msform"]["teamcity"].placeholder = "Invalid!";
+                //         document.forms["msform"]["teamcity"].style.border = "1px solid red";
+                //     }
+                // } else {
+                //     $('#teamcity').val("");
+                //     document.forms["msform"]["teamcity"].style.border = "1px solid red";
+                //     document.forms["msform"]["teamcity"].placeholder = "Invalid!";
 
-                  }
-                }
+                //   }
+                // }
             
             function checkcity() {
                 var x = document.forms["msform"]["city"].value;

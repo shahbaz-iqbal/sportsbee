@@ -14,14 +14,28 @@ Class Registrations extends CI_Model {
         $result = $query->row();
         return $result;
     }
-      public function addsocialaccounts($social){
-    	$this->db->insert('player_socialaccounts',$social);
-    }
+    //   public function addsocialaccounts($social){
+    // 	$this->db->insert('player_socialaccounts',$social);
+    // }
     public function addscricketinfo($sportsinfo){
     	$this->db->insert('player_cricketinfo',$sportsinfo);
     }
     public function addplayer($data){
-        if($this->db->insert('player',$data)){
+        
+        $this->db->insert('player',$data);
+        return $this->db->insert_id();
+    }
+    public function addsocial($data){
+      if($this->db->insert('player_socialaccounts',$data)){
+          return 'true';
+        }
+        else{
+          return 'false';
+        }
+    }
+    public function addsportdetail($data){
+
+      if($this->db->insert('player_sports_detail',$data)){
           return 'true';
         }
         else{
@@ -30,6 +44,7 @@ Class Registrations extends CI_Model {
     }
     public function addteam($data){
         $this->db->insert('team',$data);
+        return $this->db->insert_id();
     }
      public function check_registration($gmail){
         $this->db->where('gmail',$gmail);
@@ -128,4 +143,25 @@ Class Registrations extends CI_Model {
       $result = $query->result();
       return $result;
      }
+     function get_cities(){
+       $this->db->select('*');
+      $query = $this->db->get('city_table');
+      $result = $query->result();
+      return $result;
+     }
+
+     function get_teamid(){
+
+      $this->db->select('*');
+      $query = $this->db->get('team');
+      $result = $query->result();
+      return $result;
+     }
+
+     public function add_player_team($data)
+     {
+        $this->db->insert('player_team_table',$data);
+        return true;
+     }
+
 }
