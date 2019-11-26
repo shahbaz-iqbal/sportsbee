@@ -22,20 +22,31 @@ class Web extends CI_Controller {
 
 	public function player_registration() {
 
-       // $users = $this->Registrations->get_sport();
-       // $playas = $this->Registrations->get_playas();
-       // $passData = [
-       //     'users' => $users,
-       //     'playas' => $playas
-       // ];
+       $users = $this->Registrations->get_sport();
+       $playas = $this->Registrations->get_playas();
+       $cities=$this->Registrations->get_cities();
+       $passData = [
+           'users' => $users,
+           'playas' => $playas,
+           'cities'=>$cities
+       ];
 
        
        
-        $this->load->view('player_registration');
+        $this->load->view('player_registration',$passData);
     }
 
     public function team_registration() {
-        $this->load->view('team_registration');
+         $users = $this->Registrations->get_sport();
+       $playas = $this->Registrations->get_playas();
+       $cities=$this->Registrations->get_cities();
+       $passData = [
+           'users' => $users,
+           'playas' => $playas,
+           'cities'=>$cities,
+           'playercities'=>$cities,
+       ];
+        $this->load->view('team_registration',$passData);
     }
 
     public function user_login() {
@@ -43,6 +54,7 @@ class Web extends CI_Controller {
     }
     public function login() {
         $name = $this->input->post('user');
+        //$gmail=$this->input->post('gmail');
         $pass = $this->input->post('password');
         $user_login = [
             'username' => $name,
@@ -63,9 +75,15 @@ class Web extends CI_Controller {
                 $newdata = array(
                     'name' => $res->name,
                     'id' => $res->id,
+                    'email'=>$res->gmail,
+                    'address'=>$res->address,
+                    'mobile'=>$res->phone1,
+                    'username'=>$res->username,
                     'logged_in' => TRUE,
                     'user_type'=>'user'
                 );
+               
+               
                 $this->session->set_userdata($newdata);
 
                 redirect('User/Dashboard','refresh');

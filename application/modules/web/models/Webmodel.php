@@ -7,6 +7,13 @@ Class Webmodel extends CI_Model {
         $result = $query->row();
         return $result;
     }
+    // public function get_user_profile($id){
+    //   $this->db->where('id',$id);
+    //   $query = $this->db->get('player');
+    //     $result = $query->row();
+    //     return $result;
+
+    // }
       public function addsocialaccounts($social){
     	$this->db->insert('player_socialaccounts',$social);
     }

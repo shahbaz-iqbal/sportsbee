@@ -180,10 +180,10 @@
         <script src="<?php echo base_url(''); ?>application/assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
         <script src="<?php echo base_url(''); ?>application/assets/libs/clockpicker/bootstrap-clockpicker.min.js"></script>
         <script src="<?php echo base_url(''); ?>application/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-        <script src="<?php echo base_url('application/assets/libs/footable/footable.all.min.js'); ?>"></script>
+        <!-- <script src="<?php echo base_url('application/assets/libs/footable/footable.all.min.js'); ?>"></script> -->
 
 <!-- Init js -->
-<script src="<?php echo base_url('application/assets/js/pages/foo-tables.init.js'); ?>"></script>
+<!-- <script src="<?php echo base_url('application/assets/js/pages/foo-tables.init.js'); ?>"></script> -->
 <script src="<?php echo base_url(''); ?>application/assets/js/pages/form-pickers.init.js"></script>
         <script>
             $('#msform').on('keyup keypress', function (e) {
@@ -195,20 +195,7 @@
             });
         </script>
         <script>
-            $('#email').change(function () {
-                var email = $('#email').val();
-                if (email != '')
-                {
-                    $.ajax({
-                        url: "<?php echo base_url();?>Registration/check_email_avalibility",
-                        method: "POST",
-                        data: {email: email},
-                        success: function (data) {
-                            $('#email_result').html(data);
-                        }
-                    });
-                }
-            });
+          
         </script>  
         <!-- Plugins js -->
         <script src="<?php echo base_url('application/assets/libs/dropzone/dropzone.min.js'); ?>"></script>
