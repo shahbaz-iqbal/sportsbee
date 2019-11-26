@@ -166,7 +166,7 @@
 <script src="<?php echo base_url('assets/jquery.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/vendor.min.js'); ?>"></script>
 <!--Plugins js-->
-<script src="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.js'); ?>"></script>
+<!--<script src="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.js'); ?>"></script>
 <script src="<?php echo base_url(''); ?>assets/libs/jquery-knob/jquery.knob.min.js"></script>
 <script src="<?php echo base_url(''); ?>assets/libs/jquery-sparkline/jquery.sparkline.min.js"></script>
 <script src="<?php echo base_url(''); ?>assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
@@ -174,10 +174,10 @@
 <script src="<?php echo base_url(''); ?>assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
 <script src="<?php echo base_url(''); ?>assets/libs/clockpicker/bootstrap-clockpicker.min.js"></script>
 <script src="<?php echo base_url(''); ?>assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-<script src="<?php echo base_url('assets/libs/footable/footable.all.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/libs/footable/footable.all.min.js'); ?>"></script>-->
 <!--Init js -->
-<script src="<?php echo base_url('assets/js/pages/foo-tables.init.js'); ?>"></script>
-<script src="<?php echo base_url(''); ?>assets/js/pages/form-pickers.init.js"></script>
+<!--<script src="<?php echo base_url('assets/js/pages/foo-tables.init.js'); ?>"></script>
+<script src="<?php echo base_url(''); ?>assets/js/pages/form-pickers.init.js"></script>-->
 <!-- Datatables init -->
 <script src="<?php echo base_url(''); ?>assets/js/pages/datatables.init.js"></script>
 <!-- third party js -->
@@ -200,32 +200,6 @@
 <script src="<?php echo base_url('assets/js/pages/form-fileuploads.init.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/app.min.js'); ?>"></script>
 
-
-<script>
-    $('#msform').on('keyup keypress', function (e) {
-        var keyCode = e.keyCode || e.which;
-        if (keyCode === 13) {
-            e.preventDefault();
-            return false;
-        }
-    });
-</script>
-<script>
-    $('#email').change(function () {
-        var email = $('#email').val();
-        if (email != '')
-        {
-            $.ajax({
-                url: "<?php echo base_url(); ?>Registration/check_email_avalibility",
-                method: "POST",
-                data: {email: email},
-                success: function (data) {
-                    $('#email_result').html(data);
-                }
-            });
-        }
-    });
-</script>  
 <script>
     var myIndex = 0;
     carousel();
@@ -243,16 +217,6 @@
         x[myIndex - 1].style.display = "block";
         setTimeout(carousel, 4000); // Change image every 2 seconds
     }
-    // $(document).ready(function(){
-    //     $("#register_as").change(function(){
-    //         var register_as = $(this).val();
-    //         if (register_as == "team") {
-    //             window.location.href="<?php echo base_url('registration/team_registration'); ?>";
-    //         }else if (register_as == "player") {
-    //             window.location.href="<?php echo base_url('registration/player_registration'); ?>";
-    //         }
-    //     });
-    // })
 </script>
 
 

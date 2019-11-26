@@ -1,3 +1,4 @@
+
 <html>
     <head> 
         <meta charset="utf-8" />
@@ -38,6 +39,7 @@
             .thumbnail-image{
                 height: 28px; 
                 width: 55px;
+             
             }
             /*  Print page css  */
 
@@ -366,7 +368,13 @@
             /*  print btn in view_player_info  */
             .btn-primary {
                 color: #fff;
-
+                background-color: #f6a922;
+                border-color: #f6a922;
+            }
+            .btn-primary-a{
+                color: #fff;
+                margin-bottom: 25px;
+                margin-left: 25px;
                 background-color: #f6a922;
                 border-color: #f6a922;
             }
@@ -400,7 +408,7 @@
                         if (!empty($this->session->userdata('user_type'))) {
                             ?>
                             <li class="dropdown notification-list">
-                                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" href="<?php echo base_url('Web/logout'); ?>" aria-haspopup="false" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" href="<?php echo base_url('web/logout'); ?>" aria-haspopup="false" aria-expanded="false">
                                     <span style="color: white !important;" class="pro-user-name ml-1">
                                         <i class="mdi mdi-logout" style="color: #fff;"></i>
                                         Logout
@@ -424,7 +432,7 @@
                             ?>
 
                             <li class="dropdown notification-list">
-                                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" href="<?php echo base_url('Web/user_login'); ?>" aria-haspopup="false" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" href="<?php echo base_url('web/user_login'); ?>" aria-haspopup="false" aria-expanded="false">
                                     <span style="color: white !important;" class="pro-user-name ml-1">
                                         <i class="mdi mdi-login" style="color: #fff;"></i>
 
@@ -433,7 +441,7 @@
                                 </a>
                             </li>
                             <li class="dropdown notification-list">
-                                <a class="nav-link nav-user mr-0 waves-effect" href="<?php echo base_url('Web/player_registration'); ?>" aria-haspopup="false" aria-expanded="false">
+                                <a class="nav-link nav-user mr-0 waves-effect" href="<?php echo base_url('web/player_registration'); ?>" aria-haspopup="false" aria-expanded="false">
                                     <span style="color: white !important;" class="pro-user-name ml-1">
                                         <i class="mdi mdi-account-edit" style="color: #fff;"></i>
                                         Register  
@@ -591,15 +599,15 @@
                                             <li class="has-submenu">
                                                 <a href="#">Pending Requests</a>
                                                 <ul class="submenu">
-                                                    <li>
-                                                        <a href="<?php echo base_url('admin/Dashboard/player_req'); ?>">Player Request</a>
-                                                    </li>
+                                                    <!--<li>-->
+                                                    <!--    <a href="<?php echo base_url('admin/Dashboard/player_req'); ?>">Team Request</a>-->
+                                                    <!--</li>-->
                                                     <li>
                                                         <a href="<?php echo base_url('admin/Dashboard/team_req'); ?>">Team Request</a>
                                                     </li>
                                                 </ul>
                                             </li>
-                                            <li class="has-submenu" >
+<!--                                            <li class="has-submenu" >
                                                 <a href="#">Players</a>
 
                                                 <ul class="submenu">
@@ -633,6 +641,12 @@
                                                         <a href="<?php echo base_url('admin/Dashboard/teams'); ?>">Team Report</a>
                                                     </li>
                                                 </ul>
+                                            </li>-->
+                                            <li>
+                                                <a href="<?php echo base_url('admin/Dashboard/players'); ?>">Players</a>
+                                            </li>
+                                            <li>
+                                                <a href="<?php echo base_url('admin/Dashboard/teams'); ?>">Teams</a>
                                             </li>
                                             <li>
                                                 <a href="#">Tournament</a>

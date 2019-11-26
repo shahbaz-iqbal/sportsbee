@@ -4,15 +4,13 @@ $this->load->view('admin/header');
 <div class="wrapper" id="printMe">
     <div class="container-fluid">
         <!-- start page title -->
-
-
         <?php if (count($users) > 0) { ?>
             <?php foreach ($users as $user) { ?>
-                <div class="container emp-profile">
+        <div class="container emp-profile">
                     <div class="row">
                         <div class="col-md-4">
                             <div>
-                                <img src="<?php echo base_url() ?>assets/images/<?php echo $user->profile_image; ?>" alt="profile_image" height="250" width="250">
+                                <img src="<?php echo base_url(); ?>assets/images/dummy.jpg" alt="profile_image" height="200" width="200">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -33,27 +31,37 @@ $this->load->view('admin/header');
                             </div>
                         </div>
                         <div class="col-md-2">
-
+                            <p>Social Accounts</p>
+                            <div class="row" style="margin-bottom: 10px;">
+                                <a href="#" class="social-list-item border-primary text-primary"><i class="mdi mdi-facebook" style="padding: 5px;"></i></a>
+                                <a href="#" class="social-list-item border-secondary text-secondary" style="margin-left: 45px;"><i class="mdi mdi-instagram" style="padding: 5px;"></i></a>
+                            </div>
+                            <div class="row">
+                                <a href="#" class="social-list-item border-info text-info"><i class="mdi mdi-twitter" style="padding: 5px;"></i></a>
+                                <a href="#" class="social-list-item border-danger text-danger" style="margin-left: 45px;"><i class="mdi mdi-youtube" style="padding: 5px;"></i></a>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="profile-work">
-                                <p>Social Accounts</p>
-                                <div class="row" style="margin-bottom: 10px;">
-                                    <a href="#" class="social-list-item border-primary text-primary"><i class="mdi mdi-facebook" style="padding: 5px;"></i></a>
-                                    <a href="#" class="social-list-item border-secondary text-secondary" style="margin-left: 45px;"><i class="mdi mdi-instagram" style="padding: 5px;"></i></a>
-                                </div>
-                                <div class="row">
-                                    <a href="#" class="social-list-item border-info text-info"><i class="mdi mdi-twitter" style="padding: 5px;"></i></a>
-                                    <a href="#" class="social-list-item border-danger text-danger" style="margin-left: 45px;"><i class="mdi mdi-youtube" style="padding: 5px;"></i></a>
-                                </div>
+                            <div class="">
                                 <p>Sports Details:</p>
-                                <a href="; ?>">Playing Style:</a><br/>
-                                <a href="">Sport: </a><br/>
-                                <p>History/Interested in:</p>
-                                <a href="">Play in:</a><br/>
-                                <a href="">Matches:</a><br/>     
+                                <a href="">Matches:
+                                    <?php if ($user->mathes_type == 1) { ?>
+                                        <?php echo 'Hard Ball' ?>  <?php } elseif ($user->mathes_type == 2) { ?>
+                                        <?php echo 'Tape Ball' ?> <?php } elseif ($user->mathes_type == 3) { ?>
+                                        <?php echo 'Tennis Ball' ?> 
+                                    <?php } ?>
+                                </a><br/>
+                                <a href="">Team Type:  
+                                    <?php if ($user->team_type == 1) { ?>
+                                        <?php echo 'Local Team' ?>  <?php } elseif ($user->team_type == 2) { ?>
+                                        <?php echo 'School Team' ?> <?php } elseif ($user->team_type == 3) { ?>
+                                        <?php echo 'College Team' ?> <?php } elseif ($user->team_type == 4) { ?>
+                                        <?php echo 'University Team' ?> <?php } elseif ($user->team_type == 5) { ?>
+                                        <?php echo 'Organization' ?>
+                                    <?php } ?>
+                                </a><br/>    
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -81,6 +89,7 @@ $this->load->view('admin/header');
                                     <p><?php echo $user->fathername; ?></p>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Bload Group:</label>
@@ -88,7 +97,7 @@ $this->load->view('admin/header');
                                 <div class="col-md-6">
                                     <p><?php echo $user->name; ?></p>
                                 </div>
-                            </div>
+                            </div>  
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Phone:</label>
@@ -97,14 +106,7 @@ $this->load->view('admin/header');
                                     <p><?php echo $user->phone1; ?></p>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Phone2:</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p><?php echo $user->phone2; ?></p>
-                                </div>
-                            </div>
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Bio:</label>
@@ -117,10 +119,10 @@ $this->load->view('admin/header');
                     </div>
 
                 </div>
+        <div style="margin-top: -23px;"></div>
             <?php } ?>
         <?php } ?>
-        
-        <input type="button" class="btn-primary hide" onclick="printDiv('printMe')" value="print">
+        <input type="button" class="btn-primary-a hide" onclick="printDiv('printMe')" value="print">
     </div>
 </div>   
 
