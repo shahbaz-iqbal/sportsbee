@@ -121,6 +121,9 @@ $route['model/add'] 			= 'admin/service/addModel';
 $route['primary_test/add'] 		= 'admin/service/addPrimaryTest';
 $route['sugestion'] 			= 'admin/service/sugestion';
 
+
+$route['tornaments'] 			= 'admin/tornament/index';
+
 // Repaircenter Routs
 
 

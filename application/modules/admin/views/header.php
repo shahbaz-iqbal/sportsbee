@@ -34,7 +34,9 @@
         <link href="<?php echo base_url(); ?>assets/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/libs/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/libs/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" />
-        <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">-->
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
         <link href="<?php echo base_url('') ?>application/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
         <style>
             .thumbnail-image{
@@ -650,7 +652,7 @@
                                                 <a href="<?php echo base_url('admin/Dashboard/teams'); ?>">Teams</a>
                                             </li>
                                             <li>
-                                                <a href="#">Tournament</a>
+                                                <a href="<?php echo base_url('admin/Tournament/index'); ?>">Tournament</a>
                                             </li>
                                             <li>
                                                 <a href="<?php echo base_url('admin/ground/index'); ?>">Ground</a>
