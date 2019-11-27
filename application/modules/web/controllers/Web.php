@@ -61,20 +61,20 @@ class Web extends CI_Controller {
             'password' => $pass
         ];
         $res = $this->Webmodel->get_users($user_login);
-        if ($res->user_type == 1) {
+        if ($res->status == 5) {
             $newdata = array(
                 'name' => $res->name,
-                'id' => $res->id,
+                'id' => $res->player_id,
                 'logged_in' => TRUE,
                 'user_type'=>'admin'
             );
             $this->session->set_userdata($newdata);
             redirect('admin/Dashboard', 'refresh');
         } else {
-            if ($res->user_type == "") {
+            if ($res->status == 1) {
                 $newdata = array(
                     'name' => $res->name,
-                    'id' => $res->id,
+                    'id' => $res->player_id,
                     'email'=>$res->gmail,
                     'address'=>$res->address,
                     'mobile'=>$res->phone1,

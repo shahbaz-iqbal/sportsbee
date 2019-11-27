@@ -193,13 +193,19 @@
 <script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.colVis.min.js"></script>
 <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
 <!-- third party js ends -->
+<!-- Sweet Alerts js -->
+        <script src="<?php echo base_url('') ?>application/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+        <!-- Sweet alert init js-->
+        <script src="<?php echo base_url('') ?>application/assets/js/pages/sweet-alerts.init.js"></script>
 <!--Plugins js -->
 <script src="<?php echo base_url('assets/libs/dropzone/dropzone.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/libs/dropify/dropify.min.js'); ?>"></script>
 <!--Init js-->
 <script src="<?php echo base_url('assets/js/pages/form-fileuploads.init.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/app.min.js'); ?>"></script>
-
+        <!-- Sweet alert init js-->
+        
+       
 <script>
     var myIndex = 0;
     carousel();
