@@ -165,7 +165,13 @@
 <!--Plugins js-->
 <script src="<?php echo base_url('assets/jquery.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/vendor.min.js'); ?>"></script>
-<!--Plugins js-->
+<!--Plugins js--> 
+<script src="<?php echo base_url(''); ?>application/assets/libs/flatpickr/flatpickr.min.js"></script>
+<!-- Sweet Alerts js -->
+        <script src="<?php echo base_url('') ?>application/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+
+        <!-- Sweet alert init js-->
+        <script src="<?php echo base_url('') ?>application/assets/js/pages/sweet-alerts.init.js"></script>
 <!--<script src="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.js'); ?>"></script>
 <script src="<?php echo base_url(''); ?>assets/libs/jquery-knob/jquery.knob.min.js"></script>
 <script src="<?php echo base_url(''); ?>assets/libs/jquery-sparkline/jquery.sparkline.min.js"></script>

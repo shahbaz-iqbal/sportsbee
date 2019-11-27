@@ -34,7 +34,7 @@
         <link href="<?php echo base_url(); ?>assets/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/libs/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/libs/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" />
-
+        <link href="<?php echo base_url('') ?>application/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
         <style>
             .thumbnail-image{
                 height: 28px; 
@@ -649,7 +649,7 @@
                                                 <a href="<?php echo base_url('admin/Dashboard/teams'); ?>">Teams</a>
                                             </li>
                                             <li>
-                                                <a href="#">Tournament</a>
+                                                <a href="<?php echo base_url('admin/Tournament/index'); ?>">Tournament</a>
                                             </li>
                                             <li>
                                                 <a href="#">Ground</a>
