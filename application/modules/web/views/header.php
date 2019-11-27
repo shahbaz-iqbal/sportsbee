@@ -249,7 +249,7 @@
                             ?>
 
                             <li class="dropdown notification-list">
-                                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" href="<?php echo base_url('Web/user_login'); ?>" aria-haspopup="false" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" href="<?php echo base_url('web/user_login'); ?>" aria-haspopup="false" aria-expanded="false">
                                     <span style="color: white !important;" class="pro-user-name ml-1">
                                         <i class="mdi mdi-login" style="color: #fff;"></i>
                                         
@@ -258,7 +258,7 @@
                                 </a>
                             </li>
                             <li class="dropdown notification-list">
-                                <a class="nav-link nav-user mr-0 waves-effect" href="<?php echo base_url('Web/player_registration'); ?>" aria-haspopup="false" aria-expanded="false">
+                                <a class="nav-link nav-user mr-0 waves-effect" href="<?php echo base_url('web/player_registration'); ?>" aria-haspopup="false" aria-expanded="false">
                                     <span style="color: white !important;" class="pro-user-name ml-1">
                                         <i class="mdi mdi-account-edit" style="color: #fff;"></i>
                                         Register  
