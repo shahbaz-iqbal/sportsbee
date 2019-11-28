@@ -36,7 +36,13 @@
         <link href="<?php echo base_url(); ?>assets/libs/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" />
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-
+        <!-- Plugins css -->
+        <link href="<?php echo base_url(); ?>assets/libs/jquery-nice-select/nice-select.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url(); ?>assets/libs/switchery/switchery.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url(); ?>assets/libs/multiselect/multi-select.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url(); ?>assets/libs/select2/select2.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url(); ?>assets/libs/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url(); ?>assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('') ?>application/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
         <style>
             .thumbnail-image{
@@ -386,6 +392,12 @@
                 background-color: #b22e06;
                 border-color: #b22e06;
             }
+           /* table.fixed { table-layout:fixed; }
+            table.fixed td { overflow: hidden; }*/
+            div.dataTables_wrapper {
+        width: auto;
+        margin: 0 auto;
+    }
         </style>
     </head>
     <body>

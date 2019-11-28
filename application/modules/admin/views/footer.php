@@ -210,7 +210,17 @@
 <script src="<?php echo base_url('assets/js/pages/form-fileuploads.init.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/app.min.js'); ?>"></script>
         <!-- Sweet alert init js-->
-        
+        <script src="<?php echo base_url(); ?>assets/libs/jquery-nice-select/jquery.nice-select.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/libs/switchery/switchery.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/libs/multiselect/jquery.multi-select.js"></script>
+<script src="<?php echo base_url(); ?>assets/libs/select2/select2.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/libs/jquery-mockjax/jquery.mockjax.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/libs/autocomplete/jquery.autocomplete.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/libs/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+<!-- Init js-->
+<script src="<?php echo base_url(); ?>assets/js/pages/form-advanced.init.js"></script>
        
 <script>
     var myIndex = 0;

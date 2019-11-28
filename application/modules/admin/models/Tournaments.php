@@ -29,6 +29,8 @@ Class Tournaments extends CI_Model {
     $this->db->join('sponser', 'sponser.sp_id = tournament.sp_id', 'inner');
     $query = $this->db->get();
        return $query->result();
+
+       
         // print_r($query->result());
         // die();
 

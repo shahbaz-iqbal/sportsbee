@@ -29,7 +29,8 @@ class Tournament extends CI_Controller {
            'editmatchtype' => $matchestype,
            'editteamtype'=> $teamtype,
            'editcities'=>$cities,
-           'sponsers' =>$sponser
+           'sponsers' =>$sponser,
+           'editsponsers'=>$sponser
            
        ];
 
@@ -39,8 +40,10 @@ class Tournament extends CI_Controller {
      public function add_tournament() {
          
          $teamlimit = $this->input->post('teamlimit');
-        if($teamlimit==""){
+         
+        if($teamlimit == 2 || $teamlimit == '' ){
                   $tournTid=2;
+                 $teamlimit=2;
 
         }else{
                $tournTid=1;
@@ -53,9 +56,9 @@ class Tournament extends CI_Controller {
         
         $sport_id = $this->input->post('sportid');
         $matchestype = $this->input->post('matchtype');
-        $teamtype= $this->input->post('teamtype');
+        $teamtype= implode(' , ', (array) $this->input->post('teamtype'));
         $prize = $this->input->post('prize');
-        $sponsers = $this->input->post('sponsers');
+        $sponsers = implode(' , ', (array) $this->input->post('sponsers'));
         // $category = $this->input->post('category');
         // $type = $this->input->post('type');
         $data = array(
@@ -138,9 +141,9 @@ class Tournament extends CI_Controller {
         $teamlimit = $this->input->post('teamlimit');
         $sport_id = $this->input->post('sportid');
         $matchestype = $this->input->post('matchtype');
-        $teamtype= $this->input->post('teamtype');
+        $teamtype=  implode(' , ', (array) $this->input->post('teamtype'));
         $prize = $this->input->post('prize');
-        $sponsers = $this->input->post('sponsers');
+        $sponsers = implode(' , ', (array) $this->input->post('sponsers'));
 
         //......//
                                                         //  $tournid=$this->input->post('hiden_userid');
