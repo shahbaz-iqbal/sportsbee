@@ -34,15 +34,43 @@
         <link href="<?php echo base_url(); ?>assets/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/libs/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/libs/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" />
+              <!-- Plugins css -->
+        <link href="<?php echo base_url(); ?>assets/libs/jquery-nice-select/nice-select.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url(); ?>assets/libs/switchery/switchery.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url(); ?>assets/libs/multiselect/multi-select.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url(); ?>assets/libs/select2/select2.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url(); ?>assets/libs/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url(); ?>assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.css" rel="stylesheet" type="text/css" />
 
+        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+        
 
         <link href="<?php echo base_url('') ?>application/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
         <style>
+            /*  Select BOx   */
+
+            .btn-group, .btn-group-vertical {
+                background-color: cornflowerblue;
+            }
+            .multiselect-container>li>a>label.checkbox, .multiselect-container>li>a>label.radio {
+                color: black;
+            }
+            .btn:hover {
+                color: black;
+
+            }
+            .multiselect-container>li {
+                padding: 0;
+                background-color: white;
+                color: white;
+            }
+
+            /*  Print page css  */
             .thumbnail-image{
                 height: 28px; 
                 width: 55px;
-             
+
             }
             /*  Print page css  */
 
@@ -421,7 +449,7 @@
                             <?php //if ($this->session->userdata('user_type') == "user") {
                             ?>
                             <!-- <li class="dropdown notification-list">
-                                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" href="<?php //echo base_url('user/profile');                      ?>" aria-haspopup="false" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" href="<?php //echo base_url('user/profile');                           ?>" aria-haspopup="false" aria-expanded="false">
                                     <span style="color: white !important;" class="pro-user-name ml-1">
                                         <i class="mdi mdi-home" style="color: #fff;"></i>
                                         Dashboard
@@ -610,41 +638,41 @@
                                                     </li>
                                                 </ul>
                                             </li>
-<!--                                            <li class="has-submenu" >
-                                                <a href="#">Players</a>
-
-                                                <ul class="submenu">
-                                                    <li>
-                                                        <a href="<?php echo base_url('admin/Dashboard/active_player'); ?>">Active Player</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="<?php echo base_url('admin/Dashboard/block_player'); ?>">Blocked Player</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-submenu" >
-                                                <a href="#">Teams</a>
-                                                <ul class="submenu">
-                                                    <li>
-                                                        <a href="<?php echo base_url('admin/Dashboard/active_team'); ?>">Active Teams</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="<?php echo base_url('admin/Dashboard/block_team'); ?>">Blocked Teams</a>
-                                                    </li> 
-                                                </ul>
-                                            </li>
-
-                                            <li class="has-submenu" >
-                                                <a href="#">Reports</a>
-                                                <ul class="submenu">
-                                                    <li>
-                                                        <a href="<?php echo base_url('admin/Dashboard/players'); ?>">Player Report</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="<?php echo base_url('admin/Dashboard/teams'); ?>">Team Report</a>
-                                                    </li>
-                                                </ul>
-                                            </li>-->
+                                            <!--                                            <li class="has-submenu" >
+                                                                                            <a href="#">Players</a>
+                                            
+                                                                                            <ul class="submenu">
+                                                                                                <li>
+                                                                                                    <a href="<?php echo base_url('admin/Dashboard/active_player'); ?>">Active Player</a>
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <a href="<?php echo base_url('admin/Dashboard/block_player'); ?>">Blocked Player</a>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li class="has-submenu" >
+                                                                                            <a href="#">Teams</a>
+                                                                                            <ul class="submenu">
+                                                                                                <li>
+                                                                                                    <a href="<?php echo base_url('admin/Dashboard/active_team'); ?>">Active Teams</a>
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <a href="<?php echo base_url('admin/Dashboard/block_team'); ?>">Blocked Teams</a>
+                                                                                                </li> 
+                                                                                            </ul>
+                                                                                        </li>
+                                            
+                                                                                        <li class="has-submenu" >
+                                                                                            <a href="#">Reports</a>
+                                                                                            <ul class="submenu">
+                                                                                                <li>
+                                                                                                    <a href="<?php echo base_url('admin/Dashboard/players'); ?>">Player Report</a>
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <a href="<?php echo base_url('admin/Dashboard/teams'); ?>">Team Report</a>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>-->
                                             <li>
                                                 <a href="<?php echo base_url('admin/Dashboard/players'); ?>">Players</a>
                                             </li>

@@ -31,7 +31,7 @@
                                     <th>Phone</th>
                                     <th>Email</th>
                                     <th>Address</th>
-                                    <th>City</th>
+                                    <!--<th>City</th>-->
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -55,7 +55,7 @@
                                             <td><?php echo $user->phone1; ?></td>
                                             <td><?php echo $user->gmail; ?></td>
                                             <td><?php echo $user->address; ?></td>                 
-                                            <td><?php echo $user->city; ?></td>    
+                                            <!--<td><?php echo $user->city; ?></td>-->    
                                              <td>
                                                 <?php $status = $user->status; ?>
                                                 <?php if ($status == 1) { ?>

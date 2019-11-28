@@ -20,6 +20,15 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <?php if ($this->session->flashdata('success')) { ?>
+                                    <p class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></p>
+                                <?php } else if ($this->session->flashdata('error')) { ?>
+                                    <p class="alert alert-danger"><?php echo $this->session->flashdata('error'); ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
                         <!-- Button trigger modal -->
                         <!-- Large modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal" style="float: right;">Add Sponser</button>
@@ -45,7 +54,6 @@
                                             <td><?php echo $sponsers->city; ?></td>
                                             <td><?php echo $sponsers->intrested_sport; ?></td>
                                             <td><?php echo $sponsers->logo_img; ?></td>
-
                                             <td>
                                                 <a data_id="<?php echo $sponsers->sp_id; ?>" href="<?php echo base_url(); ?>admin/ground/update" class="action-icon editUser" data-toggle="modal" data-target="#editModal"><i class="mdi mdi-square-edit-outline"></i></a> 
                                                 <a href="#" class="action-icon" id="sa-warning" onclick="deleteItem(<?php echo $sponsers->sp_id; ?>)"> <i class="mdi mdi-delete"></i></a>
@@ -56,7 +64,6 @@
                                 <?php } ?>
                             </tbody>
                         </table>
-
                     </div> <!-- end card body-->
                 </div> <!-- end card -->
             </div><!-- end col-->
@@ -74,7 +81,7 @@
                     <div class="modal-body">
                         <div class="card">
                             <div class="card-body">
-                                <form method="post" action="<?php echo base_url(); ?>admin/sponser/add_sponser" id="add_ground">
+                                <form method="post" action="" id="add_ground" enctype='multipart/form-data'>
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
@@ -107,24 +114,22 @@
                                             <div class="form-group">
                                                 <label>City</label>
                                                 <select class="custom-select"  name="teamcity">
-                                                <?php
-                                                if (!empty($city)) {
-                                                    foreach ($city as $city) {
-                                                        ?>
-                                                        <option class="bloodgrouplist" value="<?php echo $city->name; ?>"> <?php echo $city->name; ?></option>
-                                                        <?php
+                                                    <?php
+                                                    if (!empty($city)) {
+                                                        foreach ($city as $city) {
+                                                            ?>
+                                                            <option class="bloodgrouplist" value="<?php echo $city->name; ?>"> <?php echo $city->name; ?></option>
+                                                            <?php
+                                                        }
                                                     }
-                                                }
-                                                ?>
-                                            </select>
-
+                                                    ?>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label>Logo</label>
                                                 <input type="file" class="form-control" name="logo"  placeholder="Logo">
-
                                             </div>
                                         </div>
                                     </div>   
@@ -138,7 +143,6 @@
                                         </select>
                                     </div>
                                 </form>
-
                             </div> <!-- end card-body-->
                         </div>
                     </div>
@@ -152,7 +156,7 @@
         <!-- Edit Model -->
         <!-- Modal -->
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Edit Sponser</h5>
@@ -196,7 +200,6 @@
                                     <div class="form-group">
                                         <label>Logo</label>
                                         <input type="file" class="form-control" name="logo"  placeholder="Logo">
-
                                     </div>
                                 </div>
                             </div>   
@@ -222,155 +225,113 @@
     </div>
 </div>
 <?php $this->load->view('admin/footer') ?>
-<!-- Sweet alert init js-->
-
 <script>
     var table = $('#example').DataTable({
-        dom: 'Blfrtip',
-        buttons: [
-//            {
-//                text: "View",
-//                enabled: false,
-//                action: function () {
-//                    var ids = $.map(table.rows('.selected').data(), function (item) {
-//                        return item[1]
-//                    });
-//                    window.location.href = "<?php echo base_url() ?>admin/Dashboard/view_players/" + ids;
-//                }
-//            },
+    dom: 'Blfrtip',
+            buttons: [
             {
-                extend: 'print',
-                exportOptions: {
+            extend: 'print',
+                    exportOptions: {
                     columns: ':visible'
-                },
-                customize: function (win) {
+                    },
+                    customize: function (win) {
                     $(win.document.body).find('table').find('td:first-child, th:first-child').remove();
                     $(win.document.body).find('table').find('td:last-child, th:last-child').remove();
-                }
+                    }
             },
             {
-                extend: 'pdf',
-                exportOptions: {
+            extend: 'pdf',
+                    exportOptions: {
                     columns: ':visible'
-                }
+                    }
             },
             {
-                extend: 'csv',
-                exportOptions: {
+            extend: 'csv',
+                    exportOptions: {
                     columns: ':visible'
-                }
+                    }
             },
-            'colvis',
-        ],
-        columnDefs: [{
-                orderable: false,
-                className: 'select-checkbox',
-                targets: 0
+                    'colvis',
+            ],
+            columnDefs: [{
+            orderable: false,
+                    className: 'select-checkbox',
+                    targets: 0
             },
-        ],
-        select: {
+            ],
+            select: {
             style: 'multi',
-            // selector: ':not(:first-child)'
-            selector: 'td:first-child'
-        },
-        order: [[1, 'desc']],
-        "lengthMenu": [10, 25, 50, 75, 100],
-        responsive: true
+                    // selector: ':not(:first-child)'
+                    selector: 'td:first-child'
+            },
+            order: [[1, 'desc']],
+            "lengthMenu": [10, 25, 50, 75, 100],
+            responsive: true
     });
-    table.on('select deselect', function () {
-        var selectedRows = table.rows({selected: true}).count();
-//table.button( 0 ).enable( selectedRows === 1 );
-        table.button(0).enable(selectedRows > 0);
-    });</script>
-<script>
+//    table.on('select deselect', function () {
+//        var selectedRows = table.rows({selected: true}).count();
+////table.button( 0 ).enable( selectedRows === 1 );
+//        table.button(0).enable(selectedRows > 0);
+//    });
+</script>
+<!--<script>
     function submit() {
         document.getElementById("add_ground").submit(); // Form submission
     }
-</script>
+</script>-->
 <script>
     $("#save").click(function (e) {
-        e.preventDefault();
-//    var check = 0;
-//    if ($('#name').val() == '') {
-//    $('#namespan').text("Please Enter Your Name!");
-//    document.forms["msform"]["name"].style.border = "1px solid red";
-//    check = 1;
-//    }
-//    if ($('#city').val() == '') {
-//    $('#cityspan').text("Please Enter City Name!");
-//    document.forms["msform"]["city"].style.border = "1px solid red";
-//    check = 1;
-//    }
-//    if ($('#fathername').val() == '') {
-//    $('#fathernamespan').text("Please Enter father name!");
-//    document.forms["msform"]["fathername"].style.border = "1px solid red";
-//    check = 1;
-//    }
-//    if ($('#cnic').val() == '') {
-//    $('#cnicspan').text("Please Enter Your Cnic Number!");
-//    document.forms["msform"]["cnic"].style.border = "1px solid red";
-//    check = 1;
-//    }
-//
-//    if (document.forms["msform"]["dob"].value == '') {
-//    $('#dobspan').text("Please Select Your Date Of Birth!");
-//    document.forms["msform"]["dob"].style.border = "1px solid red";
-//    check = 1;
-//    } else{
-        document.getElementById("edit_sponser").submit(); // Form submission
+    e.preventDefault();
+    document.getElementById("edit_sponser").submit(); // Form submission
     })
-//    };
 </script>
 <script>
-    $(".editUser").click(function (e) {
-        e.preventDefault();
-        var id = $(this).attr("data_id");
-        $.ajax({
-            url: "<?php echo base_url('admin/sponser/edit/') ?>" + id,
+            $(".editUser").click(function (e) {
+    e.preventDefault();
+    var id = $(this).attr("data_id");
+    $.ajax({
+    url: "<?php echo base_url('admin/sponser/edit/') ?>" + id,
             success: function (data) {
-                var res = jQuery.parseJSON(data);
-                $("#sp_id").val(res['sp_id']);
-                $("#editname").val(res['name']);
-                $("#editphone").val(res['phone']);
-                $("#editcity").val(res['city']);
-                $("#editemail").val(res['email']);
-                $("#edittitle").val(res['company_title']);
-                $("#editsport").val(res['intrested_sport']);
+            var res = jQuery.parseJSON(data);
+            $("#sp_id").val(res['sp_id']);
+            $("#editname").val(res['name']);
+            $("#editphone").val(res['phone']);
+            $("#editcity").val(res['city']);
+            $("#editemail").val(res['email']);
+            $("#edittitle").val(res['company_title']);
+            $("#editsport").val(res['intrested_sport']);
             }
-        });
+    });
     });</script> 
-<script>
 
-
-</script>
 <script>
     function deleteItem(id){
-        console.log("Clicked ID:"+id);
-        // Swal.fire({
-        //     title:'Alert called',
-        //     type:'warning'
-        // });
-              Swal.fire({
-                         title: 'Are you sure?',
-                         html: 'Record will delete permanently',
-                         type: 'warning',
-                         showCancelButton: true,
-                         confirmButtonColor: '#FDA81A',
-                         cancelButtonColor: '#B22E06',
-                         confirmButtonText: 'Yes, Delete it!'
-                       }).then((result) => {
-                         if (result.value) {
-                             Swal.fire({title:"Data Deleted!",
-                            text:"",
-                            type:"success",
-                            confirmButtonClass:"btn btn-confirm mt-2"}).then((result)=>{
-                                if(result.value){
-                                    window.location.href="<?php echo base_url() ?>admin/sponser/delete/"+id;
-                                }
-                            })
-                            //...//
-                           }
-                       })
+    console.log("Clicked ID:" + id);
+    // Swal.fire({
+    //     title:'Alert called',
+    //     type:'warning'
+    // });
+    Swal.fire({
+    title: 'Are you sure?',
+            html: 'Record will delete permanently',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#FDA81A',
+            cancelButtonColor: '#B22E06',
+            confirmButtonText: 'Yes, Delete it!'
+    }).then((result) => {
+    if (result.value) {
+    Swal.fire({title:"Data Deleted!",
+            text:"",
+            type:"success",
+            confirmButtonClass:"btn btn-confirm mt-2"}).then((result) => {
+    if (result.value){
+    window.location.href = "<?php echo base_url() ?>admin/sponser/delete/" + id;
+    }
+    })
+            //...//
+    }
+    })
     }
 //    function deleteItem() {
 //        Swal.fire({
@@ -392,65 +353,64 @@
 <script src="<?php echo base_url('') ?>application/assets/js/pages/sweet-alerts.init.js"></script>
 <script>
 
-function submitForm() {
-            console.log('i am submit butn');
-               
-                var check = 0;
-                if ($('#name').val() == '') {
-                    $('#namespan').text("Please fill this field!");
-                    $('#name').css("border","1px solid red");
+    function submitForm() {
+    console.log('i am submit butn');
+    var check = 0;
+    if ($('#name').val() == '') {
+    $('#namespan').text("Please fill this field!");
+    $('#name').css("border", "1px solid red");
 //                    document.forms["msform"]["fullname"].style.border = "1px solid red";
-                    check = 1;
-                }
-                if ($('#phone').val() == '') {
-                    $('#phonespan').text("Please fill this field!");
+    check = 1;
+    }
+    if ($('#phone').val() == '') {
+    $('#phonespan').text("Please fill this field!");
 //                    document.forms["msform"]["city"].style.border = "1px solid red";
-                      $('#phone').css("border","1px solid red");
-                    check = 1;
-                }
-                if ($('#email').val() == '') {
-                    $('#emailspan').text("Please fill this field!");
+    $('#phone').css("border", "1px solid red");
+    check = 1;
+    }
+    if ($('#email').val() == '') {
+    $('#emailspan').text("Please fill this field!");
 //                    document.forms["msform"]["fathername"].style.border = "1px solid red";
-                        $('#email').css("border","1px solid red");
-                    check = 1;
-                }
-                if ($('#title').val() == '') {
-                    $('#titlespan').text("Please fill this field!");
+    $('#email').css("border", "1px solid red");
+    check = 1;
+    }
+    if ($('#title').val() == '') {
+    $('#titlespan').text("Please fill this field!");
 //                    document.forms["msform"]["cnic"].style.border = "1px solid red";
-               $('#title').css("border","1px solid red");
-                    check = 1;
-                }
+    $('#title').css("border", "1px solid red");
+    check = 1;
+    }
 ////               
 //             
 
 //
 //                
 //                 check=0;
-                if (check == 1) {
-                    swal('missing fields', 'Please Fill the Required Fields', 'error');
-                } else {
-                    // alert();
-                   
-                 
-              
-                        
-                            Swal.fire({title:"Added!",
-                            text:"",
-                            type:"success",
-                            confirmButtonClass:"btn btn-confirm mt-2"}).then((result)=>{
-                                if(result.value){
-                                    $('#add_ground').attr('action', '<?php echo base_url(); ?>admin/ground/add_ground');
-                                   $('#add_ground').submit();
-                                }
-                            })
+    if (check == 1) {
+    swal('missing fields', 'Please Fill the Required Fields', 'error');
+    } else {
+    // alert();
 
-                            //...//
-                            
-                          
-                           }
-                      
 
-                }
+
+
+    Swal.fire({title:"Added!",
+            text:"",
+            type:"success",
+            confirmButtonClass:"btn btn-confirm mt-2"}).then((result) => {
+    if (result.value){
+    $('#add_ground').attr('action', '<?php echo base_url(); ?>admin/sponser/add_sponser');
+    $('#add_ground').submit();
+    }
+    })
+
+            //...//
+
+
+    }
+
+
+    }
 </script>
 
 

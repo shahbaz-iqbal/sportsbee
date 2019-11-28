@@ -12,6 +12,16 @@ Class Grounds extends CI_Model {
         $result = $query->result();
         return $result;
     }
+    public function matches_type() {
+        $query = $this->db->get('matches_type');
+        $result = $query->result();
+        return $result;
+    }
+    public function types_of_team() {
+        $query = $this->db->get('types_of_team');
+        $result = $query->result();
+        return $result;
+    }
     public function add_ground_info() {
         $query = $this->db->get('player_sports_detail');
         $result = $query->result();
