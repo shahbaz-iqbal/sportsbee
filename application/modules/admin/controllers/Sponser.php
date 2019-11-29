@@ -8,6 +8,7 @@ class Sponser extends CI_Controller {
         parent::__construct();
         $this->load->model('Sponsers');
         $this->load->model('Grounds');
+        $this->load->helper(array('form', 'url'));
     }
 
     public function index() {
@@ -25,9 +26,17 @@ class Sponser extends CI_Controller {
         $phone = $this->input->post('phone');
         $email = $this->input->post('email');
         $title = $this->input->post('title');
-        $city = $this->input->post('city');
-        $logo = $this->input->post('logo');
+        $city = $this->input->post('teamcity');
+       // $logo = $this->input->post('logo');
         $sport = $this->input->post('sport');
+        if (!empty($_FILES['logo']['name'])) {
+            $fileInfo = pathinfo($_FILES['logo']['name']);
+            $newName = time() . '.' . $fileInfo['extension'];
+            move_uploaded_file($_FILES['logo']['tmp_name'], "assets/uploads/" . $newName);
+        }
+        if (!empty($_FILES['logo']['name'])) {
+            $logo = $newName;
+        }
         $data = array(
             'name' => $name,
             'phone' => $phone,
@@ -52,7 +61,8 @@ class Sponser extends CI_Controller {
         $data = $this->Sponsers->edit_sponser($id);
         echo json_encode($data);
     }
-        function upadte_sponser() {
+
+    function upadte_sponser() {
         $id = $this->input->post('id');
         $name = $this->input->post('name');
         $phone = $this->input->post('phone');
@@ -75,12 +85,14 @@ class Sponser extends CI_Controller {
             $this->session->set_flashdata('success', 'User update successfully');
         } else {
             $this->session->set_flashdata('error', 'User not update successfully');
-        }     
+        }
         redirect('admin/sponser/index');
     }
+
     public function delete() {
         $id = $this->uri->segment(4);
         $res = $this->Sponsers->delete_ground($id);
         redirect('admin/sponser/index');
     }
+
 }

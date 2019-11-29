@@ -20,10 +20,18 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <?php if ($this->session->flashdata('success')) { ?>
+                                    <p class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></p>
+                                <?php } else if ($this->session->flashdata('error')) { ?>
+                                    <p class="alert alert-danger"><?php echo $this->session->flashdata('error'); ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
                         <!-- Button trigger modal -->
                         <!-- Large modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" style="float: right;">Add Ground</button>
-
                         <table id="example" class="table table-bordered">  
                             <thead>
                                 <tr>
@@ -47,10 +55,9 @@
                                             <td><?php echo $grounds->ground_price; ?></td>
                                             <td><?php echo $grounds->ground_location; ?></td>
                                             <td>
-                                                
                                                 <a id="" data_id="<?php echo $grounds->ground_id; ?>" href="<?php echo base_url(); ?>admin/ground/update" class="action-icon editUser" data-toggle="modal" data-target="#editModal"><i class="mdi mdi-square-edit-outline"></i></a> 
-                                              <a href="#" class="action-icon" id="sa-warning" onclick="deleteItem(<?php echo $grounds->ground_id; ?>)"> <i class="mdi mdi-delete"></i></a>
-                                              
+                                                <a href="#" class="action-icon" id="sa-warning" onclick="deleteItem(<?php echo $grounds->ground_id; ?>)"> <i class="mdi mdi-delete"></i></a>
+
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -101,8 +108,8 @@
                                         <div class="form-group">
                                             <label>Email</label>
                                             <input type="text" class="form-control" id="email" name="email" placeholder="Email Id">
-                                        <span id="emailspan" style="color: red;"></span>
-                                        
+                                            <span id="emailspan" style="color: red;"></span>
+
                                         </div>
                                         <div class="form-group">
                                             <label>Title</label>
@@ -131,7 +138,7 @@
                                         <div class="form-group">
                                             <label>Capacity</label>
                                             <input type="text" class="form-control" id="capacity" name="capacity" placeholder="Capacity">
-                                         <span id="capacityspan" style="color: red;"></span>
+                                            <span id="capacityspan" style="color: red;"></span>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -139,13 +146,13 @@
                                             <label>Area</label>
                                             <input type="text" class="form-control" id="area" name="area" placeholder="Area(square feet)">
                                         </div>
+
                                         <div class="form-group">
-                                            <label>Pitch Type</label>
-                                            <select class="custom-select ">
-                                                <option selected="" name="pitch">Pitch Type</option>
+                                            <label>Pitch Type</label><br>
+                                            <select class="select2-multiple" data-toggle="select2" name="pitch[]" multiple="multiple" data-placeholder="Choose ..." style="width: 100%;">
                                                 <option value="Hard Ball">Hard Ball</option>
-                                                <option value="Tape Ball">Tape Ball</option>      
-                                            </select>
+                                                <option value="Tape Ball">Tape Ball</option> 
+                                            </select> 
                                         </div>
                                     </div>
                                 </div>
@@ -164,24 +171,17 @@
                                         </div>
                                     </div>
                                 </div>
-<!--                                <div class="row">
+                                <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Teams Type</label>
                                             <select class="custom-select"  name="teamtype">
                                                 <?php
-                                                if (!empty($category)) {
-                                                    foreach ($category as $categorys) {
+                                                if (!empty($team)) {
+                                                    foreach ($team as $teams) {
                                                         ?>
-                                                        <option class="bloodgrouplist" value="<?php echo $categorys->team_type; ?>">
-
-                                                            <?php if ($categorys->team_type == 1) { ?>
-                                                                <?php echo 'Local Team' ?>  <?php } elseif ($categorys->team_type == 2) { ?>
-                                                                <?php echo 'School Team' ?> <?php } elseif ($categorys->team_type == 3) { ?>
-                                                                <?php echo 'College Team' ?> <?php } elseif ($categorys->team_type == 4) { ?>
-                                                                <?php echo 'University Team' ?> <?php } elseif ($categorys->team_type == 5) { ?>
-                                                                <?php echo 'Organization' ?>
-                                                            <?php } ?>
+                                                        <option class="bloodgrouplist" value="<?php echo $teams->type_name; ?>">
+                                                            <?php echo $teams->type_name; ?>
                                                         </option>
                                                         <?php
                                                     }
@@ -190,15 +190,16 @@
                                             </select>
                                         </div>
                                     </div>
+
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Matches Type</label>
                                             <select class="custom-select"  name="MatchType">
                                                 <?php
-                                                if (!empty($category)) {
-                                                    foreach ($category as $categorys) {
+                                                if (!empty($matches)) {
+                                                    foreach ($matches as $match) {
                                                         ?>
-                                                        <option class="bloodgrouplist" value="<?php echo $categorys->mathes_type; ?>"> <?php echo $categorys->mathes_type; ?></option>
+                                                        <option class="bloodgrouplist" value="<?php echo $match->match_name; ?>"> <?php echo $match->match_name; ?></option>
                                                         <?php
                                                     }
                                                 }
@@ -206,9 +207,8 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div>                            -->
+                                </div>                            
                             </form>
-
                         </div> <!-- end card-body-->
                     </div>
                     <div class="modal-footer">
@@ -282,14 +282,13 @@
                                                 <label>Area</label>
                                                 <input type="text" class="form-control" id="edit_area" name="area" placeholder="Area(square feet)">
                                             </div>
-                                            <div class="form-group">
-                                                <label>Pitch Type</label>
-                                                <select class="custom-select" id="edit_pitch">
-                                                    <option selected="" name="pitch">Pitch Type</option>
-                                                    <option value="HardBall">Hard Ball</option>
-                                                    <option value="TapeBall">Tape Ball</option>      
-                                                </select>
-                                            </div>
+                                           <div class="form-group">
+                                            <label>Pitch Type</label><br>
+                                            <select class="select2-multiple" data-toggle="select2" name="pitch[]" multiple="multiple" data-placeholder="Choose ..." style="width: 100%;">
+                                                <option value="Hard Ball">Hard Ball</option>
+                                                <option value="Tape Ball">Tape Ball</option> 
+                                            </select> 
+                                        </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -308,44 +307,38 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
-<!--                                            <div class="form-group">
+                                            <div class="form-group">
                                                 <label>Teams Type</label>
-                                                <select class="custom-select"  name="teamtype" id="edit_team">
+                                                <select class="custom-select"  name="teamtype" id="edit_ground">
                                                     <?php
-                                                    if (!empty($Ecategory)) {
-                                                        foreach ($Ecategory as $categorys) {
+                                                    if (!empty($Eteam)) {
+                                                        foreach ($Eteam as $teams) {
                                                             ?>
-                                                            <option class="bloodgrouplist" value="<?php echo $categorys->team_type; ?>">
-                                                                <?php if ($categorys->team_type == 1) { ?>
-                                                                    <?php echo 'Local Team' ?>  <?php } elseif ($categorys->team_type == 2) { ?>
-                                                                    <?php echo 'School Team' ?> <?php } elseif ($categorys->team_type == 3) { ?>
-                                                                    <?php echo 'College Team' ?> <?php } elseif ($categorys->team_type == 4) { ?>
-                                                                    <?php echo 'University Team' ?> <?php } elseif ($categorys->team_type == 5) { ?>
-                                                                    <?php echo 'Organization' ?>
-                                                                <?php } ?>
+                                                            <option class="bloodgrouplist" value="<?php echo $teams->type_name; ?>">
+                                                                <?php echo $teams->type_name; ?>
                                                             </option>
                                                             <?php
                                                         }
                                                     }
                                                     ?>
                                                 </select>
-                                            </div>-->
+                                            </div>
                                         </div>
                                         <div class="col-6">
-<!--                                            <div class="form-group">
+                                            <div class="form-group">
                                                 <label>Matches Type</label>
-                                                <select class="custom-select"  name="MatchType">
+                                                <select class="custom-select"  name="MatchType" id="edit_match">
                                                     <?php
-                                                    if (!empty($category)) {
-                                                        foreach ($category as $categorys) {
+                                                    if (!empty($Ematches)) {
+                                                        foreach ($Ematches as $match) {
                                                             ?>
-                                                            <option class="bloodgrouplist" value="<?php echo $categorys->mathes_type; ?>"> <?php echo $categorys->mathes_type; ?></option>
+                                                            <option class="bloodgrouplist" value="<?php echo $match->match_name; ?>"> <?php echo $match->match_name; ?></option>
                                                             <?php
                                                         }
                                                     }
                                                     ?>
                                                 </select>
-                                            </div>-->
+                                            </div>
                                         </div>
                                     </div>  
                                     <input type="hidden" id="save_id" name="ground_id">
@@ -369,8 +362,8 @@
 
 <script>
     var table = $('#example').DataTable({
-        dom: 'Blfrtip',
-        buttons: [
+    dom: 'Blfrtip',
+            buttons: [
 //            {
 //                text: "View",
 //                enabled: false,
@@ -382,208 +375,194 @@
 //                }
 //            },
             {
-                extend: 'print',
-                exportOptions: {
+            extend: 'print',
+                    exportOptions: {
                     columns: ':visible'
-                },
-                customize: function (win) {
+                    },
+                    customize: function (win) {
                     $(win.document.body).find('table').find('td:first-child, th:first-child').remove();
                     $(win.document.body).find('table').find('td:last-child, th:last-child').remove();
-                }
+                    }
             },
             {
-                extend: 'pdf',
-                exportOptions: {
+            extend: 'pdf',
+                    exportOptions: {
                     columns: ':visible'
-                }
+                    }
             },
             {
-                extend: 'csv',
-                exportOptions: {
+            extend: 'csv',
+                    exportOptions: {
                     columns: ':visible'
-                }
+                    }
             },
-            'colvis',
-        ],
-        columnDefs: [{
-                orderable: false,
-                className: 'select-checkbox',
-                targets: 0
+                    'colvis',
+            ],
+            columnDefs: [{
+            orderable: false,
+                    className: 'select-checkbox',
+                    targets: 0
             },
-        ],
-        select: {
+            ],
+            select: {
             style: 'multi',
-            // selector: ':not(:first-child)'
-            selector: 'td:first-child'
-
-        },
-        order: [[1, 'desc']],
-        "lengthMenu": [10, 25, 50, 75, 100],
-        responsive: true
+                    // selector: ':not(:first-child)'
+                    selector: 'td:first-child'
+            },
+            order: [[1, 'desc']],
+            "lengthMenu": [10, 25, 50, 75, 100],
+            responsive: true
     });
-    table.on('select deselect', function () {
-        var selectedRows = table.rows({selected: true}).count();
-
-//table.button( 0 ).enable( selectedRows === 1 );
-        table.button(0).enable(selectedRows > 0);
-    });
-</script>
+//    table.on('select deselect', function () {
+//    var selectedRows = table.rows({selected: true}).count();
+//    table.button(0).enable(selectedRows > 0);
+//    });</script>
 <script>
-//    function submit() {
-//        document.getElementById("add_ground").submit();// Form submission
-//    }
-</script>
-<script>
-     $("#save").click(function (e) {
-        e.preventDefault();
-          document.getElementById("edit_ground").submit();// Form submission
-        
-    });
-//    function editsubmit() {
-//         var id = $(this).attr("data_id");
-//          console.log(id);
-//          die();
-//        document.getElementById("edit_ground").submit();// Form submission
-//      
-//        
-//        window.location.href = "<?php echo base_url() ?>admin/ground/update_ground/" + id;
-        
-    
-</script>
+    $("#save").click(function (e) {
+    e.preventDefault();
+    document.getElementById("edit_ground").submit(); // Form submission
+
+    });</script>
 <script>
     $(".editUser").click(function (e) {
-        e.preventDefault();
-        var id = $(this).attr("data_id");
-        $.ajax({
-            url: "<?php echo base_url('admin/Ground/edit/') ?>" + id,
+    e.preventDefault();
+    var id = $(this).attr("data_id");
+    $.ajax({
+    url: "<?php echo base_url('admin/Ground/edit/') ?>" + id,
             success: function (data) {
-                var res = jQuery.parseJSON(data);
-                $("#save_id").val(res['ground_id']);
-                $("#edit_name").val(res['name']);
-                $("#edit_phone").val(res['phone']);
-                $("#edit_email").val(res['email']);
-                $("#edit_title").val(res['ground_title']);
-                $("#edit_capacity").val(res['ground_capacity']);
-                $("#edit_area").val(res['ground_area']);
-                $("#edit_price").val(res['ground_price']);
-                $("#edit_location").val(res['ground_location']);
-                $("#edit_pitch").val(res['ground_pitch']);
-                $("#edit_city").val(res['ground_city']);
-
+            var res = jQuery.parseJSON(data);
+            console.log(res);
+            $("#save_id").val(res['ground_id']);
+            $("#edit_name").val(res['name']);
+            $("#edit_phone").val(res['phone']);
+            $("#edit_email").val(res['email']);
+            $("#edit_title").val(res['ground_title']);
+            $("#edit_capacity").val(res['ground_capacity']);
+            $("#edit_area").val(res['ground_area']);
+            $("#edit_price").val(res['ground_price']);
+            $("#edit_location").val(res['ground_location']);
+            $("#edit_pitch").val(res['ground_pitch']);
+            $("#edit_city").val(res['ground_city']);
+            $("#edit_match").val(res['ground_type']);
+            $("#edit_ground").val(res['ground_category']);
             }
-        });
     });
-</script> 
+    });</script> 
 <script>
     function deleteItem(id){
-        console.log("Clicked ID:"+id);
-        // Swal.fire({
-        //     title:'Alert called',
-        //     type:'warning'
-        // });
-              Swal.fire({
-                         title: 'Are you sure?',
-                         html: 'Record will delete permanently',
-                         type: 'warning',
-                         showCancelButton: true,
-                         confirmButtonColor: '#FDA81A',
-                         cancelButtonColor: '#B22E06',
-                         confirmButtonText: 'Yes, Delete it!'
-                       }).then((result) => {
-                         if (result.value) {
-                             Swal.fire({title:"Data Deleted!",
-                            text:"",
-                            type:"success",
-                            confirmButtonClass:"btn btn-confirm mt-2"}).then((result)=>{
-                                if(result.value){
-                                    window.location.href="<?php echo base_url() ?>admin/Ground/delete/"+id;
-                                }
-                            })
-                            //...//
-                           }
-                       })
+    console.log("Clicked ID:" + id);
+    Swal.fire({
+    title: 'Are you sure?',
+            html: 'Record will delete permanently',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#FDA81A',
+            cancelButtonColor: '#B22E06',
+            confirmButtonText: 'Yes, Delete it!'
+    }).then((result) => {
+    if (result.value) {
+    Swal.fire({title:"Data Deleted!",
+            text:"",
+            type:"success",
+            confirmButtonClass:"btn btn-confirm mt-2"}).then((result) => {
+    if (result.value){
+    window.location.href = "<?php echo base_url() ?>admin/Ground/delete/" + id;
+    }
+    })
+            //...//
+    }
+    })
     }
 </script>
 <script>
-    
-        function submitForm() {
-            console.log('i am submit butn');
-               
-                var check = 0;
-                if ($('#name').val() == '') {
-                    $('#namespan').text("Please fill this field!");
-                    $('#name').css("border","1px solid red");
+
+    function submitForm() {
+    console.log('i am submit butn');
+    var check = 0;
+    if ($('#name').val() == '') {
+    $('#namespan').text("Please fill this field!");
+    $('#name').css("border", "1px solid red");
 //                    document.forms["msform"]["fullname"].style.border = "1px solid red";
-                    check = 1;
-                }
-                if ($('#phone').val() == '') {
-                    $('#phonespan').text("Please fill this field!");
+    check = 1;
+    }
+    if ($('#phone').val() == '') {
+    $('#phonespan').text("Please fill this field!");
 //                    document.forms["msform"]["city"].style.border = "1px solid red";
-                      $('#phone').css("border","1px solid red");
-                    check = 1;
-                }
-                if ($('#email').val() == '') {
-                    $('#emailspan').text("Please fill this field!");
+    $('#phone').css("border", "1px solid red");
+    check = 1;
+    }
+    if ($('#email').val() == '') {
+    $('#emailspan').text("Please fill this field!");
 //                    document.forms["msform"]["fathername"].style.border = "1px solid red";
-                        $('#email').css("border","1px solid red");
-                    check = 1;
-                }
-                if ($('#title').val() == '') {
-                    $('#titlespan').text("Please fill this field!");
+    $('#email').css("border", "1px solid red");
+    check = 1;
+    }
+    if ($('#title').val() == '') {
+    $('#titlespan').text("Please fill this field!");
 //                    document.forms["msform"]["cnic"].style.border = "1px solid red";
-               $('#title').css("border","1px solid red");
-                    check = 1;
-                }
+    $('#title').css("border", "1px solid red");
+    check = 1;
+    }
 ////               
 //             
 
 //
 //                
-                if ($('#teamcity').val() == '') {
-                    $('#teamcityspan').text("Please fill this field!");
+    if ($('#teamcity').val() == '') {
+    $('#teamcityspan').text("Please fill this field!");
 //                    document.forms["msform"]["email"].style.border = "1px solid red";
-                     $('#teamcity').css("border","1px solid red");
-                    check = 1;
-                }
-                if ($('#capacity').val() == '') {
-                    $('#capacityspan').text("Please fill this field!");
+    $('#teamcity').css("border", "1px solid red");
+    check = 1;
+    }
+    if ($('#capacity').val() == '') {
+    $('#capacityspan').text("Please fill this field!");
 //                    document.forms["msform"]["password"].style.border = "1px solid red";
-                   $('#capacity').css("border","1px solid red");
-                    check = 1;
-                }
-                if ($('#price').val() == '') {
-                    $('#pricespan').text("Please fill this field!");
+    $('#capacity').css("border", "1px solid red");
+    check = 1;
+    }
+    if ($('#price').val() == '') {
+    $('#pricespan').text("Please fill this field!");
 //                    document.forms["msform"]["username"].style.border = "1px solid red";
-                   $('#price').css("border","1px solid red");
-                    check = 1;
-                }
+    $('#price').css("border", "1px solid red");
+    check = 1;
+    }
 //                 check=0;
-                if (check == 1) {
-                    swal('missing fields', 'Please Fill the Required Fields', 'error');
-                } else {
-                    // alert();
-                   
-                 
-              
-                        
-                            Swal.fire({title:"Added!",
-                            text:"",
-                            type:"success",
-                            confirmButtonClass:"btn btn-confirm mt-2"}).then((result)=>{
-                                if(result.value){
-                                    $('#add_ground').attr('action', '<?php echo base_url(); ?>admin/ground/add_ground');
-                                   $('#add_ground').submit();
-                                }
-                            })
+    if (check == 1) {
+    swal('missing fields', 'Please Fill the Required Fields', 'error');
+    } else {
+    // alert();
 
-                            //...//
-                            
-                          
-                           }
-                      
 
-                }
-            //end of function moveto2level
-   
-    </script>
+
+
+    Swal.fire({title:"Added!",
+            text:"",
+            type:"success",
+            confirmButtonClass:"btn btn-confirm mt-2"}).then((result) => {
+    if (result.value){
+    $('#add_ground').attr('action', '<?php echo base_url(); ?>admin/ground/add_ground');
+    $('#add_ground').submit();
+    }
+    })
+
+            //...//
+
+
+    }
+
+
+    }
+    //end of function moveto2level
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+    $('#example-getting-started').multiselect();
+    });
+</script>
+
 

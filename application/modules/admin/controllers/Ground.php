@@ -11,6 +11,8 @@ class Ground extends CI_Controller {
 
     public function index() {
         $ground = $this->Grounds->all_ground_info();
+        $matches_type = $this->Grounds->matches_type();
+        $types_of_team = $this->Grounds->types_of_team();
         $city = $this->Grounds->city();
         $category = $this->Grounds->add_ground_info();
         $passData = [
@@ -18,7 +20,11 @@ class Ground extends CI_Controller {
             'Ecity' => $city,
             'ground' => $ground,
             'Ecategory' => $category,
-            'category' => $category
+            'category' => $category,
+            'matches' => $matches_type,
+            'Ematches' => $matches_type,
+            'Eteam' => $types_of_team,
+            'team' => $types_of_team
         ];
         $this->load->view('admin/ground/list', $passData);
     }
@@ -31,7 +37,7 @@ class Ground extends CI_Controller {
         $city = $this->input->post('teamcity');
         $capacity = $this->input->post('capacity');
         $area = $this->input->post('area');
-        $pitch = $this->input->post('pitch');
+        $pitch = implode(' , ', (array) $this->input->post('pitch'));
         $price = $this->input->post('price');
         $location = $this->input->post('location');
         $category = $this->input->post('teamtype');
@@ -60,7 +66,6 @@ class Ground extends CI_Controller {
         //$this->load->view('admin/ground/list');
         redirect('admin/ground/index');
     }
-
     public function edit() {
         $id = $this->uri->segment(4);
         $data = $this->Grounds->edit_ground($id);
@@ -75,7 +80,7 @@ class Ground extends CI_Controller {
         $city = $this->input->post('teamcity');
         $capacity = $this->input->post('capacity');
         $area = $this->input->post('area');
-        $pitch = $this->input->post('pitch');
+        $pitch = implode(' , ', (array) $this->input->post('pitch'));
         $price = $this->input->post('price');
         $location = $this->input->post('location');
         $category = $this->input->post('teamtype');

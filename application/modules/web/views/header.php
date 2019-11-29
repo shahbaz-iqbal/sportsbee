@@ -224,7 +224,7 @@
                         if (!empty($this->session->userdata('user_type'))) {
                             ?>
                             <li class="dropdown notification-list">
-                                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" href="<?php echo base_url('Web/logout'); ?>" aria-haspopup="false" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" href="<?php echo base_url('web/logout'); ?>" aria-haspopup="false" aria-expanded="false">
                                     <span style="color: white !important;" class="pro-user-name ml-1">
                                         <i class="mdi mdi-logout" style="color: #fff;"></i>
                                         Logout

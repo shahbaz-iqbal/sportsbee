@@ -168,10 +168,10 @@
 <!--Plugins js--> 
 <script src="<?php echo base_url(''); ?>application/assets/libs/flatpickr/flatpickr.min.js"></script>
 <!-- Sweet Alerts js -->
-        <script src="<?php echo base_url('') ?>application/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+<script src="<?php echo base_url('') ?>application/assets/libs/sweetalert2/sweetalert2.min.js"></script>
 
-        <!-- Sweet alert init js-->
-        <script src="<?php echo base_url('') ?>application/assets/js/pages/sweet-alerts.init.js"></script>
+<!-- Sweet alert init js-->
+<script src="<?php echo base_url('') ?>application/assets/js/pages/sweet-alerts.init.js"></script>
 <!--<script src="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.js'); ?>"></script>
 <script src="<?php echo base_url(''); ?>assets/libs/jquery-knob/jquery.knob.min.js"></script>
 <script src="<?php echo base_url(''); ?>assets/libs/jquery-sparkline/jquery.sparkline.min.js"></script>
@@ -200,17 +200,17 @@
 <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
 <!-- third party js ends -->
 <!-- Sweet Alerts js -->
-        <script src="<?php echo base_url('') ?>application/assets/libs/sweetalert2/sweetalert2.min.js"></script>
-        <!-- Sweet alert init js-->
-        <script src="<?php echo base_url('') ?>application/assets/js/pages/sweet-alerts.init.js"></script>
+<script src="<?php echo base_url('') ?>application/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+<!-- Sweet alert init js-->
+<script src="<?php echo base_url('') ?>application/assets/js/pages/sweet-alerts.init.js"></script>
 <!--Plugins js -->
 <script src="<?php echo base_url('assets/libs/dropzone/dropzone.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/libs/dropify/dropify.min.js'); ?>"></script>
 <!--Init js-->
 <script src="<?php echo base_url('assets/js/pages/form-fileuploads.init.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/app.min.js'); ?>"></script>
-        <!-- Sweet alert init js-->
-        <script src="<?php echo base_url(); ?>assets/libs/jquery-nice-select/jquery.nice-select.min.js"></script>
+<!-- Sweet alert init js-->
+<script src="<?php echo base_url(); ?>assets/libs/jquery-nice-select/jquery.nice-select.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/libs/switchery/switchery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/libs/multiselect/jquery.multi-select.js"></script>
 <script src="<?php echo base_url(); ?>assets/libs/select2/select2.min.js"></script>
@@ -219,9 +219,11 @@
 <script src="<?php echo base_url(); ?>assets/libs/bootstrap-select/bootstrap-select.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+
 <!-- Init js-->
 <script src="<?php echo base_url(); ?>assets/js/pages/form-advanced.init.js"></script>
-       
+
+
 <script>
     var myIndex = 0;
     carousel();
