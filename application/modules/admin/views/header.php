@@ -689,7 +689,7 @@
                                                 <a href="#">Matches</a>
                                             </li>
                                             <li>
-                                                <a href="#">Events</a>
+                                                <a href="<?php echo base_url('admin/event/index'); ?>">Events</a>
                                             </li>          
                                             <li>
                                                 <a href="#">Instant Challenge</a>

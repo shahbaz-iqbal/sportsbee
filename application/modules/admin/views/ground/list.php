@@ -282,13 +282,13 @@
                                                 <label>Area</label>
                                                 <input type="text" class="form-control" id="edit_area" name="area" placeholder="Area(square feet)">
                                             </div>
-                                           <div class="form-group">
-                                            <label>Pitch Type</label><br>
-                                            <select class="select2-multiple" data-toggle="select2" name="pitch[]" multiple="multiple" data-placeholder="Choose ..." style="width: 100%;">
-                                                <option value="Hard Ball">Hard Ball</option>
-                                                <option value="Tape Ball">Tape Ball</option> 
-                                            </select> 
-                                        </div>
+                                            <div class="form-group">
+                                                <label>Pitch Type</label><br>
+                                                <select class="select2-multiple" data-toggle="select2" name="pitch[]" id="pitchtype" multiple="multiple" data-placeholder="Choose ..." style="width: 100%;">
+                                                    <option value="Hard Ball">Hard Ball</option>
+                                                    <option value="Tape Ball">Tape Ball</option> 
+                                                </select> 
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -459,12 +459,12 @@
             confirmButtonColor: '#FDA81A',
             cancelButtonColor: '#B22E06',
             confirmButtonText: 'Yes, Delete it!'
-    }).then((result) => {
+    }).then((result) = > {
     if (result.value) {
     Swal.fire({title:"Data Deleted!",
             text:"",
             type:"success",
-            confirmButtonClass:"btn btn-confirm mt-2"}).then((result) => {
+            confirmButtonClass:"btn btn-confirm mt-2"}).then((result) = > {
     if (result.value){
     window.location.href = "<?php echo base_url() ?>admin/Ground/delete/" + id;
     }
@@ -538,7 +538,7 @@
     Swal.fire({title:"Added!",
             text:"",
             type:"success",
-            confirmButtonClass:"btn btn-confirm mt-2"}).then((result) => {
+            confirmButtonClass:"btn btn-confirm mt-2"}).then((result) = > {
     if (result.value){
     $('#add_ground').attr('action', '<?php echo base_url(); ?>admin/ground/add_ground');
     $('#add_ground').submit();
@@ -562,7 +562,8 @@
 <script type="text/javascript">
     $(document).ready(function() {
     $('#example-getting-started').multiselect();
-    });
+    });</script>
+<script>
+    $('#pitchtype').select2();
 </script>
-
 
