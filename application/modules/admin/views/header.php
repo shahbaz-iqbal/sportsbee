@@ -414,6 +414,20 @@
                 background-color: #b22e06;
                 border-color: #b22e06;
             }
+
+           /* table.fixed { table-layout:fixed; }
+            table.fixed td { overflow: hidden; }*/
+            div.dataTables_wrapper {
+        width: auto;
+        margin: 0 auto;
+    }
+
+
+       .select2-container--default .select2-selection--multiple .select2-selection__rendered li {
+               list-style: none;
+                 background-color: #fda81a;
+        }
+
         </style>
     </head>
     <body>
@@ -700,10 +714,12 @@
                                         <a href="#">Team </a>
                                         <ul class="submenu">
                                             <li>
-                                                <a href="<?php echo base_url('admin/Dashboard/general_data'); ?>">Indoor Team</a>
+                                                <a href="<?php echo base_url('admin/Indoorteam/index'); ?>">Indoor Team</a>
+                                                <!-- <a href="<?php echo base_url('admin/Dashboard/general_data'); ?>">Indoor Team</a> -->
                                             </li>
                                             <li>
-                                                <a href="#">Outdoor Team</a>
+                                                <a href="<?php echo base_url('admin/Indoorteam/outdoorpage'); ?>">Outdoor Team</a>
+                                                <!-- <a href="#">Outdoor Team</a> -->
                                             </li>
                                             <li>
                                                 <a href="<?php echo base_url('admin/sponser/index'); ?>">Sponsors</a>
@@ -732,6 +748,17 @@
                                     </li>
                                     <li class="has-submenu">
                                         <a href="#">Settings </a>
+                                        <!-- <ul class="submenu">
+                                            <li class="has-submenu">
+                                                <a href="#">Pending Requests</a> -->
+                                                <ul class="submenu">
+                                                    <!--<li>-->
+                                                    <!--    <a href="http://localhost/sb_portal/admin/Dashboard/player_req">Team Request</a>-->
+                                                    <!--</li>-->
+                                                    <li>
+                                                        <a href="<?php echo base_url('admin/roletype/index'); ?>">Roles</a>
+                                                    </li>
+                                                </ul>
                                     </li>
                                     <?php
                                 }
