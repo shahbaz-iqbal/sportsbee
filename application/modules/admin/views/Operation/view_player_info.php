@@ -10,7 +10,7 @@ $this->load->view('admin/header');
                     <div class="row">
                         <div class="col-md-4">
                             <div>
-                                <img src="<?php echo base_url(); ?>assets/images/dummy.jpg" alt="profile_image" height="200" width="200">
+                                <img src="<?php echo base_url(); ?>assets/images/dummy.jpg" alt="profile_image" height="200" width="200" style="border-radius: 110px;">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -22,7 +22,7 @@ $this->load->view('admin/header');
                                     Gmail:<?php echo $user->gmail; ?>
                                 </h6>
                                 <p class="proile-rating">Address : <span><?php echo $user->address; ?></span></p>
-                                <p class="proile-rating">City : <span><?php echo $user->city; ?></span></p>
+                                <p class="proile-rating">City : <span><?php echo $user->cityname; ?></span></p>
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Other details</a>

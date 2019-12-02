@@ -32,6 +32,8 @@
                         <table id="example" class="table table-bordered">  
                             <thead>
                                 <tr>
+                                    <th>#</th>
+                                    <th>id</th>
                                     <th>Name</th>
                                     <th>teamcategory</th>
                                     <th>matchtype</th>
@@ -45,6 +47,8 @@
                                 <?php if (count($users) > 0) { ?>
                                     <?php foreach ($users as $user) { ?>
                                         <tr>
+                                            <td></td>
+                                            <td><?php echo $user->team_id; ?></td>
                                             <td><?php echo $user->name; ?></td>
                                             <td>
                                                 <?php if ($user->teamcategory == 1) { ?>
@@ -71,6 +75,7 @@
                                                 <input type="button"  onclick="window.location.href = '<?php echo base_url(); ?>admin/Dashboard/team_req_accept/<?php echo $user->team_id; ?>'" class="btn btn-primary"  value="Accept">
 
                                                 <input type="button"  onclick="window.location.href = '<?php echo base_url(); ?>admin/Dashboard/team_req_reject/<?php echo $user->team_id; ?>'" class="btn btn-primary" value="Reject">
+                                                <!--<input type="button"  onclick="window.location.href = '<?php echo base_url(); ?>admin/Dashboard/view_teams/<?php echo $user->team_id; ?>'" class="btn btn-primary" value="View">-->
 
                                             </td>        
                                         </tr>
@@ -88,8 +93,78 @@
 <?php $this->load->view('admin/footer') ?>
 <script>
     var table = $('#example').DataTable({
+        dom: 'Blfrtip',
+        buttons: [
+            {
+                text: "View",
+                enabled: false,
+                action: function () {
+                    //                   var data = table.row({selected: true}).data();
+                    var ids = $.map(table.rows('.selected').data(), function (item) {
+                        alert(ids);
+                        return item[1]
+                    });
+
+                    window.location.href = "<?php echo base_url() ?>admin/Dashboard/pending_teams/" + ids;
+
+
+                    //console.log(ids)
+
+//                    console.log(data);
+                }
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                customize: function (win) {
+                    $(win.document.body).find('table').find('td:first-child, th:first-child').remove();
+                    $(win.document.body).find('table').find('td:last-child, th:last-child').remove();
+                }
+            },
+            {
+                extend: 'pdf',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'csv',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis',
+        ],
+        columnDefs: [{
+                orderable: false,
+                className: 'select-checkbox',
+                targets: 0
+            },
+            {
+                "targets": 1,
+                "visible": false
+            }
+        ],
+        select: {
+            style: 'multi',
+            // selector: ':not(:first-child)'
+            selector: 'td:first-child'
+
+        },
+        order: [[1, 'desc']],
+        "lengthMenu": [10, 25, 50, 75, 100]
+
+    });
+    table.on('select deselect', function () {
+        var selectedRows = table.rows({selected: true}).count();
+
+        //table.button( 0 ).enable( selectedRows === 1 );
+        table.button(0).enable(selectedRows > 0);
     });
 </script>
+
 
 
 

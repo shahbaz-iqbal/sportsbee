@@ -3,8 +3,23 @@
 Class Admins extends CI_Model {
 
     function all_player() {
-        $query = $this->db->get('player');
-        $result = $query->result();
+//        $query = $this->db->get('player');
+//        $result = $query->result();
+//        return $result;
+//             $arr = array();
+//
+//        foreach ($id as $i) {
+//            $result = '';
+            $result = $this->db->select('player.*,player_team_table.player_as')
+                            ->from('player')
+                            ->join('player_team_table', 'player_team_table.player_id = player.player_id', 'left')
+                          //  ->join('player_socialaccounts', 'player_socialaccounts.player_id = player.player_id', 'left')
+                           // ->join('city_table', 'city_table.city_id = player.city_id', 'left')
+                            //->where('player.player_id', $i)
+                            ->get()->result();
+//            array_push($arr, $result);
+//        }
+
         return $result;
     }
 
@@ -129,36 +144,62 @@ Class Admins extends CI_Model {
     }
 
     function player_detail($id) {
-        // $array = array('player_id' => $id);
         $arr = array();
-    
-        foreach ($id as $i){
+
+        foreach ($id as $i) {
             $result = '';
-            $result = $this->db->select('player_socialaccounts.facebook,player_socialaccounts.instagram,player_socialaccounts.twitter,player_socialaccounts.youtube,player_sports_detail.mathes_type,player_sports_detail.team_type,player.player_id,player.name,player.fathername,player.cnic,player.dob,player.gender,player.bloodgroup,player.bio,player.gmail,player.username,player.password,player.phone1,player.phone2,player.city,player.postalcode,player.address,player.profile_image,player.profile_image_tag,player.phone2,player.phone2')
-                        ->from('player')
-                        ->join('player_sports_detail', 'player_sports_detail.player_id = player.player_id','left')
-                        ->join('player_socialaccounts', 'player_socialaccounts.player_id = player.player_id','left')
-                        ->where('player.player_id', $i)
-                        ->get()->row();
-        array_push($arr, $result);
-
+            $result = $this->db->select('player_socialaccounts.facebook,player_socialaccounts.instagram,player_socialaccounts.twitter,player_socialaccounts.youtube,player_sports_detail.mathes_type,player_sports_detail.team_type,player.player_id,player.name,player.fathername,player.cnic,player.dob,player.gender,player.bloodgroup,player.bio,player.gmail,player.username,player.password,player.phone1,player.phone2,player.city_id,player.postalcode,player.address,player.profile_image,player.profile_image_tag,player.phone2,player.phone2,city_table.name as cityname')
+                            ->from('player')
+                            ->join('player_sports_detail', 'player_sports_detail.player_id = player.player_id', 'left')
+                            ->join('player_socialaccounts', 'player_socialaccounts.player_id = player.player_id', 'left')
+                            ->join('city_table', 'city_table.city_id = player.city_id', 'left')
+                            ->where('player.player_id', $i)
+                            ->get()->row();
+            array_push($arr, $result);
         }
-        
-        // return $result->result_array(); 
+        echo "<pre>";
+        print_r($result);
+        echo "</pre>";
+        die;
         return $arr;
-
-
-//         $this->db->where_in('player_id', $id);
-//        $query = $this->db->get('player');
-//        $result = $query->result();
-//        return $result;
     }
 
     function team_detail($id) {
-        $this->db->where_in('team_id', $id);
-        $query = $this->db->get('team');
-        $result = $query->result();
-        return $result;
+//        $this->db->where_in('team_id', $id);
+//        $query = $this->db->get('team');
+//        $result = $query->result();
+//        return $result;
+//    }
+        
+        $tramDetails = array();
+        foreach ($id as $d){
+            $result = $this->db->select('team.name AS team_name,team.description As teamdiscription,team.teamcategory As teamCaategory,team.matchtype As teammatchtype,team.address As teamaddress,team.city As teamcity,team.postalcode As teampostalcode,player.name AS player_name,player_team_table.player_as,player.fathername as playerFather,player.cnic,player.dob,player.gender,player.bloodgroup,player.bio,player.gmail,player.username,player.phone1,player.phone2,player.postalcode,player.address,player.profile_image,player.profile_image_tag,city_table.name as TeamCityName')
+                        ->from('team')
+                        ->join('player_team_table', 'player_team_table.team_id = team.team_id')
+                        ->join('player','player.player_id = player_team_table.player_id')
+                        ->join('city_table','city_table.city_id = team.city')
+                        ->where('team.team_id', $d)
+                        ->get()->row();
+        array_push($tramDetails, $result);
+        }
+
+        return $tramDetails;
+    }
+    function team_request_detail($id) {
+        
+        $tramDetails = array();
+        foreach ($id as $d){
+            $result = $this->db->select('team.name AS team_name,team.description As teamdiscription,team.teamcategory As teamCaategory,team.matchtype As teammatchtype,team.address As teamaddress,team.city As teamcity,team.postalcode As teampostalcode,player.name AS player_name,player_team_table.player_as,player.fathername as playerFather,player.cnic,player.dob,player.gender,player.bloodgroup,player.bio,player.gmail,player.username,player.phone1,player.phone2,player.postalcode,player.address,player.profile_image,player.profile_image_tag,city_table.name as TeamCityName')
+                        ->from('team')
+                        ->join('player_team_table', 'player_team_table.team_id = team.team_id')
+                        ->join('player','player.player_id = player_team_table.player_id')
+                        ->join('city_table','city_table.city_id = team.city')
+                        ->where('team.team_id', $d)
+                        ->get()->row();
+        array_push($tramDetails, $result);
+        }
+
+        return $tramDetails;
     }
 
 }

@@ -44,7 +44,16 @@ class Dashboard extends CI_Controller {
 //        ];
         $this->load->view('admin/operation/view_player_info', $passData);
     }
-
+    
+        public function pending_teams() {
+       $ids = $this->uri->segment(4);
+        $id = explode(',', $ids);
+        $detail = $this->Admins->team_detail($id);
+        $passData = [
+            'users' => $detail
+        ];
+        $this->load->view('admin/operation/pending_req/view_pending', $passData);
+    }
     public function view_teams() {
         $ids = $this->uri->segment(4);
         $id = explode(',', $ids);
@@ -52,12 +61,6 @@ class Dashboard extends CI_Controller {
         $passData = [
             'users' => $detail
         ];
-    
-//
-//         $users = $this->Admins->active_player();
-//        $passData = [
-//            'users' => $users
-//        ];
         $this->load->view('admin/operation/view_team_info', $passData);
     }
 
@@ -107,12 +110,13 @@ class Dashboard extends CI_Controller {
         redirect('Admin/player_req');
     }
 
+
     public function team_req() {
         $users = $this->Admins->team_request();
         $passData = [
             'users' => $users
         ];
-
+        
         $this->load->view('admin/operation/pending_req/team_req',$passData);
     }
 
@@ -124,33 +128,6 @@ class Dashboard extends CI_Controller {
             'status' => $status
         ];
         $res = $this->Admins->accept_team_req($id, $data);
-//        $gmail = $this->Admins->send_email($id);
-//        foreach ($gmail as $g) {
-//            $g = $g->gmail;
-//        }
-//        if ($res) {
-//            $config['protocol'] = 'sendmail';
-//            $config['mailpath'] = '/usr/sbin/sendmail';
-//            $config['charset'] = 'iso-8859-1';
-//            $config['wordwrap'] = TRUE;
-//            $this->email->initialize($config);
-//
-//            $this->load->library('email', $config);
-//
-//            $this->email->from('shahbaziqbal150@gmail.com', 'Shahbaz Iqbal');
-//            $this->email->to($g);
-//            $this->email->subject('From Sports bee');
-//            $this->email->message('Congretulation you are online.');
-//            $this->email->send();
-//            $d = $this->email->print_debugger();
-//            echo "<pre>";
-//            print_r($d);
-//            echo "</pre>";
-//            die;
-//        }
-//        die();
-//
-//
 
         if ($res) {
             $this->session->set_flashdata('success', 'Accept Request successfully');

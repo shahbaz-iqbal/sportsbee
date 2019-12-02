@@ -31,6 +31,7 @@ class Event extends CI_Controller {
    
             $sponser = implode(' , ', (array) $this->input->post('sponser'));
             $link = $this->input->post('link');
+            $image = $this->input->post('img');
           //  $image = $this->input->post('img');
 //            if (!empty($_FILES['img']['name'])) {
 //                $fileInfo = pathinfo($_FILES['img']['name']);

@@ -24,8 +24,9 @@
                         <table id="example" class="table table-bordered">  
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>#</th>                                 
                                     <th>id</th>
+                                     <th>Captian</th>
                                     <th>Profile</th>
                                     <th>name</th>
                                     <th>Phone</th>
@@ -41,7 +42,15 @@
                                     <?php foreach ($users as $user) { ?>
                                         <tr>
                                             <td></td>
+                                           
                                             <td><?php echo $user->player_id; ?></td>
+                                             <td>
+                                                 <?php if ($user->player_as == "") { ?>
+                                                 <?php   ?>
+                                                 <?php } else { ?>
+                                                            <?php  ?> 
+                                                 <?php  } ?>
+                                             </td>
                                             <td>
                                                 <?php $filename = $user->profile_image; ?>
                                                 <?php if (file_exists('http:localhost/sportsbee_portal/assets/images/' . $filename)) { ?>
@@ -131,7 +140,7 @@
                 targets: 0
             },
             {
-                "targets": 1,
+                "targets": [ 1, 2 ],
                 "visible": false
             }
         ],
