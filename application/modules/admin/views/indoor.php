@@ -50,11 +50,18 @@
                                     <?php foreach ($ind_team as $data) { ?>
                                         <tr>
                                             <td></td>
+
                                             <td><?php echo $data->indoor_id; ?></td>
                                             <td><?php echo $data->ind_team_name; ?></td>
                                             <td><?php echo $data->ind_email; ?></td>
                                             <td><?php echo $data->ind_password; ?></td>
+                                            <?php if($data->role_name ==''){ ?>
+                                              <td ><?php echo 'None' ?></td>
+                                           <?php }else{ ?>
                                             <td ><?php echo $data->role_name; ?></td>
+
+                                          <?php } ?>
+                                            
                                             <td><?php echo $data->ind_phone1; ?></td>
                                             <td><?php echo $data->ind_address; ?></td>
                                             <td><?php echo $data->ind_modules; ?></td>
@@ -464,12 +471,12 @@
         columns: [
             { width: "5%" },
             { width: "5%" },
-            { width: "40%" },
-            { width: "40%" },
-             { width: "40%" },
+            { width: "20%" },
+            { width: "20%" },
+             { width: "20%" },
             { width: "40%" }, 
             { width: "40%" },
-            { width: "40%" },
+            { width: "60%" },
              { width: "40%" },
             { width: "40%" }
             

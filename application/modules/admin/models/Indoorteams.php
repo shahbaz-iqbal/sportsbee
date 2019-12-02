@@ -61,7 +61,7 @@ Class Indoorteams extends CI_Model {
                 $this->db->select('indoor_team.*,role_type.*');
                 $this->db->from('indoor_team');
                 $this->db->where("team_status",'Indoor team');
-                $this->db->join('role_type', 'role_type.role_id = indoor_team.role_id', 'inner'); 
+                $this->db->join('role_type', 'role_type.role_id = indoor_team.role_id', 'left outer'); 
 
        $query = $this->db->get();
                  //   print_r($query->result());
@@ -75,7 +75,7 @@ Class Indoorteams extends CI_Model {
           $this->db->select('indoor_team.*,role_type.*');
                 $this->db->from('indoor_team');
                 $this->db->where("team_status",'Outdoor team');
-                $this->db->join('role_type', 'role_type.role_id = indoor_team.role_id', 'inner'); 
+                $this->db->join('role_type', 'role_type.role_id = indoor_team.role_id', 'left outer'); 
 
        $query = $this->db->get();
                  //   print_r($query->result());

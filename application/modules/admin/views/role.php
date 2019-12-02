@@ -229,8 +229,8 @@
         ],
         columns: [
             { width: "5%" },
-            { width: "5%" },
-            { width: "40%" },
+            { width: "20%" },
+            { width: "80%" },
             { width: "40%" }
             
            
@@ -331,10 +331,17 @@
 
      function deleteItem(id){
         console.log("Clicked ID:"+id);
-       
-              Swal.fire({
+        var text;
+
+             $.ajax({
+                url:"<?php echo base_url('admin/roletype/count_reserved_roles/'); ?>"+id,
+                success:function(data){
+                   // data=JSON.parse(data);
+                    console.log(data);
+                   text=data;
+                     Swal.fire({
                          title: 'Are you sure?',
-                         html: 'Record will delete permanently!',
+                         html: text,
                          type: 'warning',
                          showCancelButton: true,
                          confirmButtonColor: '#fda81a',
@@ -359,6 +366,13 @@
                           
                            }
                        })
+                   
+                }
+             });
+
+             
+       
+            
                    }
 
 

@@ -67,6 +67,59 @@ Class Roletypes extends CI_Model {
         return $query->result();
 
     }
+
+    // function get_roles_associated_teams($id){
+    //     $this->db->select('indoor_team.*');
+    //     $this->db->from('indoor_team');
+    //     $this->db->where('role_id',$id);
+      
+    //     $this->db->join('role_type','role_type.role_id = indoor_team.role_id'); 
+    //     $query = $this->db->get();
+    //                 print_r($query->result());
+    //              // die();
+    //    return $query->result();
+    // }
+          
+    function count_reserved_roles($id){
+
+       // $this->db->count_all_results('indoor_team');  // Produces an integer, like 25
+        // $this->db->where('role_id',$id);
+        // $this->db->from('indoor_team');
+        // $res =$this->db->count_all_results(); 
+
+         $this->db->like('team_status','Outdoor team');
+        $this->db->from('indoor_team');
+        $this->db->where('role_id',$id);
+        $res1 =$this->db->count_all_results(); 
+
+         $this->db->like('team_status','Indoor team');
+        $this->db->from('indoor_team');
+        $this->db->where('role_id',$id);
+        $res2 =$this->db->count_all_results(); 
+
+        // $msg=$res2.' Indoor teams and '.$res1.' Outdoor teams have this Role!! Record will delete permanently!';
+
+
+        $msg='<table class="table table-bordered  table-condensed">
+    <thead>
+      <tr>
+        <th>Indoor Teams</th>
+        <th>Outdoor Teams</th>
+       
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>'.$res2.'</td>
+        <td>'.$res1.'</td>';
+       
+        return $msg;
+
+
+        // print_r($res);
+        // die();
+    }
     function edit_role($data,$id){
       $this->db->where('role_id',$id);
       $result=$this->db->update('role_type',$data);

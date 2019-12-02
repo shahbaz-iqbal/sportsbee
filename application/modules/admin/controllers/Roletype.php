@@ -63,6 +63,18 @@ class Roletype extends CI_Controller {
        }
        echo json_encode($output);
 
+    } 
+
+    public function count_reserved_roles(){
+      // print_r('helloo');
+      // die();
+     // $output='';
+      $id=$this->uri->segment(4);
+      $data=$this->Roletypes->count_reserved_roles($id);
+      // print_r($data);
+      // die();
+      echo $data;
+      //die();
     }
 
    
@@ -79,6 +91,25 @@ class Roletype extends CI_Controller {
         $this->index();
     }
 
+ // function view_(){
+ //     $id = $this->uri->segment(4);
+ //   $roles=$this->Roletypes->get_roles_associated_teams($id);
+   
+ //   echo '<pre>';
+ //   print_r($roles);
+ //   echo '</pre>';
+ //   die();
+
+ //      // $passData=[
+ //      //      'roles'=>$roles,
+ //      //      'addroles'=>$roles
+ //      // ];
+       
+        
+ //        $this->load->view('teams');
+ //    }
+
+ 
 
 
 }

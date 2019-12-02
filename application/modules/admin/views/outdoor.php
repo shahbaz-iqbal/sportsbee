@@ -52,8 +52,15 @@
                                             <td><?php echo $data->indoor_id; ?></td>
                                             <td><?php echo $data->ind_team_name; ?></td>
                                             <td><?php echo $data->ind_email; ?></td>
-                                           
+
+                                             <?php if($data->role_name ==''){ ?>
+                                              <td ><?php echo 'None' ?></td>
+                                           <?php }else{ ?>
                                             <td ><?php echo $data->role_name; ?></td>
+
+                                          <?php } ?>
+                                           
+                                            
                                             <td><?php echo $data->ind_phone1; ?></td>
                                             <td><?php echo $data->ind_address; ?></td>
                                            
@@ -439,12 +446,12 @@
         columns: [
             { width: "5%" },
             { width: "5%" },
-            { width: "40%" },
-            { width: "40%" },
-            { width: "40%" },
-            { width: "40%" },
-            { width: "10%" },
-            { width: "40%" }
+            { width: "20%" },
+            { width: "20%" },
+            { width: "20%" },
+            { width: "20%" },
+            { width: "20%" },
+            { width: "20%" }
             
            
           ],
