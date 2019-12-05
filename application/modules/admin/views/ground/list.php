@@ -53,7 +53,7 @@
                                             <td><?php echo $grounds->ground_title; ?></td>
                                             <td><?php echo $grounds->ground_city; ?></td>
                                             <td><?php echo $grounds->ground_price; ?></td>
-                                            <td><?php echo $grounds->ground_location; ?></td>
+                                            <td><a href="<?php echo $grounds->ground_location; ?>"><?php echo $grounds->ground_location; ?></a></td>
                                             <td>
                                                 <a id="" data_id="<?php echo $grounds->ground_id; ?>" href="<?php echo base_url(); ?>admin/ground/update" class="action-icon editUser" data-toggle="modal" data-target="#editModal"><i class="mdi mdi-square-edit-outline"></i></a> 
                                                 <a href="#" class="action-icon" id="sa-warning" onclick="deleteItem(<?php echo $grounds->ground_id; ?>)"> <i class="mdi mdi-delete"></i></a>
@@ -149,7 +149,7 @@
 
                                         <div class="form-group">
                                             <label>Pitch Type</label><br>
-                                            <select class="select2-multiple" data-toggle="select2" name="pitch[]" multiple="multiple" data-placeholder="Choose ..." style="width: 100%;">
+                                            <select class="select2-multiple" data-toggle="select2" name="pitch[]" id="pitchtypes" multiple="multiple" data-placeholder="Choose ..." style="width: 100%;">
                                                 <option value="Hard Ball">Hard Ball</option>
                                                 <option value="Tape Ball">Tape Ball</option> 
                                             </select> 
@@ -284,10 +284,12 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Pitch Type</label><br>
-                                                <select class="select2-multiple" data-toggle="select2" name="pitch[]" id="pitchtype" multiple="multiple" data-placeholder="Choose ..." style="width: 100%;">
-                                                    <option value="Hard Ball">Hard Ball</option>
-                                                    <option value="Tape Ball">Tape Ball</option> 
-                                                </select> 
+                                                <div class="edit_pitch">
+                                                    <select class="select2-multiple" data-toggle="select2" name="pitch[]" id="edit_pitchh" multiple="multiple" data-placeholder="Choose ..." style="width: 100%;">
+                                                        <option value="Hard Ball">Hard Ball</option>
+                                                        <option value="Tape Ball">Tape Ball</option> 
+                                                    </select> 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -309,19 +311,21 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label>Teams Type</label>
-                                                <select class="custom-select"  name="teamtype" id="edit_ground">
-                                                    <?php
-                                                    if (!empty($Eteam)) {
-                                                        foreach ($Eteam as $teams) {
-                                                            ?>
-                                                            <option class="bloodgrouplist" value="<?php echo $teams->type_name; ?>">
-                                                                <?php echo $teams->type_name; ?>
-                                                            </option>
-                                                            <?php
+                                                <div class="edit_team">
+                                                    <select class="custom-select"  name="teamtype" id="">
+                                                        <?php
+                                                        if (!empty($Eteam)) {
+                                                            foreach ($Eteam as $teams) {
+                                                                ?>
+                                                                <option class="bloodgrouplist" value="<?php echo $teams->type_name; ?>">
+                                                                    <?php echo $teams->type_name; ?>
+                                                                </option>
+                                                                <?php
+                                                            }
                                                         }
-                                                    }
-                                                    ?>
-                                                </select>
+                                                        ?>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-6">
@@ -431,7 +435,22 @@
     url: "<?php echo base_url('admin/Ground/edit/') ?>" + id,
             success: function (data) {
             var res = jQuery.parseJSON(data);
-            console.log(res);
+           var myStr = res['ground_pitch'];
+        var strArray = myStr.split(',');
+       
+        // Display array values on page
+//        for(var i = 0; i < strArray.length; i++){
+//            $("#edit_pitchh").val(strArray[i]);
+                var abc= strArray[0];
+                $("#edit_pitchh").val(abc);
+//                $('#edit_pitchh').trigger('change').val(['Hard ball', 'Tape ball']);
+              //  .find("option[value=" + strArray +"]").attr('selected', true);
+//                $("select option[value=abc]").attr("selected","selected");
+//                $("select option[abc]").attr("selected","selected");
+          //  $('#edit_pitchh').attr("value",abc);
+          
+            console.log(abc);
+//        }
             $("#save_id").val(res['ground_id']);
             $("#edit_name").val(res['name']);
             $("#edit_phone").val(res['phone']);
@@ -441,10 +460,12 @@
             $("#edit_area").val(res['ground_area']);
             $("#edit_price").val(res['ground_price']);
             $("#edit_location").val(res['ground_location']);
-            $("#edit_pitch").val(res['ground_pitch']);
+            // $("#edit_pitch").val(res['ground_pitch']);
             $("#edit_city").val(res['ground_city']);
             $("#edit_match").val(res['ground_type']);
-            $("#edit_ground").val(res['ground_category']);
+           
+            //$("div.edit_pitch select").val(strArray[0]);
+            $("div.edit_team select").val(res['ground_category']);
             }
     });
     });</script> 
@@ -459,12 +480,12 @@
             confirmButtonColor: '#FDA81A',
             cancelButtonColor: '#B22E06',
             confirmButtonText: 'Yes, Delete it!'
-    }).then((result) = > {
+    }).then((result) => {
     if (result.value) {
     Swal.fire({title:"Data Deleted!",
             text:"",
             type:"success",
-            confirmButtonClass:"btn btn-confirm mt-2"}).then((result) = > {
+            confirmButtonClass:"btn btn-confirm mt-2"}).then((result) => {
     if (result.value){
     window.location.href = "<?php echo base_url() ?>admin/Ground/delete/" + id;
     }
@@ -538,7 +559,7 @@
     Swal.fire({title:"Added!",
             text:"",
             type:"success",
-            confirmButtonClass:"btn btn-confirm mt-2"}).then((result) = > {
+            confirmButtonClass:"btn btn-confirm mt-2"}).then((result) => {
     if (result.value){
     $('#add_ground').attr('action', '<?php echo base_url(); ?>admin/ground/add_ground');
     $('#add_ground').submit();
@@ -564,6 +585,10 @@
     $('#example-getting-started').multiselect();
     });</script>
 <script>
-    $('#pitchtype').select2();
+    $('#edit_pitchh').select2();</script>
+<script>
+    $('#pitchtypes').select2();
 </script>
+
+
 

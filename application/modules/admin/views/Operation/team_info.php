@@ -27,7 +27,7 @@
                                     <th>id</th>
                                     <th>Profile</th>
                                     <th>name</th>
-                                    <th>Address</th>
+                                    <th>Discription</th>
                                     <th>City</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -55,8 +55,8 @@
                                                 <img src="<?php echo base_url(); ?>/assets/images/dummy.jpg" height="30" width="45" style="margin-left: 10px; border-radius: 20px;"/>
                                             </td>
                                             <td><?php echo $user->name; ?></td>
-                                            <td><?php echo $user->address; ?></td>                 
-                                            <td><?php echo $user->city; ?></td>                 
+                                            <td><?php echo $user->description; ?></td>                 
+                                            <td><?php echo $user->cityname; ?></td>                 
                                             <td>
                                                 <?php $status = $user->status; ?>
                                                 <?php if ($status == 1) { ?>

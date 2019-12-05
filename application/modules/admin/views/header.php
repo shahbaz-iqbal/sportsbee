@@ -34,7 +34,7 @@
         <link href="<?php echo base_url(); ?>assets/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/libs/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/libs/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" />
-              <!-- Plugins css -->
+        <!-- Plugins css -->
         <link href="<?php echo base_url(); ?>assets/libs/jquery-nice-select/nice-select.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/libs/switchery/switchery.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/libs/multiselect/multi-select.css" rel="stylesheet" type="text/css" />
@@ -42,12 +42,44 @@
         <link href="<?php echo base_url(); ?>assets/libs/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.css" rel="stylesheet" type="text/css" />
 
-        
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-        
+
 
         <link href="<?php echo base_url('') ?>application/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
         <style>
+            /*  Event page image selection   */
+
+
+
+
+/*            .multi-upload
+            {
+                width: 40%;
+                margin:auto;
+                margin-top:10px;
+
+            }*/
+
+
+            .thumbnail{
+
+                height: 10px;
+                margin: 10px; 
+                float: left;
+            }
+            #clear{
+                display:none;
+            }
+            #result {
+                border: 4px dotted #cccccc;
+                display: none;
+                float: right;
+                width: 100%;
+                margin-top: 10px;
+                
+            }
+
             /*  Select BOx   */
 
             .btn-group, .btn-group-vertical {
@@ -415,18 +447,22 @@
                 border-color: #b22e06;
             }
 
-           /* table.fixed { table-layout:fixed; }
-            table.fixed td { overflow: hidden; }*/
+            /* table.fixed { table-layout:fixed; }
+             table.fixed td { overflow: hidden; }*/
             div.dataTables_wrapper {
-        width: auto;
-        margin: 0 auto;
-    }
+                width: auto;
+                margin: 0 auto;
+            }
 
 
-       .select2-container--default .select2-selection--multiple .select2-selection__rendered li {
-               list-style: none;
-                 background-color: #fda81a;
-        }
+            /*            .select2-container--default .select2-selection--multiple .select2-selection__rendered li {
+                            //list-style: none;
+                            background-color: #fda81a;
+                        }*/
+            .select2-container--default .select2-selection--multiple .select2-selection__choice {
+                background-color: #fda81a;
+
+            }
 
         </style>
     </head>
@@ -463,7 +499,7 @@
                             <?php //if ($this->session->userdata('user_type') == "user") {
                             ?>
                             <!-- <li class="dropdown notification-list">
-                                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" href="<?php //echo base_url('user/profile');                           ?>" aria-haspopup="false" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" href="<?php //echo base_url('user/profile');                             ?>" aria-haspopup="false" aria-expanded="false">
                                     <span style="color: white !important;" class="pro-user-name ml-1">
                                         <i class="mdi mdi-home" style="color: #fff;"></i>
                                         Dashboard
@@ -635,7 +671,7 @@
                                     <?php
                                 } else if ($this->session->userdata('user_type') == "admin") {
                                     ?>
-                                    <li class="has-submenu active">
+                                    <li class="has-submenu">
                                         <a style="padding-left: 20px !important;" href="<?php echo base_url('admin/Dashboard'); ?>">Dashboard</a>
                                     </li>
                                     <li class="has-submenu">
@@ -751,14 +787,14 @@
                                         <!-- <ul class="submenu">
                                             <li class="has-submenu">
                                                 <a href="#">Pending Requests</a> -->
-                                                <ul class="submenu">
-                                                    <!--<li>-->
-                                                    <!--    <a href="http://localhost/sb_portal/admin/Dashboard/player_req">Team Request</a>-->
-                                                    <!--</li>-->
-                                                    <li>
-                                                        <a href="<?php echo base_url('admin/roletype/index'); ?>">Roles</a>
-                                                    </li>
-                                                </ul>
+                                        <ul class="submenu">
+                                            <!--<li>-->
+                                            <!--    <a href="http://localhost/sb_portal/admin/Dashboard/player_req">Team Request</a>-->
+                                            <!--</li>-->
+                                            <li>
+                                                <a href="<?php echo base_url('admin/roletype/index'); ?>">Roles</a>
+                                            </li>
+                                        </ul>
                                     </li>
                                     <?php
                                 }

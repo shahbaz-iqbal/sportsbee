@@ -2,18 +2,12 @@
 Class Webmodel extends CI_Model {
     public function get_users($user_login){
         $this->db->where('username',$user_login['username']);
+        $this->db->or_where('name',$user_login['username']);
         $this->db->where('password',$user_login['password']);
         $query = $this->db->get('player');
         $result = $query->row();
         return $result;
     }
-    // public function get_user_profile($id){
-    //   $this->db->where('id',$id);
-    //   $query = $this->db->get('player');
-    //     $result = $query->row();
-    //     return $result;
-
-    // }
       public function addsocialaccounts($social){
     	$this->db->insert('player_socialaccounts',$social);
     }

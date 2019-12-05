@@ -70,13 +70,9 @@
                                             <td><?php echo $user->city; ?></td>                 
                                             <td><?php echo $user->description; ?></td>                                                              
                                             <td>
-
-
                                                 <input type="button"  onclick="window.location.href = '<?php echo base_url(); ?>admin/Dashboard/team_req_accept/<?php echo $user->team_id; ?>'" class="btn btn-primary"  value="Accept">
-
                                                 <input type="button"  onclick="window.location.href = '<?php echo base_url(); ?>admin/Dashboard/team_req_reject/<?php echo $user->team_id; ?>'" class="btn btn-primary" value="Reject">
                                                 <!--<input type="button"  onclick="window.location.href = '<?php echo base_url(); ?>admin/Dashboard/view_teams/<?php echo $user->team_id; ?>'" class="btn btn-primary" value="View">-->
-
                                             </td>        
                                         </tr>
                                     <?php } ?>
@@ -101,16 +97,9 @@
                 action: function () {
                     //                   var data = table.row({selected: true}).data();
                     var ids = $.map(table.rows('.selected').data(), function (item) {
-                        alert(ids);
                         return item[1]
                     });
-
                     window.location.href = "<?php echo base_url() ?>admin/Dashboard/pending_teams/" + ids;
-
-
-                    //console.log(ids)
-
-//                    console.log(data);
                 }
             },
             {

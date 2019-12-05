@@ -47,8 +47,7 @@ class Ground extends CI_Controller {
             'phone' => $phone,
             'email' => $email,
             'ground_title' => $title,
-            'ground_city' => $city,
-            
+            'ground_city' => $city,       
             'ground_capacity' => $capacity,
             'ground_area' => $area,
             'ground_pitch' => $pitch,
@@ -102,7 +101,7 @@ class Ground extends CI_Controller {
         $res = $this->Grounds->update_ground($id, $data);
 
         if ($res) {
-            $this->session->set_flashdata('success', 'User update successfully');
+            $this->session->set_flashdata('success', 'Grounds update successfully');
         } else {
             $this->session->set_flashdata('error', 'User not update successfully');
         }

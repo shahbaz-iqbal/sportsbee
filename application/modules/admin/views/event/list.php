@@ -2,7 +2,7 @@
 <div class="wrapper">
     <div class="container-fluid">
         <!-- start page title -->
-
+        
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
@@ -92,7 +92,7 @@
                     <div class="modal-body">
                         <div class="card">
                             <div class="card-body">
-                                <form method="post" action="" id="EventForm">
+                                <form method="post" action="" id="EventForm"  enctype='multipart/form-data'>
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
@@ -140,11 +140,18 @@
                                     </div> 
                                     <div class="row">
                                         <div class="col-md-12">
-
-                                            <div class="form-group">
+                                            
+                                            <div class="multi-upload">
+                                                            <label for="files">Select multiple files: </label>
+                                                            <input id="files" type="file" name="img[]" onchange="readURL(this);" accept="image/*" multiple="true" multiple/>
+                                                            <button type="button" id="clear">Clear</button>
+							   <output id="result" />
+						</div>
+                                            
+<!--                                            <div class="form-group">
                                                 <label>Image</label>
                                                 <input type="file" class="form-control" name="img"  placeholder="Event Images">
-                                            </div>
+                                            </div>-->
 
                                         </div>
                                     </div>
@@ -208,12 +215,6 @@
             "lengthMenu": [10, 25, 50, 75, 100],
             responsive: true
     });</script>
-<!--<script>
-    $("#save").click(function (e) {
-    e.preventDefault();
-    document.getElementById("edit_ground").submit(); // Form submission
-
-    });</script>-->
 <script>
     function editEvent(id){
 //        console.log("EDIT ID:"+id);
@@ -234,26 +235,6 @@
         })
     }
     
-//    $("#event").click(function () {
-//    var id = $(this).attr("data-id");
-//    console.log(id);
-//    $.ajax({
-//    url: "<?php //echo base_url('admin/Event/edit_event/') ?>" + id,
-//            success: function (data) {
-//
-//            data = JSON.parse(data);
-//            console.log(data['event_id']);
-//            $("#eventid").val(data['event_id']);
-//            $("#name").val(data['name']);
-//            $("#phone").val(data['phone']);
-//            $("#title").val(data['title']);
-//            $("#email").val(data['email']);
-//            $("#module_access").val(data['sponser_list']);
-//            $("#link").val(data['youtube_link']);
-//            }
-//    })
-//    });
-        
 </script> 
 
 <script>
@@ -336,6 +317,66 @@
     });</script>
 <script>
     $('#module_access').select2();
+</script>
+<script>
+   window.onload = function(){   
+
+								    if(window.File && window.FileList && window.FileReader)
+								    {
+								        $('#files').on("change", function(event) {
+								            var files = event.target.files; //FileList object
+								            var output = document.getElementById("result");
+								            for(var i = 0; i< files.length; i++)
+								            {
+								                var file = files[i];
+								                //Only pics
+								                // if(!file.type.match('image'))
+								                if(file.type.match('image.*')){
+								                    if(this.files[0].size < 2097152){    
+								                  // continue;
+								                    var picReader = new FileReader();
+								                    picReader.addEventListener("load",function(event){
+								                        var picFile = event.target;
+								                        var div = document.createElement("div");
+								                        div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
+								                                "title='preview image'/>";
+								                        output.insertBefore(div,null);            
+								                    });
+								                    //Read the image
+								                    $('#clear, #result').show();
+								                    picReader.readAsDataURL(file);
+								                    }else{
+								                        alert("Image Size is too big. Minimum size is 2MB.");
+								                        $(this).val("");
+								                    }
+								                }else{
+								                alert("You can only upload image file.");
+								                $(this).val("");
+								            }
+								            }                               
+								           
+								        });
+								    }
+								    else
+								    {
+								        console.log("Your browser does not support File API");
+								    }
+								}
+								
+								   $('#files').on("click", function() {
+								        $('.thumbnail').parent().remove();
+								        $('result').hide();
+								        $(this).val("");
+								    });
+								
+								    $('#clear').on("click", function() {
+								        $('.thumbnail').parent().remove();
+								        $('#result').hide();
+								        $('#files').val("");
+								        $(this).hide();
+								    });
+								
+
 </script>
 
 

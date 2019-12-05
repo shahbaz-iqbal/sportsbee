@@ -28,11 +28,12 @@ class Event extends CI_Controller {
             $phone = $this->input->post('phone');
             $email = $this->input->post('email');
             $title = $this->input->post('title');
-   
+
             $sponser = implode(' , ', (array) $this->input->post('sponser'));
             $link = $this->input->post('link');
             $image = $this->input->post('img');
-          //  $image = $this->input->post('img');
+
+            //  $image = $this->input->post('img');
 //            if (!empty($_FILES['img']['name'])) {
 //                $fileInfo = pathinfo($_FILES['img']['name']);
 //                $newName = time() . '.' . $fileInfo['extension'];
@@ -41,49 +42,54 @@ class Event extends CI_Controller {
 //            if (!empty($_FILES['img']['name'])) {
 //                $image = $newName;
 //            }
-                $data = array(
-                    'name' => $name,
-                    'phone' => $phone,
-                    'email' => $email,
-                    'title' => $title,
-                    'sponser_list' => $sponser,
-                    'youtube_link' => $link,
-                    'image' => $image
-                );
-                $res = $this->Events->update_event($id, $data);
-
-                if ($res) {
-                    $this->session->set_flashdata('success', 'User update successfully');
-                } else {
-                    $this->session->set_flashdata('error', 'User not update successfully');
-                }
-
-                redirect('admin/event/index');
-            }
-         else {
-            $name = $this->input->post('name');
-            $phone = $this->input->post('phone');
-            $email = $this->input->post('email');
-            $title = $this->input->post('title');
-            $sponser = implode(' , ', (array) $this->input->post('eventsponser'));
-            $link = $this->input->post('link');
-            $img = $this->input->post('img');
-
-//            if (!empty($_FILES['img']['name'])) {
-//                $fileInfo = pathinfo($_FILES['img']['name']);
-//                $newName = time() . '.' . $fileInfo['extension'];
-//                move_uploaded_file($_FILES['img']['tmp_name'], "assets/uploads/" . $newName);
-//            }
-//            if (!empty($_FILES['img']['name'])) {
-//                $img = $newName;
-//            }
             $data = array(
                 'name' => $name,
                 'phone' => $phone,
                 'email' => $email,
                 'title' => $title,
                 'sponser_list' => $sponser,
-                'image' => $img,
+                'youtube_link' => $link,
+                'image' => $image
+            );
+            $res = $this->Events->update_event($id, $dataa);
+            if ($res) {
+                $this->session->set_flashdata('success', 'User update successfully');
+            } else {
+                $this->session->set_flashdata('error', 'User not update successfully');
+            }
+            redirect('admin/event/index');
+        } else {
+            $name = $this->input->post('name');
+            $phone = $this->input->post('phone');
+            $email = $this->input->post('email');
+            $title = $this->input->post('title');
+            $sponser = implode(' , ', (array) $this->input->post('eventsponser'));
+            $link = $this->input->post('link');
+            $config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+            $config['base_url'] .= "://" . $_SERVER['HTTP_HOST'];
+            $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+
+            foreach ($_FILES['img']['name'] as $key => $filename) {
+                $ext = pathinfo($filename, PATHINFO_EXTENSION);
+                $new_name = time() . '.' . $ext;
+                $config['file_name'] = $new_name;
+                $config['upload_path'] = $config['base_url'] . 'assets/uploads/';
+                $config['allowed_types'] = 'gif|jpg|png';
+                $config['max_size'] = 1000;
+                $this->upload->initialize($config);
+                if (!$this->upload->do_upload('image')) {
+                    $dataerror = array('error' => $this->upload->display_errors());
+                } else {
+                    $dataa = array('upload_data' => $this->upload->data());
+                }
+            }
+            $data = array(
+                'name' => $name,
+                'phone' => $phone,
+                'email' => $email,
+                'title' => $title,
+                'sponser_list' => $sponser,
+                'image' => $new_name,
                 'youtube_link' => $link
             );
             $res = $this->Events->event_detail($data);
@@ -92,13 +98,11 @@ class Event extends CI_Controller {
             } else {
                 $this->session->set_flashdata('error', 'Event not add successfully');
             }
-//$this->load->view('admin/ground/list');
             redirect('admin/event/index');
         }
     }
-    
 
-     public function edit_event() {
+    public function edit_event() {
         $id = $this->uri->segment(4);
         $data = $this->Events->edit_event($id);
         echo json_encode($data);

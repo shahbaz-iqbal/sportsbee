@@ -497,11 +497,42 @@
                                 <li class="has-submenu">
                                     <a href="#">Settings </a>
                                 </li>
-                                <?php }
-                            }else{ ?>
+                                 <?php
+                                }else if($this->session->userdata('user_type') == "captian"){
+                                ?>
+                                <li class="has-submenu active">
+                                    <a style="padding-left: 20px !important;" href="#">Dashboard</a>
+                                </li>
+                            
+                                <li class="has-submenu">
+                                    <a href="#">Store </a>
+                                    <ul class="submenu">
+                                        <li>
+                                            <a href="#">Cricket</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Football <small>(comming soon)</small></a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Hockey <small>(comming soon)</small></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="has-submenu">
+                                    <a href="#">Reports </a>
+                                </li>
+                                <li class="has-submenu">
+                                    <a href="#">Scoreboard </a>
+                                </li>
+                                <li class="has-submenu">
+                                    <a href="#">Settings </a>
+                                </li>
+                               
+                            <?php }}else { ?>
                             <li class="has-submenu <?php if (empty($this->session->userdata('user_type'))) { echo "active"; } ?>">
                                 <a style="padding-left: 20px !important;" href="<?php echo base_url(); ?>">Home</a>
                             </li>
+                            
                             <li class="has-submenu">
                                 <a href="#"> Fixtures </a>
                                 <ul class="submenu">
@@ -516,8 +547,6 @@
                                     </li>
                                 </ul>
                             </li>
-
-
                             <li class="has-submenu">
                                 <a href="#">Ranking</a>
                                 <ul class="submenu">
@@ -583,7 +612,9 @@
                             <li class="has-submenu">
                                 <a href="#"> About Us</a>
                             </li>
-                        <?php } ?>
+                            <!-- 'end else par -->
+                            <?php } ?>
+                           
                         </ul>
                         <!-- End navigation menu -->
 

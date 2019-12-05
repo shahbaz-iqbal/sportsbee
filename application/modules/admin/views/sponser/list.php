@@ -53,7 +53,16 @@
                                             <td><?php echo $sponsers->company_title; ?></td>
                                             <td><?php echo $sponsers->city; ?></td>
                                             <td><?php echo $sponsers->intrested_sport; ?></td>
-                                            <td><?php echo $sponsers->logo_img; ?></td>
+                                            <td>
+                                                
+                                                <?php $image = $sponsers->logo_img;?>
+                                                <?php if(!empty($image)) { ?>
+                                                <img src=" <?php echo base_url( 'assets/uploads/'. $image );?>" height="50" width="50">
+                                                <?php } else { ?>
+                                                            Image Not Avail
+                                                <?php   } ?>
+                                                 
+                                            </td>
                                             <td>
                                                 <a data_id="<?php echo $sponsers->sp_id; ?>" href="<?php echo base_url(); ?>admin/ground/update" class="action-icon editUser" data-toggle="modal" data-target="#editModal"><i class="mdi mdi-square-edit-outline"></i></a> 
                                                 <a href="#" class="action-icon" id="sa-warning" onclick="deleteItem(<?php echo $sponsers->sp_id; ?>)"> <i class="mdi mdi-delete"></i></a>
@@ -156,7 +165,7 @@
         <!-- Edit Model -->
         <!-- Modal -->
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Edit Sponser</h5>
@@ -199,9 +208,10 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Logo</label>
-                                        <input type="file" class="form-control" name="logo"  placeholder="Logo">
+                                        <input type="file" id="logo" class="form-control" name="updatelogo"  placeholder="Logo">
                                     </div>
                                 </div>
+                                 <input type="hidden" id="img"  name="logo">
                             </div>   
                             <div class="form-group">
                                 <label>Intersted Sport</label>
@@ -291,8 +301,9 @@
     var id = $(this).attr("data_id");
     $.ajax({
     url: "<?php echo base_url('admin/sponser/edit/') ?>" + id,
-            success: function (data) {
+            success: function (data) {       
             var res = jQuery.parseJSON(data);
+            console.log(res['logo_img']);
             $("#sp_id").val(res['sp_id']);
             $("#editname").val(res['name']);
             $("#editphone").val(res['phone']);
@@ -300,6 +311,8 @@
             $("#editemail").val(res['email']);
             $("#edittitle").val(res['company_title']);
             $("#editsport").val(res['intrested_sport']);
+            $('#img').val(res['logo_img']);
+           
             }
     });
     });</script> 

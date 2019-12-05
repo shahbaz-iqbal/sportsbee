@@ -25,24 +25,17 @@ class Dashboard extends CI_Controller {
     public function view_players() {
         $ids = $this->uri->segment(4);
         $id = explode(',', $ids);
-
-//        foreach ($idd as $id){
-//            
-//        }
         $detail = $this->Admins->player_detail($id);
         $passData = [
             'users' => $detail
         ];
-//        echo "<pre>";
-//        print_r($detail);
-//        echo "</pre>";
-//        die;
-//
+
 //         $users = $this->Admins->active_player();
 //        $passData = [
 //            'users' => $users
 //        ];
         $this->load->view('admin/operation/view_player_info', $passData);
+    
     }
     
         public function pending_teams() {

@@ -3,30 +3,24 @@
 Class Admins extends CI_Model {
 
     function all_player() {
-//        $query = $this->db->get('player');
-//        $result = $query->result();
-//        return $result;
-//             $arr = array();
-//
-//        foreach ($id as $i) {
-//            $result = '';
             $result = $this->db->select('player.*,player_team_table.player_as')
                             ->from('player')
                             ->join('player_team_table', 'player_team_table.player_id = player.player_id', 'left')
-                          //  ->join('player_socialaccounts', 'player_socialaccounts.player_id = player.player_id', 'left')
-                           // ->join('city_table', 'city_table.city_id = player.city_id', 'left')
-                            //->where('player.player_id', $i)
                             ->get()->result();
-//            array_push($arr, $result);
-//        }
-
         return $result;
     }
-
+    
     function all_teams() {
-        $query = $this->db->get('team');
-        $result = $query->result();
+          $result = $this->db->select('team.*,city_table.name as cityname')
+                            ->from('team')
+                            ->join('city_table', 'city_table.city_id = team.city', 'left')
+                            ->get()->result();
         return $result;
+        
+        
+//        $query = $this->db->get('team');
+//        $result = $query->result();
+//        return $result;
     }
 
     function player_request() {
@@ -54,12 +48,6 @@ Class Admins extends CI_Model {
         $query = $this->db->get('team');
         $result = $query->result();
         return $result;
-//        $result = $this->db->select('team.name as teamname,team.tokan,team.id,team.address,team.city,team.postalcode,team.teamcategory,team.matchtype,player.profile_image,player.name,player.fathername,player.cnic,player.dob,player.username,player.gender,player.bloodgroup,player.facebook,player.instagram,player.twitter,player.youtube,player.bio,player.phone1,player.phone2,player.postalcode,player.player_type,player.sports_style,player.match_type,player.team_type,player.gmail')
-//                        ->from('team')
-//                        ->join('player', 'player.id = team.captain_id')
-//                        ->where('team.status', 3)
-//                        ->get()->result();
-//        return $result;
     }
 
     function accept_team_req($id, $data) {
@@ -142,7 +130,6 @@ Class Admins extends CI_Model {
                         ->get()->result();
         return $result;
     }
-
     function player_detail($id) {
         $arr = array();
 
@@ -157,19 +144,9 @@ Class Admins extends CI_Model {
                             ->get()->row();
             array_push($arr, $result);
         }
-        echo "<pre>";
-        print_r($result);
-        echo "</pre>";
-        die;
         return $arr;
     }
-
     function team_detail($id) {
-//        $this->db->where_in('team_id', $id);
-//        $query = $this->db->get('team');
-//        $result = $query->result();
-//        return $result;
-//    }
         
         $tramDetails = array();
         foreach ($id as $d){
