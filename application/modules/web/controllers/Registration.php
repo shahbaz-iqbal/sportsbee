@@ -17,6 +17,7 @@ class Registration extends CI_Controller {
         $player = array();
         $Social=array();
         $player['status'] = 1;
+        $player['user_type'] = 'player';
         $player['name'] = $this->input->post('fullname');
         $player['fathername'] = $this->input->post('fathername');
         $player['cnic'] = $this->input->post('cnic');
@@ -36,44 +37,30 @@ class Registration extends CI_Controller {
          $Social['twitter'] = $this->input->post('twitter');
          $Social['instagram'] = $this->input->post('instagram');
          $Social['youtube'] = $this->input->post('youtube');
-         // $player['facebook'] = $this->input->post('facebook');
-         // $player['twitter'] = $this->input->post('twitter');
-         // $player['instagram'] = $this->input->post('instagram');
-         // $player['youtube'] = $this->input->post('youtube');
-         $player['enc_password']=md5($this->input->post('password'));
+         
+         $temp=$this->input->post('password');
+         $pass=md5($temp);
+         $player['enc_password']=$pass;
           $player['city_id'] = $this->input->post('city');
-          $player_sport_detail['mathes_type'] = implode(' , ', (array) $this->input->post('matchtype'));
+         
+         $player_sport_detail['mathes_type'] = implode(' , ', (array) $this->input->post('matchtype'));
          $player_sport_detail['team_type'] = implode(' , ', (array) $this->input->post('teamtype'));
          $player_sport_detail['play_hand']=$this->input->post('switch');
          $player_sport_detail['play_as_id'] = $this->input->post('playertype');
          $player_sport_detail['sport_id'] = $this->input->post('playtype');
         
 
-        // if (!empty($_FILES['upload']['name'])) {
-        //     $fileInfo = pathinfo($_FILES['upload']['name']);
-        //     $newName = time() . '.' . $fileInfo['extension'];
-        //     move_uploaded_file($_FILES['upload']['tmp_name'], "assets/uploads/" . $newName);
-        // }
-        // if (!empty($_FILES['upload']['name'])) {
-        //     $player['profile_image'] = $newName;
-        // }
+    
          $gmail = $player['gmail'];
           $res=$this->Registrations->addplayer($player);
-          $res = $this->Registrations->check_registration($gmail);
-          $playerid=$res[0]->player_id;
+          $res1 = $this->Registrations->check_registration($gmail);
+          $playerid=$res1[0]->player_id;
 
           $player_sport_detail['player_id']=$playerid;
           $Social['player_id']=$playerid;
           $res2=$this->Registrations->addsocial($Social);
           $res3=$this->Registrations->addsportdetail($player_sport_detail);
-         // foreach ($res as $value) {
-         //   echo 'i am res :'.$value;
-         // }
-
-         // echo 'i am res :'.$res;
-         // $t = $this->Registrations->ms();
-         // echo '<br>this is t:'.$t;
-        // $res = $this->Registrations->add_social_player($Social);
+         
          if($res3){
           $this->session->set_flashdata('add', 'Successfully Resistered, Now Your Can login with your Account');
          $this->session->set_flashdata('alert-class', 'alert-success');
@@ -84,8 +71,9 @@ class Registration extends CI_Controller {
 
     public function insert_team() {
         $player = array();
-        $player['status'] = 3;
-         $team['status'] = 3;
+        $player['status'] = 1;
+        $player['user_type'] = 'captain';
+         $team['status'] = 0;
         $team['name'] = $this->input->post('teamname');
         $team['city'] = $this->input->post('teamcity');
       
@@ -113,58 +101,40 @@ class Registration extends CI_Controller {
         $player['password'] = md5($this->input->post('password'));
         $player['phone1'] = $this->input->post('phone1');
         $player['phone2'] = $this->input->post('phone2');
-       // $player['city'] = $this->input->post('city');
         $player['postalcode'] = $this->input->post('postalcode');
         $player['address'] = $this->input->post('address');
-        //$player['profile_image_tag'] = $this->input->post('fullname') . " image";
-        //$player['captain_status'] = 1;
          $Social['facebook'] = $this->input->post('facebook');
          $Social['twitter'] = $this->input->post('twitter');
          $Social['instagram'] = $this->input->post('instagram');
          $Social['youtube'] = $this->input->post('youtube');
-        //  $player['facebook'] = $this->input->post('facebook');
-        // $player['twitter'] = $this->input->post('twitter');
-        // $player['instagram'] = $this->input->post('instagram');
-        // $player['youtube'] = $this->input->post('youtube');
-          $player['enc_password']=md5($this->input->post('password'));
+       
+          $temp=$this->input->post('password');
+         $pass=md5($temp);
+         $player['enc_password']=$pass;
+        
           $player['city_id'] = $this->input->post('city');
-       // $player['player_type'] = $this->input->post('playertype');
-      //  $player['sports_style'] = $this->input->post('switch');
-        if (!empty($this->input->post('matchtype'))) {
-            $player['match_type'] = implode(',', $this->input->post('matchtype'));
-        }
-        // if (!empty($this->input->post('teamtype'))) {
-        //  //   $player['team_type'] = implode(',', $this->input->post('teamtype'));
-        // }
-        // if (!empty($_FILES['upload']['name'])) {
-        //     $fileInfo = pathinfo($_FILES['upload']['name']);
-        //     $newName = time() . '.' . $fileInfo['extension'];
-        //     move_uploaded_file($_FILES['upload']['tmp_name'], "assets/uploads/" . $newName);
-        // }
-        // if (!empty($_FILES['upload']['name'])) {
-        //     $player['profile_image'] = $newName;
-        // }
-
+       
         $gmail = $player['gmail'];
         $playerID = $this->Registrations->addplayer($player);
         $teamID = $this->Registrations->addteam($team);
-        //....team id....//
-        // $tid=$this->Registrations->get_teamid();
-        // $teamid=$tid[0]->team_id;
-        $player_sport_detail['team_id']=$teamID;
-
-        // $res = $this->Registrations->check_registration($gmail);
-        // $id = $res[0]->id;
-        //$team['captain_id'] = $captionid;
+      
+        // $player_sport_detail['team_id']=$teamID;
         $player_sport_detail['player_id']=$playerID;
+        $player_sport_detail['sport_id']= $this->input->post('playertype');
+        // $player_sport_detail['team_type']=>
+        // $player_sport_detail['play_as_id']=>
+        // $player_sport_detail['play_hand']=>
+        // $player_sport_detail['mathes_type']=>
+
           $Social['player_id']=$playerID;
 
-          $dataTeamPlayer = array(
-                'player_id' =>$playerID, 
-                'team_id' => $teamID, 
-                'player_as' =>'Captain',
-                'status' => 1 
-            );
+          $dataTeamPlayer['player_id'] = $playerID;
+           $dataTeamPlayer['team_id'] = $teamID;
+            $dataTeamPlayer['player_as'] ="captain";
+             $dataTeamPlayer['status'] = 0;
+                 
+                
+            
 
           $res2=$this->Registrations->addsocial($Social);
           $res3=$this->Registrations->addsportdetail($player_sport_detail);

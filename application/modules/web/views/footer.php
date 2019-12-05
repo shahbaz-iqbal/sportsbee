@@ -238,6 +238,26 @@
 
         <!-- Sweet alert init js-->
         <script src="<?php echo base_url('') ?>application/assets/js/pages/sweet-alerts.init.js"></script>
+
+
+        <!--Init js -->
+<!--<script src="<?php echo base_url('assets/js/pages/foo-tables.init.js'); ?>"></script>
+<script src="<?php echo base_url(''); ?>assets/js/pages/form-pickers.init.js"></script>-->
+<!-- Datatables init -->
+<script src="<?php echo base_url(''); ?>assets/js/pages/datatables.init.js"></script>
+<!-- third party js -->
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.0/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+<!-- third party js ends -->
  
  
 </body>

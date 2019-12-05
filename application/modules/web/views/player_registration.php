@@ -286,13 +286,7 @@
                                    <option class="bloodgrouplist"   value="<?php echo $user->sport_id; ?>"> <?php echo $user->sport_name; ?></option>
                                                        <?php } ?>
                                                        <?php } ?>
-                                                       <!--  <label for="">Select Sports</label>
-                                                   <!--  <select class="form-control" name="" id="playtype">                                       
-                                                     <option class="bloodgrouplist"  selected  value="Cricket">Cricket</option> 
-                                                        <option class="bloodgrouplist" disabled value="Football">Football (Coming Soon)</option>
-                                                        <option class="bloodgrouplist" disabled value="Kabbadi">Kabbadi (Coming Soon)</option>
-                                                        <option class="bloodgrouplist" disabled value="BaseBall">BaseBall (Coming Soon)</option>
-                                                        <option class="bloodgrouplist" disabled value="Tennis">Tennis (Coming Soon)</option> --> -->
+                                                       
                                                     </select>
                                                     <span id="playtypespan" style="color: red;"></span>
                                                 </div>
@@ -313,9 +307,7 @@
                                                        <?php } ?>
                                                        <?php } ?>
 
-                                                        <!-- <option value="BatsMan">BatsMan</option>
-                                                        <option value="Bowler">Bowler</option>
-                                                        <option value="All Rounder">All Rounder</option> -->
+                                                       
                                                     </select>
                                                     <span id="playertypespan" style="color: red;"></span>
                                                 </div>
@@ -345,11 +337,21 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="typematches">Type Of Matches</label>
-                                                    <ul class="ks-cboxtags">
-                                                        <li><input type="checkbox" id="checkboxOne" name="matchtype[]" value="Hard Ball"><label for="checkboxOne">Hard Ball&nbsp;</label></li>
-                                                        <li><input type="checkbox" id="checkboxTwo" name="matchtype[]" value="Tape Ball"><label for="checkboxTwo">Tape Ball&nbsp;</label></li>
-                                                        <li><input type="checkbox" id="checkboxThree" name="matchtype[]" value="Tennis Ball"><label for="checkboxThree">Tenis Ball&nbsp;</label></li>
-                                                    </ul>
+                                                        <ul class="ks-cboxtags">
+                                                         <?php if (count($matchtype) > 0) { ?>
+                                                             <?php  foreach ($matchtype as $match) { ?>
+
+
+
+                                                            <li><input type="checkbox" id="<?php echo $match->matches_type_id ?>" name="matchtype[]" value="<?php echo $match->matches_type_id ?>"><label for="<?php echo $match->matches_type_id ?>"><?php echo $match->match_name ?>&nbsp;</label></li>
+
+
+                                                           <?php } ?>
+                                                           <?php } ?>
+
+                                                           </ul>
+
+                                                
                                                 </div>
                                             </div>
                                         </div>
@@ -357,13 +359,21 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="typematches">Type Of Teams</label>
-                                                    <ul class="ks-cboxtags">
-                                                        <li><input type="checkbox" id="checkboxFour" name="teamtype[]" value="Local Team"><label for="checkboxFour">Local Team&nbsp;</label></li>
-                                                        <li><input type="checkbox" id="checkboxFive" name="teamtype[]" value="School Team"><label for="checkboxFive">School Team&nbsp;</label></li>
-                                                        <li><input type="checkbox" id="checkboxSix" name="teamtype[]" value="College Team"><label for="checkboxSix">College Team&nbsp;</label></li>
-                                                        <li><input type="checkbox" id="checkboxSeven" name="teamtype[]" value="University Team"><label for="checkboxSeven">University Team&nbsp;</label></li>
-                                                        <li><input type="checkbox" id="checkboxEight" name="teamtype[]" value="Organization"><label for="checkboxEight">Custom Team (Organization)&nbsp;</label></li>
-                                                    </ul>
+                                                    
+                                                         <ul class="ks-cboxtags">
+                                                         <?php if (count($teamtype) > 0) { ?>
+                                                             <?php  foreach ($teamtype as $match) { ?>
+
+
+
+                                                            <li><input type="checkbox" id="<?php echo $match->team_type_id.'a'; ?>" name="teamtype[]" value="<?php echo $match->team_type_id ?>"><label for="<?php echo $match->team_type_id.'a'; ?>"><?php echo $match->type_name ?>&nbsp;</label></li>
+
+
+                                                           <?php } ?>
+                                                           <?php } ?>
+
+                                                           </ul>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -476,7 +486,7 @@
                     $('#addressspan').text("Please Enter Address!");
                     document.forms["msform"]["address"].style.border = "1px solid red";
                     check = 1;
-                } //check=0;
+                } check=0;
                 if (check == 1) {
                     swal('missing fields', 'Please Fill the Required Fields', 'error');
                 } else {

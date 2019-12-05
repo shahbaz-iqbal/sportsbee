@@ -232,6 +232,7 @@
     carousel();
 
     function carousel() {
+        try{
         var i;
         var x = document.getElementsByClassName("mySlides");
         for (i = 0; i < x.length; i++) {
@@ -243,6 +244,11 @@
         }
         x[myIndex - 1].style.display = "block";
         setTimeout(carousel, 4000); // Change image every 2 seconds
+    }
+    catch(e)
+    {
+        console.log('some error in carousel');
+    }
     }
 </script>
 

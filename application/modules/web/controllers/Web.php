@@ -25,10 +25,14 @@ class Web extends CI_Controller {
        $users = $this->Registrations->get_sport();
        $playas = $this->Registrations->get_playas();
        $cities=$this->Registrations->get_cities();
+       $matchtype=$this->Registrations->get_match_type();
+       $teamtype=$this->Registrations->get_team_level();
        $passData = [
            'users' => $users,
            'playas' => $playas,
-           'cities'=>$cities
+           'cities'=>$cities,
+           'matchtype' => $matchtype,
+           'teamtype' =>$teamtype
        ];
 
        
