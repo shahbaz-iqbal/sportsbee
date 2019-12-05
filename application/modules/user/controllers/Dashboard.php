@@ -6,8 +6,8 @@ class Dashboard extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-<<<<<<< HEAD
-        $this->load->model('user_model');
+
+        $this->load->model('User_model');
     }
     
     public function index() {
@@ -16,20 +16,6 @@ class Dashboard extends CI_Controller {
         $res = $this->user_model->get_user_profile($id);
         $this->load->view('profile', $res);
     }
-=======
-         $this->load->model('User_model');
-    }
-
-
-	public function index()
-	{
-
-		$r = $this->session->get_userdata();
-		$id= $r['id'];
-		  $res = $this->User_model->get_user_profile($id);
-
-		$this->load->view('profile',$res);
-	}
 
 	public function tournaments()
 	{
@@ -126,7 +112,5 @@ class Dashboard extends CI_Controller {
 			echo "not greater";
 	}
 
-	
->>>>>>> e8b657d4aa1c76b519efe192d655444d8faf5543
 
 }
