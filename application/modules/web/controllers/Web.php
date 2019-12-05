@@ -17,6 +17,7 @@ class Web extends CI_Controller {
         $this->load->view('index');
     }
 
+<<<<<<< HEAD
     public function player_registration() {
 
         $users = $this->Registrations->get_sport();
@@ -31,6 +32,31 @@ class Web extends CI_Controller {
 
 
         $this->load->view('player_registration', $passData);
+=======
+	public function index()
+	{
+		$this->load->view('index');
+	}
+
+	public function player_registration() {
+
+       $users = $this->Registrations->get_sport();
+       $playas = $this->Registrations->get_playas();
+       $cities=$this->Registrations->get_cities();
+       $matchtype=$this->Registrations->get_match_type();
+       $teamtype=$this->Registrations->get_team_level();
+       $passData = [
+           'users' => $users,
+           'playas' => $playas,
+           'cities'=>$cities,
+           'matchtype' => $matchtype,
+           'teamtype' =>$teamtype
+       ];
+
+       
+       
+        $this->load->view('player_registration',$passData);
+>>>>>>> e8b657d4aa1c76b519efe192d655444d8faf5543
     }
 
     public function team_registration() {

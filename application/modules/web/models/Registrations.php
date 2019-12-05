@@ -17,6 +17,9 @@ Class Registrations extends CI_Model {
     //   public function addsocialaccounts($social){
     // 	$this->db->insert('player_socialaccounts',$social);
     // }
+
+
+
     public function addscricketinfo($sportsinfo){
     	$this->db->insert('player_cricketinfo',$sportsinfo);
     }
@@ -163,5 +166,21 @@ Class Registrations extends CI_Model {
         $this->db->insert('player_team_table',$data);
         return true;
      }
+
+       public function get_match_type(){
+
+      $this->db->select('*');
+      $query = $this->db->get('matches_type');
+      $result = $query->result();
+      return $result;
+      
+    }
+    public function get_team_level(){
+
+      $this->db->select('*');
+      $query = $this->db->get('types_of_team');
+      $result = $query->result();
+      return $result;
+    }
 
 }

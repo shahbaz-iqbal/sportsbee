@@ -70,6 +70,8 @@ class Indoorteam extends CI_Controller {
                       'team_status'=>$status
                      
                       ); 
+                  print_r($data);
+                  exit();
                 
                  
 

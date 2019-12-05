@@ -33,6 +33,10 @@ class Tournament extends CI_Controller {
            'editsponsers'=>$sponser
            
        ];
+       // echo '<pre>';
+       // print_r($tour);
+       // echo "</pre>";
+       // die();
 
         $this->load->view('Tindex',$passData);
     }
@@ -56,9 +60,13 @@ class Tournament extends CI_Controller {
         
         $sport_id = $this->input->post('sportid');
         $matchestype = $this->input->post('matchtype');
+
         $teamtype= implode(' , ', (array) $this->input->post('teamtype'));
         $prize = $this->input->post('prize');
         $sponsers = implode(' , ', (array) $this->input->post('sponsers'));
+        $playerlimit=$this->input->post('player_limit');
+        $status='Upcoming';
+
         // $category = $this->input->post('category');
         // $type = $this->input->post('type');
         $data = array(
@@ -72,9 +80,12 @@ class Tournament extends CI_Controller {
             'matches_type_id' =>$matchestype, 
             'team_type_id' => $teamtype,
             'prize' =>$prize, 
-            'sp_id' =>$sponsers 
+            'sp_id' =>$sponsers,
+            'player_limit'=>$playerlimit,
+            'tournament_status'=>$status
             
         );
+
         $res = $this->Tournaments->insert_tourn($data);
         if($res) {
             $this->session->set_flashdata('success', 'Tournament added successfully');
@@ -108,14 +119,16 @@ class Tournament extends CI_Controller {
             $output['sp_id']=$row->sp_id;
             $output['sport_id']=$row->sport_id;
            $output['prize']=$row->prize;
-           $output['sponsers']=$row->sp_id;
+           $output['sponsers']=$row->name;
            $output['matchtype']=$row->match_name;
            $output['matchtypeid']=$row->matches_type_id;
            $output['teamtype']=$row->type_name;
            $output['teamtypeid']=$row->team_type_id;
+           $output['player_limit']=$row->player_limit;
 
 
             $output['id'] = $row->tournid;
+
 
 
        }
@@ -144,21 +157,10 @@ class Tournament extends CI_Controller {
         $teamtype=  implode(' , ', (array) $this->input->post('teamtype'));
         $prize = $this->input->post('prize');
         $sponsers = implode(' , ', (array) $this->input->post('sponsers'));
-
+        $status='Upcoming';
+        $playerlimit=$this->input->post('player_limit');
         //......//
-                                                        //  $tournid=$this->input->post('hiden_userid');
-                                                        // $name = $this->input->post('editname');
-                                                        // $city = $this->input->post('editcity');
-                                                        // $entryfee = $this->input->post('editentry_fee');
-                                                        // $dated= $this->input->post('editdated');
-                                                        // $teamlimit = $this->input->post('editeditteamlimit');
-                                                        // $sport_id = $this->input->post('editsportid');
-                                                        // $matchestype = $this->input->post('editmatchtype');
-                                                        // $teamtype= $this->input->post('editteamtype');
-                                                        // $prize = $this->input->post('editprize');
-                                                        // $sponsers = $this->input->post('editsponsers');
-                                                        // // $category = $this->input->post('category');
-                                                        // // $type = $this->input->post('type');
+                                                       
         $data = array(
             'title' => $name,
             'city_id' => $city,
@@ -170,10 +172,12 @@ class Tournament extends CI_Controller {
             'team_type_id' => $teamtype,
             'prize' =>$prize, 
             'sp_id' =>$sponsers,
-            'tournTid'=>$tournTid
+            'tournTid'=>$tournTid,
+            'player_limit'=>$playerlimit,
+            'tournament_status'=>$status
             
         );
-        // print_r($id);
+        // print_r($data);
         // exit();
        $res= $this->Tournaments->update_user($id,$data);
        if($res){

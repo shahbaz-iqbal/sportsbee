@@ -19,18 +19,19 @@ Class Tournaments extends CI_Model {
     }
     function get_all_tourdata(){
 
-        $this->db->select('tournament.*,sports_table.*,city_table.*,matches_type.*,types_of_team.*,tournament_type.*,sponser.name AS sp_name');
+     $this->db->select('tournament.*,sports_table.*,city_table.*,matches_type.*,types_of_team.*,tournament_type.*,sponser.name AS sp_name');
+        //$this->db->select('*');
     $this->db->from('tournament');
-    $this->db->join('sports_table', 'sports_table.sport_id = tournament.sport_id', 'right outer'); 
-    $this->db->join('city_table', 'city_table.city_id = tournament.city_id', 'inner'); 
-    $this->db->join('matches_type', 'matches_type.matches_type_id = tournament.matches_type_id', 'inner'); 
-    $this->db->join('types_of_team', 'types_of_team.team_type_id = tournament.team_type_id', 'inner'); 
-    $this->db->join('tournament_type', 'tournament_type.tournTid = tournament.tournTid', 'inner');
-    $this->db->join('sponser', 'sponser.sp_id = tournament.sp_id', 'inner');
+     $this->db->join('sports_table', 'sports_table.sport_id = tournament.sport_id', 'right outer'); 
+     $this->db->join('city_table', 'city_table.city_id = tournament.city_id', 'right outer'); 
+    $this->db->join('matches_type', 'matches_type.matches_type_id = tournament.matches_type_id', 'right outer'); 
+    $this->db->join('types_of_team', 'types_of_team.team_type_id = tournament.team_type_id', 'right outer'); 
+    $this->db->join('tournament_type', 'tournament_type.tournTid = tournament.tournTid', 'right outer');
+    $this->db->join('sponser', 'sponser.sp_id = tournament.sp_id', 'left outer');
     $query = $this->db->get();
        return $query->result();
 
-       
+        // echo '<pre>';
         // print_r($query->result());
         // die();
 

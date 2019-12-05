@@ -294,6 +294,14 @@
                                             </div>
                                         </div>
 
+                                         <div class="col-4">
+                                           <div class="form-group">
+                                                <label>Players Per Team</label>
+                                                <input type="number" class="form-control checkplayerlimit" id="player_limit" name="player_limit" placeholder="5-15" min="5" max="15">
+                                                <span id="playerlimitspan" style="color: red;"></span>
+                                            </div>
+                                        </div>
+
                                         
                                     </div>
 
@@ -342,6 +350,7 @@
                                             <div class="form-group">
                                                 <label>Event Title</label>
                                                 <input type="text" class="form-control" id="editname" name="name" placeholder="Title">
+                                                 <span id="editnamespan" style="color: red;"></span>
                                             </div>
                                            
                                         </div>
@@ -361,6 +370,7 @@
 
                                                        
                                                     </select>
+                                                    <span id="editcityspan" style="color: red;"></span>
                                                
                                             </div>
                                             
@@ -370,6 +380,7 @@
                                                 <label>Start Date</label>
                                                 <input type="text" class="form-control flatpickr-input active" id="editdated" name="dated" 
                                                 readonly="readonly">
+                                                <span id="editdatespan" style="color: red;"></span>
                                             </div>
                                            
                                         </div>
@@ -382,7 +393,7 @@
 
                                                 <div class="form-group">
                                                 <label>Sport</label>
-                                                <select class="custom-select"  name="sportid" id="editsportid">
+                                                <select class="custom-select"  name="sportid" id="editsport">
                                                     <option value="">Select Sport</option>
                                                            <?php if (count($editsport) > 0) { ?>
                                                          <?php  foreach ($editsport as $sport) { ?>
@@ -395,6 +406,7 @@
 
                                                        
                                                     </select>
+                                                    <span id="editsportspan" style="color: red;"></span>
                                                 <!-- <input type="text" class="form-control" id="sportid" name="sportid"> -->
                                             </div>
                     
@@ -416,6 +428,7 @@
 
                                                        
                                                     </select>
+                                                    <span id="editmatchtypespan" style="color: red;"></span>
                                             </div>
                                            
                                         </div>
@@ -457,22 +470,10 @@
                                                        <?php } ?>
                                                        <?php } ?>
                                                 </select>
+                                                <span id="editteamtypespan" style="color: red;"></span>
 
 
-                                                <!-- <select class="custom-select"  name="teamtype" id="editteamtype">
-                                                    <option value="">Select Type</option>
-                                                           <?php //if (count($editteamtype) > 0) { ?>
-                                                         <?php  //foreach ($editteamtype as $teamtype) { ?>
-                                                   
-                                        <option class="bloodgrouplist" value="<?php echo $teamtype->team_type_id; ?>"> <?php echo  $teamtype->type_name; ?>
-                                            
-                                        </option>
-                                                       <?php //} ?>
-                                                       <?php //} ?>
-
-                                                       
-                                                    </select> -->
-                                                <!-- <input type="text" class="form-control" id="teamtype" name="teamtype" > -->
+                                               
                                             </div>
                                             
                                           
@@ -481,7 +482,7 @@
                                               <div class="form-group">
                                                <label>Sponsers</label>
                                                 <!-- <input type="text" class="form-control" id="sponsers" name="sponsers"> -->
-                                                <select class="select2-multiple2" data-toggle="select2" data-placeholder="Choose ..." style="width: 100%;" multiple="multiple" name="sponsers[]" id="edit_sponsers">
+                                                <select class="select2-multiple2" data-toggle="select2" data-placeholder="Choose ..." style="width: 100%;" multiple="multiple" name="sponsers[]" id="editsponsers">
                                                   
                                                     <?php 
                                                     if (!empty($editsponsers)) {
@@ -491,6 +492,7 @@
                                                     }
                                                     ?>
                                                 </select>
+                                                <span id="editsponsersspan" style="color: red;"></span>
                                             </div>
                                          
                                         </div>
@@ -508,6 +510,14 @@
 
                                             
                                                 
+                                            </div>
+                                        </div>
+
+                                         <div class="col-4">
+                                           <div class="form-group" >
+                                                <label>Players Per Team</label>
+                                                <input type="number" class="form-control checkeditplayerlimit" id="editplayer_limit" name="player_limit" placeholder="5-15" min="5" max="15">
+                                                <span id="editplayerlimitspan" style="color: red;"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -534,8 +544,9 @@
                         </button>
 <?php $this->load->view('admin/footer') ?>
 <script type="text/javascript">
-    $('#edit_sponsers').select2();
+    $('#editsponsers').select2();
     $('.select2-multiple1').select2();
+
     $('#teamtype').select2();
     $('#editteamtype').select2();
     function deleteItem(id){
@@ -680,6 +691,7 @@
                 success:function(data){
                    
                      data = JSON.parse(data);
+                     console.log(data);
 
                     if(data.teamlimit=='2'){
                         // console.log('i am none');
@@ -701,19 +713,32 @@
 
                      
                   
-                    //console.log(data.id);
+                    console.log(data.sp_id);
               $('#editname').val(data.title);
-              $('#editsponsers').val(data.sponser);
+              // $('#editsponsers').val(data.sponser);
               $('#editprize').val(data.prize);
-              $('#editteamtype').val(data.teamtypeid);
+             
               $('#editsportid').val(data.sport_id);
               $('#editdated').val(data.dated);
               $('#editentry_fee').val(data.entryfee);
               $('#editcity').val(data.city_id);
               $('#editmatchtype').val(data.matchtypeid);
-              
-              $('#editsponsers').val(data.sp_id);
+                   
+
+                   midss = data.teamtypeid.split(',').map(n => {
+                        return Number(n.trim());
+                      });
+              console.log(midss);
+                 $('#editteamtype').val(midss);
+                  $('#editteamtype').trigger('change');
+              ids = data.sp_id.split(',').map(n => {
+                return Number(n.trim());
+              });
+              console.log(ids);
+              $('#editsponsers').val(ids);
+              $('#editsponsers').trigger('change');
               $('#hiden_userid').val(data.id);
+              $('#editplayer_limit').val(data.player_limit);
             // var z=$('#hiden_userid').val();
             // var z= $('#edit_tournament').val(data.tournid);
             // console.log(z)
@@ -723,56 +748,12 @@
                 }
 
             })
-       // var currow=$(this).closest('tr');
-       // var id=currow.find('td:eq(1)').text();
-       // var title=currow.find('td:eq(2)').text();
-       // var city=currow.find('td:eq(3)').text();
-       // var entryfee=currow.find('td:eq(4)').text();
-       // var dated=currow.find('td:eq(5)').text();
-       // var teamlimit=currow.find('td:eq(6)').text();
-       // var sportname=currow.find('td:eq(7)').text();
-       // var matchtype=currow.find('td:eq(8)').text();
-       // var teamtype=currow.find('td:eq(9)').text();
-       // var prize=currow.find('td:eq(10)').text();
-       // var sponser=currow.find('td:eq(11)').text();
-       //      alert('x is :'+id);
-       //        $('#editname').val(title);
-       //        $('#editsponsers').val(sponser);
-       //        $('#editprize').val(prize);
-       //        $('#editteamtype').val(teamtype);
-       //        $('#editsportid').val(sportname);
-       //        $('#edi').val();
-       //        $('#editentry_fee').val(entryfee);
-       //        $('#editcity').val(city);
-       //        $('#editmatchtype').val(matchtype);
-       //        $('#editteamlimit').val(teamlimit);
+     
 
 
         })
         
-      //   $('#editbtn').click(function(){
-      //  // var x=document.getElementById("myTable").rows[10].cells.item(1).innerHTML;
-      // // var x=$('#tblname').val();
-      // console.log('i am working');
-      //  var currow=$(this).closest('tr');
-      //  var id=currow.find('td:eq(2)').text();
-      //       alert('x is :'+id);
-      //       // var abc=$('#editbtn').val();
-      //       // alert(abc);
-      //       // var oldtitle=$('#name').val();
-      //        $('#editname').val(id);
-      //       // alert("oldTitle is:"+oldtitle);
-      //   })
-
-//         function tabledata(){
-//             $('tbledit').Tabledit({
-//     url: 'example.php',
-//     columns: {
-//         identifier: [0, 'id'],
-//         editable: [[1, 'nickname'], [2, 'firstname'], [3, 'lastname']]
-//     }
-// });
-//         }
+   
 
     });
 </script>
@@ -791,6 +772,27 @@
              $('#teamlimit').val("");
              $('#teamlimitspan').text("Only Even Number of Teams Allowed!");
 
+        }
+    });
+    $(".checkplayerlimit").change(function(e){
+        var playerlimit=$(this).val();
+        if(playerlimit <=15 && playerlimit >=5){
+              $('#playerlimitspan').text("");
+              $('#player_limit').css("boarder","1px solid green");
+              console.log('i am <5 and >15');
+        }else{
+             $('#player_limit').val("");
+             $('#playerlimitspan').text("Only 5-15 players per team Allowed!");
+        }
+    });
+
+     $(".checkeditplayerlimit").change(function(e){
+        var playerlimit=$(this).val();
+        if(playerlimit <=15 && playerlimit >=5){
+              $('#editplayerlimitspan').text("");
+        }else{
+             $('#editplayer_limit').val("");
+             $('#editplayerlimitspan').text("Only 5-15 players per team Allowed!");
         }
     });
       $(".checkeditteamlimit").change(function(e){
@@ -953,7 +955,7 @@
                     $('#matchtypespan').text("");
                     $('#matchtype').css("border","1px solid green");
                    
-                     check = 0;
+                     
                 }
                  if($('#teamtype').val() ==''){
                     console.log('i am empty city');
@@ -1005,6 +1007,21 @@
                    
                      //check = 0;
                 }
+                  if($('#player_limit').val() ==''){
+                    //console.log('i am empty city');
+                    $('#playerlimitspan').text("Please Enter Players Per Team Limit!");
+                    $('#player_limit').css("border","1px solid red");
+                    
+                   
+                     check = 1;
+                }
+                if($('#player_limit').val() !=''){
+                    //console.log('i am fill city');
+                    $('#playerlimitspan').text("");
+                    $('#player_limit').css("border","1px solid green");
+                  
+                   
+                }
 
 
 
@@ -1050,6 +1067,124 @@
                 editcheck=1;
                 $('#editteamlimitspan').text("Enter Team Limit!");
            }
+             if($('#editplayer_limit').val() ==''){
+                    //console.log('i am empty city');
+                    $('#editplayerlimitspan').text("Please Enter Players Per Team Limit!");
+                    $('#editplayer_limit').css("border","1px solid red");
+                    
+                   
+                     editcheck=1;
+                }
+                if($('#editplayer_limit').val() !=''){
+                    //console.log('i am fill city');
+                    $('#editplayerlimitspan').text("");
+                    $('#editplayer_limit').css("border","1px solid green");
+                  
+                   
+                }
+
+                 if ($('#editname').val() == '') {
+                    
+                    $('#editnamespan').text("Please Enter Title!");
+                    $('#editname').css("border","1px solid red");
+                   
+                
+                    editcheck = 1;
+                   
+                }
+                if($('#editname').val() != '') {
+                    $('#editnamespan').text("");
+                    $('#editname').css("border","1px solid green");
+                    
+                }
+                if($('#editcity').val() ==''){
+                  
+                    $('#editcityspan').text("Please Select City!");
+                    $('#editcity').css("border","1px solid red");
+                   
+                     editcheck = 1;
+                }
+                if($('#editcity').val() !=''){
+                   
+                    $('#editcityspan').text("");
+                    $('#editcity').css("border","1px solid green");
+                   
+                   
+                }
+                 if($('#editsportid').val() ==''){
+                    
+                    $('#editsportidspan').text("Please Select Sport!");
+                    $('#editsportid').css("border","1px solid red");
+                   
+                     editcheck = 1;
+                }
+                if($('#editsportid').val() !=''){
+                   
+                    $('#editsportidspan').text("");
+                    $('#editsportid').css("border","1px solid green");
+                   
+                   
+                }
+                 if($('#editdated').val() ==''){
+                    console.log('i am date negative');
+                    $('#editdatespan').text("Please Select Date!");
+                    $('#editdated').css("border","1px solid red");
+                   
+                     editcheck = 1;
+                }
+                if($('#editdated').val() !=''){
+                    console.log('i am fill city');
+                    $('#editdatespan').text("");
+                    $('#editdated').css("border","1px solid green");
+                   
+                    
+                }
+                if($('#editmatchtype').val() ==''){
+                   
+                    $('#editmatchtypespan').text("Please Select Match Type!");
+                    $('#editmatchtype').css("border","1px solid red");
+                   
+                     editcheck = 1;
+                }
+                if($('#editmatchtype').val() !=''){
+                   
+                    $('#editmatchtypespan').text("");
+                    $('#editmatchtype').css("border","1px solid green");
+                   
+                    
+                }
+                 if($('#editteamtype').val() ==''){
+                    console.log('i am empty city');
+                    $('#editteamtypespan').text("Please Select Team Type!");
+                    $('#editteamtype').css("border","1px solid red");
+                   
+                     editcheck = 1;
+                }
+                if($('#editteamtype').val() !=''){
+                   
+                    $('#editteamtypespan').text("");
+                    $('#editteamtype').css("border","1px solid green");
+                   
+                     
+                }
+
+                 if($('#editsponsers').val() ==''){
+                   
+                    $('#editsponsersspan').text("Please Select Sponser!");
+                    $('#editsponsers').css("border","1px solid red");
+                    
+                   
+                     editcheck = 1;
+                }
+                if($('#editsponsers').val() !=''){
+                   
+                    $('#editsponsersspan').text("");
+                    $('#editsponsers').css("border","1px solid green");
+                    console.log('i am sponsers positive case');
+                    console.log($('#sponser').val());
+                   
+                   
+                }
 
 
         if(editcheck == 1) {
@@ -1058,7 +1193,7 @@
                 } else {
                     // alert();
                             Swal.fire({title:"Data Updated!",
-                            text:"Successfully",
+                            text:"Successfully!",
                             type:"success",
                             confirmButtonClass:"btn btn-confirm mt-2"}).then((result)=>{
                                 if(result.value){
