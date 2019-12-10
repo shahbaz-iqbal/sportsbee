@@ -1,4 +1,4 @@
- <?php $this->load->view('web/header'); ?>
+  <?php $this->load->view('web/header'); ?>
 
 <div class="wrapper">
     <div class="container-fluid">
@@ -9,10 +9,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Players</li>
+                            <li class="breadcrumb-item active">Notifications</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Players</h4>
+                    <h4 class="page-title">Requests</h4>
                 </div>
             </div>
         </div>
@@ -33,77 +33,70 @@
                                 <tr>
                                 	
                                     <th>id</th>
-                                    <th>Name</th>
-                                    <th>DOB</th>
-                                     <th>City</th>
-                                    <th>Intrested Sport</th>
-                                   
-                                    <th>Play As</th>
-                                    <th>Play Level</th>
+                                    <th>Captain Name</th>
+                                    <th>City</th>
+                                    <th>Sport</th>
                                     <th>Match Type</th>
-                                    <th>Mobile #</th>
+                                    <th>Level</th>
+                                    <th>description</th>
                                   
-                                    <th>Apply</th>
+                                    <th>Action</th>
                              </tr>
                             </thead><tbody>
                                 
                                         
-                                	  <?php foreach ($playerdata as $data) { ?>
+                                	  <?php foreach ($captaindata as $data) { ?>
                                 	   <tr>
                                         
-                                            <td id="tblroleid"><?php echo $data->player_id; ?></td>
+                                            <td id="tblroleid"><?php echo $data->team_id; ?></td>
                                             <td id="tblrolename"><?php echo $data->name; ?></td>
-                                            <td id="tblrolename"><?php echo $data->dob; ?></td>
-                                            <td id="tblrolename"><?php echo $data->city_name; ?></td>
-                                            <td id="tblrolename"><?php echo $data->sport_name; ?></td>
+                                            <td id="tblrolename"><?php echo $data->city; ?></td>
+                                            <td id="tblrolename"><?php echo $data->sport_id; ?></td>
+                                            <td id="tblrolename"><?php echo $data->matchtype; ?></td>
                                             
-                                            <td id="tblrolename"><?php echo $data->playtype; ?></td>
-                                            <td id="tblrolename"><?php echo $data->playLevel; ?></td>
-                                            <td id="tblrolename"><?php echo $data->match_name; ?></td>
-                                            <td id="tblrolename"><?php echo $data->phone1; ?></td>
-
-                                            
-                                           
-
-                                            <!-- <td><?php echo $d->prize; ?></td> -->
-                                            <td>
-
-                                          
-                                        <?php if($data->team_id == '' && $data->player_team_tbl_status == '' ) {  ?>
-                                              
-                                         <input type="button" class="btn btn-primary ac" value="Send Request" id="<?php echo $data->player_id ?>" onclick="sendRequ(<?php echo $data->player_id ?>,<?php echo $id ?>)" >
+                                            <td id="tblrolename"><?php echo $data->teamcategory; ?></td>
+                                            <td id="tblrolename"><?php echo $data->status; ?></td>
+                                 
+                                  <?php if($data -> req_status == 0){ ?>
+                                            <td>    
+                                         <input type="button" class="btn btn-primary ac" value="Accept Request" id="<?php echo $data->team_id ?>" onclick="acceptRequ(<?php echo $data->team_id ?>,<?php echo $id ?>)" >
 
                                          <!-- <a href="#" class="action-icon" id="sa-warning" onclick="deleteItem(<?php echo $data->role_id; ?>)"> <i class="mdi mdi-delete"></i></a> -->
-    <input class="btn btn-danger cancelBtn" type="button"  name="hidenbtn" id="hiddenbtn" onclick="cancleReq(<?php echo $data->player_id ?>)" value="Cancle">
-
-
-                      <?php } if($data->team_id ==$team_id && $data->player_team_tbl_status == 0){ ?>
-
-                       <input type="button" class="btn btn-primary ac" value="Pending" id="<?php echo $data->player_id ?>" onclick="sendRequ(<?php echo $data->player_id ?>,<?php echo $id ?>)" >
-
-                                        
-    <input type="button"  name="hidenbtn" id="hiddenbtn" onclick="cancleReq(<?php echo $data->player_id ?>)" value="Cancle">
-                                              
-                    
-
-     <?php } if($data->team_id ==$team_id && $data->player_team_tbl_status == 2) { ?>
-
-          <input type="button" class="btn btn-danger" value="Rejected" disabled>
-
-
-                    <?php } ?>    
-
-                    <?php if($data->team_id != $team_id && $data->player_team_tbl_status == '0' ) {  ?>
-                                              
-                                         <input type="button" class="btn btn-primary ac" value="Send Request" id="<?php echo $data->player_id ?>" onclick="sendRequ(<?php echo $data->player_id ?>,<?php echo $id ?>)" >
-
-                                         <!-- <a href="#" class="action-icon" id="sa-warning" onclick="deleteItem(<?php echo $data->role_id; ?>)"> <i class="mdi mdi-delete"></i></a> -->
-    <input class="btn btn-danger cancelBtn" type="button"  name="hidenbtn" id="hiddenbtn" onclick="cancleReq(<?php echo $data->player_id ?>)" value="Cancle">
-
-
-                      <?php }   ?>                  
+    <input class="btn btn-danger cancelBtn" type="button"  name="hidenbtn" id="hiddenbtn" onclick="cancleReq(<?php echo $data->team_id ?>,<?php echo $id ?>)" value="Cancle">
 
                                             </td>
+
+                                        <?php } ?>
+
+                                        <!-- If request already rejected! -->
+
+                                          <?php if($data -> req_status == 2){ ?>
+                                            <td>    
+                                         
+
+                                        
+    <input class="btn btn-danger cancelBtn" type="button"  name="hidenbtn" id="hiddenbtn" value="Rejected" disabled>
+
+                                            </td>
+
+                                        <?php } ?>
+
+                                        <!--  -->
+
+                                          <!-- If request already accepted! -->
+
+                                          <?php if($data -> req_status == 1){ ?>
+                                            <td>    
+                                         
+
+                                        
+    <input class="btn btn-danger cancelBtn" type="button"  name="hidenbtn" id="hiddenbtn" onclick="cancleReq(<?php echo $data->team_id ?>,<?php echo $id ?>)" value="Cancle">
+
+                                            </td>
+
+                                        <?php } ?>
+
+                                        <!--  -->
                                         </tr>
                                     <?php } ?>
                                  
@@ -188,83 +181,64 @@
     // });
 
 
-function sendRequ($rid,$uid){
+function acceptRequ($tid,$uid){
 
             console.log('send req btn');
 
              var user_id=$uid;
-             var row_id=$rid;
-            // console.log(user_id);
+             var row_id=$tid;
+             var check='a';
+        
            
-            $.ajax({
-                url:"<?php echo base_url('user/Dashboard/check_req_limit/'); ?>"+user_id,
-                
-                // data:{userid:user_id},
-                // dataType:"json",
-                success:function(data){
-                   
-                     // data = JSON.parse(data);
-                    console.log('i am some response from check req limit');
-                    console.log(data);
-                    var d=data.split(',');
-                    var limit=d[0];
-                    var teamid=d[1];
-
-                    //console.log(abc[0]);
-                      // var lim=data;
-                       if(limit<15){
-                         // $('.table tbody').on('click','.ac',function(){
-                        
-                                // $("input").click(function(){
-                                //     var id=$(this).attr("id");
-                                //     console.log('id is'+id);
-                                //     $(this).prop("value","Response Pending");
+           
 
 
                                      $.ajax({
-                                        url:"<?php echo base_url('user/Dashboard/add_Request/'); ?>"+row_id+'/'+teamid,
+                                        url:"<?php echo base_url('user/Request/accept_Request/'); ?>"+row_id+'/'+user_id+'/'+check,
                                         success:function(data){
                                             console.log('i am added request to player');
                                             console.log(data);
                                             var test='$'+'(\'#'+row_id+'\')';
-                                             $('#'+row_id).attr("value","Pending");
-                                              $('#'+row_id).prop("disabled","true");
+                                             // $('#'+row_id).attr("value","Pending");
+                                              // $('#'+row_id).prop("disabled","true");
+                                              $('#'+row_id).hide();
                                              console.log('id is'+test);
                                             $('#'+row_id).siblings(".cancelBtn").show();
                                             console.log('i need to show');
                                         }
                                      })
 
-                                // })
-                                
+                           
+                                }
 
 
 
-                             // });
-                      }else{
-                        swal('Request Limit Full', 'You can not send more requests', 'error');
-                      }
+                            
+                     
             
 
 
-                }
+                
 
-            })
+           
      
 
 
-        }
+        
 
 
 
 
         // CancleReq
 
-           function cancleReq(id){
-        console.log("Cancle ID:"+id);
-       var row_id=id;
-
-            
+           function cancleReq($tid,$uid){
+        console.log("Cancle ID:"+$uid);
+       var row_id=$tid;
+       var user_id=$uid;
+       var check='c';
+          
+        // var abc=  $(this).val();
+        // console.log(abc);            
                
                    
                      Swal.fire({
@@ -279,16 +253,19 @@ function sendRequ($rid,$uid){
                          if (result.value) {
 
                             $.ajax({
-                                url:"<?php echo base_url('user/Dashboard/cancle_request/'); ?>"+id,
+                                url:"<?php echo base_url('user/Request/accept_Request/'); ?>"+row_id+'/'+user_id+'/'+check,
                                 success:function(data){
-
+                                       console.log('i am cancle');
+                                       console.log(data);
                                     Swal.fire({title:"Request Cancled",
                                     text:"Successfully!",
                                     type:"success",
                                     confirmButtonClass:"btn btn-confirm mt-2"});
-                                     // $('#hiddenbtn').hide();
-                                      $('#'+row_id).attr("value","Send Request");
-                                   $('#'+row_id).prop("disabled","false");
+                                      // $('#hiddenbtn').attr("value","Rejected");
+                                       $('#'+row_id).hide();
+                                       location.reload(true);
+                                       // $('#hiddenbtn').attr("disabled","false");
+                                   // $('#'+row_id).prop("disabled","false");
 
                                 }
                             });

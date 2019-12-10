@@ -45,11 +45,15 @@ class Web extends CI_Controller {
         $users = $this->Registrations->get_sport();
         $playas = $this->Registrations->get_playas();
         $cities = $this->Registrations->get_cities();
+        $matchtype=$this->Registrations->get_match_type();
+        $teamtype=$this->Registrations->get_team_level();
         $passData = [
             'users' => $users,
             'playas' => $playas,
             'cities' => $cities,
             'playercities' => $cities,
+             'matchtype' => $matchtype,
+           'teamtype' =>$teamtype
         ];
         $this->load->view('team_registration', $passData);
     }
@@ -100,7 +104,7 @@ class Web extends CI_Controller {
                         'mobile' => $res->phone1,
                         'username' => $res->username,
                         'logged_in' => TRUE,
-                        'user_type' => 'captian'
+                        'user_type' => 'captain'
                     );
                     $this->session->set_userdata($newdata);
 
