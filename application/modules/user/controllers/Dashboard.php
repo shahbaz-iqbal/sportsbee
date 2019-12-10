@@ -1,33 +1,47 @@
-<?php
-
+ <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dashboard extends CI_Controller {
 
-    public function __construct() {
+	
+	public function __construct() {
         parent::__construct();
+         $this->load->model('User_model');
+    }
 
-        $this->load->model('User_model');
-    }
-    
-    public function index() {
-        $r = $this->session->get_userdata();
-        $id = $r['id'];
-        $res = $this->user_model->get_user_profile($id);
-        $this->load->view('profile', $res);
-    }
+
+	public function index()
+	{
+
+		$r = $this->session->get_userdata();
+		  $id= $r['id'];
+		  $res = $this->User_model->get_user_profile($id);
+
+		$this->load->view('profile',$res);
+	}
 
 	public function tournaments()
 	{
          $tour=$this->User_model->get_touradata();
+         $sess= $this->session->all_userdata();
+		   $id=$sess['id'];
+		
+		// $id = 78;
+		$team_id=$this->User_model->get_team_id($id);
+		$totalmembers= $this->User_model->check_team_limit($team_id);
 
        $passData = [
            
-           'tour'=>$tour
+           'tour'=>$tour,
+           'teamid'=>$team_id,
+           'totalmembers'=>$totalmembers
            
            
        ];
-		$this->load->view('user/tournament',$passData);
+       //  echo '<pre>';
+       // print_r($tour);
+       // die();
+		 $this->load->view('user/tournament',$passData);
 	}
 
 	public function players(){
@@ -41,8 +55,7 @@ class Dashboard extends CI_Controller {
 		
 		$player_team_table=$this->User_model->get_playerteamtbl();
 
-		// print_r($id);
-		// die();
+		
 
        $passData = [
            
@@ -57,7 +70,7 @@ class Dashboard extends CI_Controller {
        // echo '<pre>';
        // print_r($playerdata);
        // die();
-		     $this->load->view('user/players',$passData);
+		       $this->load->view('user/players',$passData);
 
 	}
 
@@ -99,8 +112,32 @@ class Dashboard extends CI_Controller {
 
 	}
 
+	public function apply_req(){
+		$tournid=$this->uri->segment(4);
+		$teamid=$this->uri->segment(5);
+
+		$data=array();
+		$data['tournid']=$tournid;
+		$data['team_id']=$teamid;
+		$data['status']=0;
+		$data['request_date']=date('Y-m-d');
+
+		$res=$this->User_model->apply_req($data,$tournid,$teamid);
+
+	}
+
+	public function cancle_req(){
+		$tournid=$this->uri->segment(4);
+		$teamid=$this->uri->segment(5);
+      
+      $res=$this->User_model->cancle_req($tournid,$teamid);
+		
+
+	}
+
 	function test()
-	{
+	{    
+
 		$d1 = 'Dec 11, 2019';
 		$d2 = '2019-12-12';
 
@@ -112,5 +149,6 @@ class Dashboard extends CI_Controller {
 			echo "not greater";
 	}
 
+	
 
 }

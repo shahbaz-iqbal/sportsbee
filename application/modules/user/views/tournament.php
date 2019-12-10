@@ -41,6 +41,7 @@
                                     <th>Date</th>
                                     <th>Level</th>
                                     <th>City</th>
+                                    <th>Players Required</th>
                                   
                                     <th>Apply</th>
                              </tr>
@@ -61,20 +62,27 @@
                                             <td id="tblrolename"><?php echo $data->dated; ?></td>
                                             <td id="tblrolename"><?php echo $data->type_name; ?></td>
                                             <td id="tblrolename"><?php echo $data->name; ?></td>
+                                            <td><?php echo $data->player_limit ?></td>
 
                                             
                                            
 
                                             <!-- <td><?php echo $d->prize; ?></td> -->
-                                            <td>
+                                          <?php if($totalmembers >= 5){ ?>
 
-                                             
+                                             <td>
 
                                                 <!--  -->
-                                                 <input type="button" class="btn btn-primary" value="Send Request"  >
+                                                <!-- <p class="btn-success">Eligible</p> -->
+
+                                                 <input type="button" class="btn btn-primary" value="Apply" id="<?php echo $data->tournid ?>" onclick="Apply(<?php echo $data->tournid ?> , <?php echo $teamid ?> )">
+                                                 <input type="button" style="display:none;" class="btn btn-danger" value="Cancle" id="<?php echo $data->tournid.'2' ?>" onclick="Cancle(<?php echo $data->tournid ?> , <?php echo $teamid ?> )" >
+                            
                                               
                                                     
                                             </td>
+
+                                        <?php } ?>
                                         </tr>
                                     <?php } ?>
                                     <?php } ?>
@@ -157,4 +165,92 @@
     //     //table.button( 0 ).enable( selectedRows === 1 );
     //     table.button(0).enable(selectedRows > 0);
     // });
+
+
+    function Cancle($tourn,$team){
+       // alert($(this).attr('id'));
+        var t=$tourn;
+        var team=$team;
+        // $('#'+t+'2').attr("value","Pending");
+       
+
+        // $('#'+t+'2').attr("value","Pending");
+        // console.log(t);
+        // console.log(team);
+
+
+           Swal.fire({
+                         title: 'Are you sure?',
+                         html: 'You Wanted To Cancle Request!',
+                         type: 'warning',
+                         showCancelButton: true,
+                         confirmButtonColor: '#fda81a',
+                         cancelButtonColor: '#B22E06',
+                         confirmButtonText: 'Yes, Cancle!'
+                       }).then((result) => {
+                         if (result.value) {
+
+                            $.ajax({
+                                url:"<?php echo base_url('user/Dashboard/cancle_req/'); ?>"+t+'/'+team,
+                                success:function(data){
+
+                                    Swal.fire({title:"Cancled! ",
+                                    text:"Your request has been cancle for Upcoming Tournament.",
+                                    type:"success",
+                                    confirmButtonClass:"btn btn-confirm mt-2"});
+                                     
+                                      $('#'+t).attr("value","Send Request");
+                                   $('#'+t).prop("disabled","false");
+
+                                   $('#'+t+'2').hide();
+
+                                }
+                            });
+                    
+                          
+                           }
+                       })
+       
+    }
+
+    function Apply($tourn,$team)
+    {
+        var t=$tourn;
+         var team=$team;
+        
+
+
+             Swal.fire({
+                         title: 'Are you sure?',
+                         html: 'You Wanted To Apply',
+                         type: 'warning',
+                         showCancelButton: true,
+                         confirmButtonColor: '#fda81a',
+                         cancelButtonColor: '#B22E06',
+                         confirmButtonText: 'Yes, Apply!'
+                       }).then((result) => {
+                         if (result.value) {
+
+                            $.ajax({
+                                url:"<?php echo base_url('user/Dashboard/apply_req/'); ?>"+t+'/'+team,
+                                success:function(data){
+
+                                    Swal.fire({title:"Congratulation! ",
+                                    text:"Your request has been sent for Upcoming Tournament.",
+                                    type:"success",
+                                    confirmButtonClass:"btn btn-confirm mt-2"});
+                                     
+                                      $('#'+t).attr("value","Pending");
+                                   $('#'+t).prop("disabled","true");
+
+                                   $('#'+t+'2').show();
+
+                                }
+                            });
+                    
+                          
+                           }
+                       })
+
+    }
 </script>

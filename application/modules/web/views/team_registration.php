@@ -131,23 +131,37 @@
                                         </div> <!-- end row -->
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="form-group">
+                                                <!-- <div class="form-group">
                                                     <label for="city">Address<span style="color:red;">..*</span></label>
                                                     <textarea class="form-control" id="teamaddress" name="teamaddress" style="resize: none" onfocusout="checkteamaddress()" rows="3"  placeholder="Address..." maxlength="490"></textarea>
                                                     <span id="teamaddressspan" style="color: red;"></span>
-                                                </div>
+                                                </div> -->
                                             </div> <!-- end col -->
                                         </div> <!-- end row -->
                                         <h5 class="mb-3 text-uppercase bg-light p-2"><i class="mdi mdi-calendar-clock mr-1"></i>Teem  History or Interested In  </h5>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="typematches">Matches history or interested in</label>
+                                                     <label for="typematches">Matches history or interested in</label>
+                                                        <ul class="ks-cboxtags">
+                                                         <?php if (count($matchtype) > 0) { ?>
+                                                             <?php  foreach ($matchtype as $match) { ?>
+
+
+
+                                                            <li><input type="checkbox" id="<?php echo $match->matches_type_id ?>" name="teammatchtype[]" value="<?php echo $match->matches_type_id ?>"><label for="<?php echo $match->matches_type_id ?>"><?php echo $match->match_name ?>&nbsp;</label></li>
+
+
+                                                           <?php } ?>
+                                                           <?php } ?>
+
+                                                           </ul>
+                                                   <!--  <label for="typematches">Matches history or interested in</label>
                                                     <ul class="ks-cboxtags">
                                                         <li><input type="checkbox" id="checkboxOne" name="teammatchtype[]" value="1"><label for="checkboxOne">Hard Ball&nbsp;</label></li>
                                                         <li><input type="checkbox" id="checkboxTwo" name="teammatchtype[]" value="2"><label for="checkboxTwo">Tape Ball&nbsp;</label></li>
                                                         <li><input type="checkbox" id="checkboxThree" name="teammatchtype[]" value="3"><label for="checkboxThree">Tnnis Ball&nbsp;</label></li>
-                                                    </ul>
+                                                    </ul> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -155,13 +169,27 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="typematches">Teams Category</label>
+
                                                     <ul class="ks-cboxtags">
+                                                         <?php if (count($teamtype) > 0) { ?>
+                                                             <?php  foreach ($teamtype as $match) { ?>
+
+
+
+                                                            <li><input type="checkbox" id="<?php echo $match->team_type_id.'a'; ?>" name="teamcategory[]" value="<?php echo $match->team_type_id ?>"><label for="<?php echo $match->team_type_id.'a'; ?>"><?php echo $match->type_name ?>&nbsp;</label></li>
+
+
+                                                           <?php } ?>
+                                                           <?php } ?>
+
+                                                           </ul>
+                                                   <!--  <ul class="ks-cboxtags">
                                                         <li><input type="checkbox" id="checkboxFour" name="teamcategory[]" value="1"><label for="checkboxFour">Local Team&nbsp;</label></li>
                                                         <li><input type="checkbox" id="checkboxFive" name="teamcategory[]" value="2"><label for="checkboxFive">School Team&nbsp;</label></li>
                                                         <li><input type="checkbox" id="checkboxSix" name="teamcategory[]" value="3"><label for="checkboxSix">College Team&nbsp;</label></li>
                                                         <li><input type="checkbox" id="checkboxSeven" name="teamcategory[]" value="4"><label for="checkboxSeven">University Team&nbsp;</label></li>
                                                         <li><input type="checkbox" id="checkboxEight" name="teamcategory[]" value="5"><label for="checkboxEight">Custom Team (Organization)&nbsp;</label></li>
-                                                    </ul>
+                                                    </ul> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -424,10 +452,19 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="typematches">Type Of Matches</label>
+
+                                                    
                                                     <ul class="ks-cboxtags">
-                                                        <li><input type="checkbox" id="checkboxNine" name="matchtype[]" value="1"><label for="checkboxNine">Hard Ball&nbsp;</label></li>
-                                                        <li><input type="checkbox" id="checkboxTen" name="matchtype[]" value="2"><label for="checkboxTen">Tape Ball&nbsp;</label></li>
-                                                        <li><input type="checkbox" id="checkboxEleven" name="matchtype[]" value="3"><label for="checkboxEleven">Tnnis Ball&nbsp;</label></li>
+                                                        <?php if (count($matchtype) > 0) { ?>
+                                                             <?php  foreach ($matchtype as $match) { ?>
+
+
+
+                                                            <li><input type="checkbox" id="<?php echo $match->matches_type_id.'b' ?>" name="matchtype[]" value="<?php echo $match->matches_type_id ?>"><label for="<?php echo $match->matches_type_id.'b' ?>"><?php echo $match->match_name ?>&nbsp;</label></li>
+
+
+                                                           <?php } ?>
+                                                           <?php } ?>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -437,11 +474,17 @@
                                                 <div class="form-group">
                                                     <label for="typematches">Type Of Teams</label>
                                                     <ul class="ks-cboxtags">
-                                                        <li><input type="checkbox" id="checkboxTwelve" name="teamtype[]" value="1"><label for="checkboxTwelve">Local Team&nbsp;</label></li>
-                                                        <li><input type="checkbox" id="checkboxThirteen" name="teamtype[]" value="2"><label for="checkboxThirteen">School Team&nbsp;</label></li>
-                                                        <li><input type="checkbox" id="checkboxFourteen" name="teamtype[]" value="3"><label for="checkboxFourteen">College Team&nbsp;</label></li>
-                                                        <li><input type="checkbox" id="checkboxFifteen" name="teamtype[]" value="4"><label for="checkboxFifteen">University Team&nbsp;</label></li>
-                                                        <li><input type="checkbox" id="checkboxSixteen" name="teamtype[]" value="5"><label for="checkboxSixteen">Custom Team (Organization)&nbsp;</label></li>
+                                                          <?php if (count($teamtype) > 0) { ?>
+                                                             <?php  foreach ($teamtype as $match) { ?>
+
+
+
+                                                            <li><input type="checkbox" id="<?php echo $match->team_type_id.'c'; ?>" name="teamtype[]" value="<?php echo $match->team_type_id ?>"><label for="<?php echo $match->team_type_id.'c'; ?>"><?php echo $match->type_name ?>&nbsp;</label></li>
+
+
+                                                           <?php } ?>
+                                                           <?php } ?>
+                                                      
                                                     </ul>
                                                 </div>
                                             </div>
@@ -492,11 +535,12 @@
                                                                 document.forms["msform"]["teamcity"].style.border = "1px solid red";
                                                                 check = 1;
                                                             }
-                                                            if ($('#teamaddress').val() == '') {
-                                                                $('#teamaddressspan').text("Please Enter father name!");
-                                                                document.forms["msform"]["teamaddress"].style.border = "1px solid red";
-                                                                check = 1;
-                                                            }//check=0;
+                                                            // if ($('#teamaddress').val() == '') {
+                                                            //     $('#teamaddressspan').text("Please Enter father name!");
+                                                            //     document.forms["msform"]["teamaddress"].style.border = "1px solid red";
+                                                            //     check = 1;
+                                                            // }
+                                                            check=0;
                                                             if (check == 1) {
                                                                 swal('missing fields', 'Please Fill the Required Fields', 'error');
                                                             } else {
@@ -571,7 +615,7 @@
                                                                 $('#addressspan').text("Please Enter Address!");
                                                                 document.forms["msform"]["address"].style.border = "1px solid red";
                                                                 check = 1;
-                                                            }//check=0;
+                                                            }check=0;
                                                             if (check == 1) {
                                                                 swal('missing fields', 'Please Fill the Required Fields', 'error');
                                                             } else {
@@ -1151,18 +1195,18 @@
                 // }
             }
             
-            function checkteamaddress(){
+            // function checkteamaddress(){
 
-                 if (document.forms["msform"]["teamaddress"].value.length > 5) {
-                    document.forms["msform"]["teamaddress"].style.border = "1px solid green";
-                    $('#teamaddressspan').text("");
-                } else {
-                    $('#teamaddress').val("");
-                    document.forms["msform"]["teamaddress"].placeholder = "Invalid!";
-                    document.forms["msform"]["teamaddress"].style.border = "1px solid red";
-                }
+            //      if (document.forms["msform"]["teamaddress"].value.length > 5) {
+            //         document.forms["msform"]["teamaddress"].style.border = "1px solid green";
+            //         $('#teamaddressspan').text("");
+            //     } else {
+            //         $('#teamaddress').val("");
+            //         document.forms["msform"]["teamaddress"].placeholder = "Invalid!";
+            //         document.forms["msform"]["teamaddress"].style.border = "1px solid red";
+            //     }
 
-            }
+            // }
 
 
 

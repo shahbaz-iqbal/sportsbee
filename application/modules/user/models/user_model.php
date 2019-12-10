@@ -1,4 +1,4 @@
-<?php
+ <?php
 Class User_model extends CI_Model {
     public function get_user_profile($id){
       $this->db->where('player_id',$id);
@@ -45,7 +45,7 @@ Class User_model extends CI_Model {
 
     	 // $this->db->select('sports_table.*,city_table.*,matches_type.*,types_of_team.*,player_sports_detail.*,play_as.*,player_team_table.*, player.*');
     	$this->db->select('player.name,player.player_id,player.dob,player.phone1,player.city_id,player_sports_detail.mathes_type,player_sports_detail.team_type,player_sports_detail.team_type,
-    		player_sports_detail.sport_id,player_sports_detail.play_as_id,city_table.name AS city_name,sports_table.sport_name,play_as.name AS playtype,types_of_team.type_name AS playLevel,matches_type.match_name,player_team_table.player_team_id,player_team_table.player_as,player_team_table.team_id,player_team_table.status');
+    		player_sports_detail.sport_id,player_sports_detail.play_as_id,city_table.name AS city_name,sports_table.sport_name,play_as.name AS playtype,types_of_team.type_name AS playLevel,matches_type.match_name,player_team_table.player_team_id,player_team_table.player_as,player_team_table.team_id,player_team_table.status AS player_team_tbl_status,player_team_table.player_id AS player_tbl_playerid');
     	  $this->db->from('player');
      $this->db->join('player_team_table', 'player_team_table.player_id = player.player_id', 'left'); 
       $this->db->join('player_sports_detail', 'player.player_id = player_sports_detail.player_id', 'left'); 
@@ -54,7 +54,7 @@ Class User_model extends CI_Model {
             $this->db->join('play_as', 'player_sports_detail.play_as_id = play_as.play_as_id', 'left'); 
              $this->db->join('types_of_team', 'player_sports_detail.team_type = types_of_team.team_type_id', 'left'); 
      $this->db->join('matches_type', 'player_sports_detail.mathes_type = matches_type.matches_type_id ', 'left');
-     $this->db->where('player.user_type','');
+     $this->db->where('player.user_type','player');
              // $this->db->join('player_team_table','player_team_table.player_id = player.player_id','left');
      // $this->db->where('player_team_table.team_id !=',$team_id);
      // $this->db->where('player_team_table.status !=',1);
@@ -62,8 +62,13 @@ Class User_model extends CI_Model {
      $query = $this->db->get();
      $results = $query->result();
      foreach ($results as $key => $result) {
-     	if($result->team_id == $team_id AND $result->status == 1){
+     	if($result->team_id == $team_id AND $result->player_team_tbl_status == 1){
      		unset($results[$key]);
+
+
+
+
+            
      	}
 
      }
@@ -96,6 +101,16 @@ Class User_model extends CI_Model {
     	
     }
 
+    public function check_team_limit($team_id){
+
+        $this->db->where('team_id',$team_id);
+         $res1 =$this->db->count_all_results('player_team_table'); 
+         // print_r("COUNT:".$res1);
+        
+         return $res1;
+
+    }
+
     public function add_Request($data){
 
     	
@@ -115,9 +130,27 @@ Class User_model extends CI_Model {
     	 // $this->db->insert('player',$data);
     }
 
+
     public function cancle_Request($playerid){
     	 $this->db->where('player_id', $playerid);
         $result = $this->db->delete('player_team_table');
+        return $result;
+    }
+
+    public function apply_req($data,$tournid,$teamid){
+
+        $this->db->where('tournid',$tournid);
+        $this->db->where('team_id',$teamid);
+        $result = $this->db->insert('tournament_team',$data);
+        return $result;
+    }
+
+    public function cancle_req($tournid,$teamid){
+
+         $this->db->where('tournid',$tournid);
+        $this->db->where('team_id',$teamid);
+
+        $result = $this->db->delete('tournament_team');
         return $result;
     }
 }

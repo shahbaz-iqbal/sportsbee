@@ -51,7 +51,7 @@ class Registration extends CI_Controller {
         
 
     
-         $gmail = $player['gmail'];
+          $gmail = $player['gmail'];
           $res=$this->Registrations->addplayer($player);
           $res1 = $this->Registrations->check_registration($gmail);
           $playerid=$res1[0]->player_id;
@@ -80,7 +80,7 @@ class Registration extends CI_Controller {
         $team['sport_id']=$this->input->post('playertype');
       
         $team['postalcode'] = $this->input->post('teampostalcode');
-        $team['address'] = $this->input->post('teamaddress');
+        $team['address'] = $this->input->post('address');
         if (!empty($this->input->post('teammatchtype'))) {
             $team['matchtype'] = implode(',', $this->input->post('teammatchtype'));
         }
@@ -98,7 +98,7 @@ class Registration extends CI_Controller {
         $player['bio'] = $this->input->post('bio');
         $player['gmail'] = $this->input->post('gmail');
         $player['username'] = $this->input->post('username');
-        $player['password'] = md5($this->input->post('password'));
+        $player['password'] = $this->input->post('password');
         $player['phone1'] = $this->input->post('phone1');
         $player['phone2'] = $this->input->post('phone2');
         $player['postalcode'] = $this->input->post('postalcode');
@@ -114,17 +114,25 @@ class Registration extends CI_Controller {
         
           $player['city_id'] = $this->input->post('city');
        
-        $gmail = $player['gmail'];
+        // $gmail = $player['gmail'];
         $playerID = $this->Registrations->addplayer($player);
         $teamID = $this->Registrations->addteam($team);
       
         // $player_sport_detail['team_id']=$teamID;
         $player_sport_detail['player_id']=$playerID;
         $player_sport_detail['sport_id']= $this->input->post('playertype');
-        // $player_sport_detail['team_type']=>
-        // $player_sport_detail['play_as_id']=>
-        // $player_sport_detail['play_hand']=>
-        // $player_sport_detail['mathes_type']=>
+         // $player_sport_detail['team_type']=$this->input->post('playertype');
+        $player_sport_detail['play_as_id']=$this->input->post('playtype');
+         $player_sport_detail['play_hand']=$this->input->post('switch');
+         // $player_sport_detail['mathes_type']=
+
+
+          if (!empty($this->input->post('matchtype'))) {
+            $player_sport_detail['mathes_type']= implode(',', $this->input->post('matchtype'));
+        }
+        if (!empty($this->input->post('teamtype'))) {
+            $player_sport_detail['team_type'] = implode(',', $this->input->post('teamtype'));
+        }
 
           $Social['player_id']=$playerID;
 

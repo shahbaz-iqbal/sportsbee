@@ -593,6 +593,30 @@
                list-style: none;
                  background-color: #fda81a;
         }
+
+        .tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #fda81a;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
         </style>
     </head>
     <body>
@@ -705,7 +729,7 @@
                         <ul class="navigation-menu"> 
                             <?php 
                             if (!empty($this->session->userdata('user_type'))) {
-                                if ($this->session->userdata('user_type') == "user") {
+                                if ($this->session->userdata('user_type') == "captain") {
                                 ?>
                                 <li class="has-submenu active">
                                     <a style="padding-left: 20px !important;" href="<?php echo base_url('user/Dashboard'); ?>">Dashboard</a>
@@ -906,7 +930,7 @@
                                     <a href="#">Settings </a>
                                 </li>
                                  <?php
-                                }else if($this->session->userdata('user_type') == "captian"){
+                                }else if($this->session->userdata('user_type') == "player"){
                                 ?>
                                 <li class="has-submenu active">
                                     <a style="padding-left: 20px !important;" href="#">Dashboard</a>
@@ -926,6 +950,8 @@
                                         </li>
                                     </ul>
                                 </li>
+
+                                
                                 <li class="has-submenu">
                                     <a href="#">Reports </a>
                                 </li>
@@ -935,6 +961,65 @@
                                 <li class="has-submenu">
                                     <a href="#">Settings </a>
                                 </li>
+                                <!-- Notification start --> 
+                                <li class=" has-submenu dropdown notification-list float-right mb-0">
+                        <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <i class="fe-bell noti-icon"></i>
+                            <span class="badge badge-danger rounded-circle noti-icon-badge">1</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-lg" style="">
+
+                            <!-- item-->
+                            <div class="dropdown-item noti-title">
+                                <h5 class="m-0">
+                                    <span class="float-right">
+                                        <a href="" class="text-dark">
+                                            <small>Clear All</small>
+                                        </a>
+                                    </span>Notification
+                                </h5>
+                            </div>
+
+                            <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 506.994px;"><div class="slimscroll noti-scroll" style="overflow: hidden; width: auto; height: 506.994px;">
+
+                               
+
+                                <!-- item-->
+                                <a href="<?php echo base_url('user/Request') ?>" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-primary">
+                                        <i class="mdi mdi-comment-account-outline"></i>
+                                    </div>
+                                    <p class="notify-details">Some captain sends request to join team
+                                        <small class="text-muted">1 min ago</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon">
+                                        <img src="assets/images/users/user-4.jpg" class="img-fluid rounded-circle" alt=""> </div>
+                                    <p class="notify-details">Karen Robinson</p>
+                                    <p class="text-muted mb-0 user-msg">
+                                        <small>Wow ! this admin looks good and awesome design</small>
+                                    </p>
+                                </a>
+ -->
+                               
+                               
+
+                              
+                            </div><div class="slimScrollBar" style="background: rgb(158, 165, 171); width: 8px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 8px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+
+                            <!-- All-->
+                            <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                                View all
+                                <i class="fi-arrow-right"></i>
+                            </a>
+
+                        </div>
+                    </li>
+
+                                <!-- Nitification End -->
                                
                             <?php }}else { ?>
                             <li class="has-submenu <?php if (empty($this->session->userdata('user_type'))) { echo "active"; } ?>">
