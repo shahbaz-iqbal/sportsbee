@@ -54,14 +54,14 @@
                                             <td><?php echo $sponsers->city; ?></td>
                                             <td><?php echo $sponsers->intrested_sport; ?></td>
                                             <td>
-                                                
-                                                <?php $image = $sponsers->logo_img;?>
-                                                <?php if(!empty($image)) { ?>
-                                                <img src=" <?php echo base_url( 'assets/uploads/'. $image );?>" height="50" width="50">
+
+                                                <?php $image = $sponsers->logo_img; ?>
+                                                <?php if (!empty($image)) { ?>
+                                                    <img src=" <?php echo base_url('assets/uploads/' . $image); ?>" height="30" width="30">
                                                 <?php } else { ?>
-                                                            Image Not Avail
-                                                <?php   } ?>
-                                                 
+                                                    Image Not Avail
+                                                <?php } ?>
+
                                             </td>
                                             <td>
                                                 <a data_id="<?php echo $sponsers->sp_id; ?>" href="<?php echo base_url(); ?>admin/ground/update" class="action-icon editUser" data-toggle="modal" data-target="#editModal"><i class="mdi mdi-square-edit-outline"></i></a> 
@@ -138,7 +138,7 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label>Logo</label>
-                                                <input type="file" class="form-control" name="logo"  placeholder="Logo">
+                                                <input type="file" class="form-control" name="logo" value="2000"  placeholder="Logo">
                                             </div>
                                         </div>
                                     </div>   
@@ -174,7 +174,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="<?php echo base_url(); ?>admin/sponser/upadte_sponser" id="edit_sponser">
+                        <form method="post" action="<?php echo base_url(); ?>admin/sponser/upadte_sponser" id="edit_sponser" enctype='multipart/form-data'>
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
@@ -208,10 +208,10 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Logo</label>
-                                        <input type="file" id="logo" class="form-control" name="updatelogo"  placeholder="Logo">
+                                        <input type="file" class="form-control" name="updateimg" value="2000" placeholder="Logo">
                                     </div>
                                 </div>
-                                 <input type="hidden" id="img"  name="logo">
+                                <input type="hidden" id="img"  name="logo">
                             </div>   
                             <div class="form-group">
                                 <label>Intersted Sport</label>
@@ -301,7 +301,7 @@
     var id = $(this).attr("data_id");
     $.ajax({
     url: "<?php echo base_url('admin/sponser/edit/') ?>" + id,
-            success: function (data) {       
+            success: function (data) {
             var res = jQuery.parseJSON(data);
             console.log(res['logo_img']);
             $("#sp_id").val(res['sp_id']);
@@ -312,7 +312,6 @@
             $("#edittitle").val(res['company_title']);
             $("#editsport").val(res['intrested_sport']);
             $('#img').val(res['logo_img']);
-           
             }
     });
     });</script> 
@@ -421,8 +420,6 @@
 
 
     }
-
-
     }
 </script>
 

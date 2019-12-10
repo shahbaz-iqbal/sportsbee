@@ -705,7 +705,7 @@
                         <ul class="navigation-menu"> 
                             <?php 
                             if (!empty($this->session->userdata('user_type'))) {
-                                if ($this->session->userdata('user_type') == "user") {
+                                if ($this->session->userdata('user_type') == "player") {
                                 ?>
                                 <li class="has-submenu active">
                                     <a style="padding-left: 20px !important;" href="<?php echo base_url('user/Dashboard'); ?>">Dashboard</a>
@@ -906,7 +906,7 @@
                                     <a href="#">Settings </a>
                                 </li>
                                  <?php
-                                }else if($this->session->userdata('user_type') == "captian"){
+                                }else if($this->session->userdata('user_type') == "captain"){
                                 ?>
                                 <li class="has-submenu active">
                                     <a style="padding-left: 20px !important;" href="#">Dashboard</a>

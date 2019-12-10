@@ -70,25 +70,26 @@ class Sponser extends CI_Controller {
         $title = $this->input->post('title');
         $city = $this->input->post('city');
         $logo = $this->input->post('logo');
-      //  $updatelogo = $this->input->post('updatelogo');
+         $uplogo = $_FILES['updateimg']['name'];
         $sport = $this->input->post('sport');
-//        if($this->input->post('updatelogo')!=""){
-//            echo 'update';
-//            if (!empty($_FILES['updatelogo']['name'])) {
-//            $fileInfo = pathinfo($_FILES['updatelogo']['name']);
-//            $newName = time() . '.' . $fileInfo['extension'];
-//            move_uploaded_file($_FILES['updatelogo']['tmp_name'], "assets/uploads/" . $newName);
-//        }
-//        if (!empty($_FILES['updatelogo']['name'])) {
-//            $logo = $newName;
-//        }
-//             
-//        }  else {
-//            echo 'old';
-//           $logo = $this->input->post('logo');
-//        }
+        if($uplogo!=""){
+            echo 'update';
+            if (!empty($_FILES['updateimg']['name'])) {
+            $fileInfo = pathinfo($_FILES['updateimg']['name']);
+            $newName = time() . '.' . $fileInfo['extension'];
+            move_uploaded_file($_FILES['updateimg']['tmp_name'], "assets/uploads/" . $newName);
+        }
+        if (!empty($_FILES['updateimg']['name'])) {
+            $logo = $newName;
+        }
+             
+        }  else {
+           
+           $logo = $this->input->post('logo');
+        }
         
-        
+    
+       
         $data = array(
             'name' => $name,
             'phone' => $phone,
@@ -98,10 +99,6 @@ class Sponser extends CI_Controller {
             'logo_img' => $logo,
             'intrested_sport' => $sport
         );
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>";
-        die;
         $res = $this->Sponsers->update_sponser($id, $data);
         if ($res) {
             $this->session->set_flashdata('success', 'User update successfully');

@@ -67,7 +67,6 @@ class Web extends CI_Controller {
         ];
         $res = $this->Webmodel->get_users($user_login);
         if ($res->user_type == 'admin') {
-
             $newdata = array(
                 'name' => $res->name,
                 'id' => $res->player_id,
@@ -77,7 +76,7 @@ class Web extends CI_Controller {
             $this->session->set_userdata($newdata);
             redirect('admin/Dashboard', 'refresh');
         } else {
-            if ($res->user_type == 'player') {
+            if ($res->user_type == 'player' && $res->status == 1) {
                 $newdata = array(
                     'name' => $res->name,
                     'id' => $res->player_id,
@@ -86,14 +85,13 @@ class Web extends CI_Controller {
                     'mobile' => $res->phone1,
                     'username' => $res->username,
                     'logged_in' => TRUE,
-                    'user_type' => 'user'
+                    'user_type' => 'player'
                 );
 
                 $this->session->set_userdata($newdata);
-
                 redirect('User/Dashboard', 'refresh');
             } else {
-                if ($res->user_type == 'captian') {
+                if ($res->user_type == 'captain' && $res->status == 1) {
                     $newdata = array(
                         'name' => $res->name,
                         'id' => $res->player_id,
@@ -104,14 +102,14 @@ class Web extends CI_Controller {
                         'logged_in' => TRUE,
                         'user_type' => 'captian'
                     );
-
                     $this->session->set_userdata($newdata);
 
                     redirect('user/Dashboard', 'refresh');
                 } else {
 
                     $this->session->set_flashdata('error', 'Invalid Email Password');
-                    $this->load->view('user/login');
+                   // $this->load->view('user/user_login');
+                   redirect('web/user_login');
                 }
             }
         }

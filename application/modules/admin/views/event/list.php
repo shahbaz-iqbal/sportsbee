@@ -2,7 +2,7 @@
 <div class="wrapper">
     <div class="container-fluid">
         <!-- start page title -->
-        
+
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
@@ -62,7 +62,14 @@
                                             <td><?php echo $d->title; ?></td>
                                             <!--<td><?php echo $d->sponser_list; ?></td>-->
                                             <td><?php echo $d->youtube_link; ?></td>
-                                            <td><?php echo $d->image; ?></td>
+                                            <td>
+                                                <?php $image = $d->eventimage; ?>
+                                                <?php if (!empty($image)) { ?>
+                                                    <img src=" <?php echo base_url('assets/uploads/' . $image); ?>" height="30" width="30">
+                                                <?php } else { ?>
+                                                    Image Not Avail
+                                                <?php } ?>
+                                            </td>
                                             <td>
                                                 <a href="#" class="action-icon" id="event" onclick="editEvent(<?php echo $d->event_id; ?>)" data-toggle="modal" data-target="#eventModal"> <i class="mdi mdi-square-edit-outline"></i></a>
                                                 <a href="#" class="action-icon" id="sa-warning" onclick="deleteItem(<?php echo $d->event_id; ?>)"> <i class="mdi mdi-delete"></i></a>
@@ -125,8 +132,9 @@
                                             <div class="form-group">
                                                 <label>Sponser List</label><br>
                                                 <select class="select2-multiple" data-toggle="select2" id="module_access" name="eventsponser[]" multiple="multiple" data-placeholder="Choose ..." style="width: 100%;">
-                                                    <option value="H"> Ball</option>
-                                                    <option value="ape"> Ball</option> 
+                                                    <option value="Cricket"> Cricket</option>
+                                                    <option value="Footbal">Footbal</option> 
+                                                    <option value="Hockey">Hockey</option> 
                                                 </select> 
                                             </div>
                                         </div>
@@ -140,22 +148,23 @@
                                     </div> 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            
+
                                             <div class="multi-upload">
-                                                            <label for="files">Select multiple files: </label>
-                                                            <input id="files" type="file" name="img[]" onchange="readURL(this);" accept="image/*" multiple="true" multiple/>
-                                                            <button type="button" id="clear">Clear</button>
-							   <output id="result" />
-						</div>
-                                            
-<!--                                            <div class="form-group">
-                                                <label>Image</label>
-                                                <input type="file" class="form-control" name="img"  placeholder="Event Images">
-                                            </div>-->
+                                                <label for="files">Select multiple files: </label>
+                                                <input id="files" type="file" name="img[]" onchange="readURL(this);" accept="image/*" multiple="true" multiple/>
+                                                <button type="button" id="clear">Clear</button>
+                                                <output id="result" />
+                                            </div>
+
+                                            <!--                                            <div class="form-group">
+                                                                                            <label>Image</label>
+                                                                                            <input type="file" class="form-control" name="img"  placeholder="Event Images">
+                                                                                        </div>-->
 
                                         </div>
                                     </div>
                                     <input type="hidden" id="eventid" name="idevent">
+                                    <input type="hidden" id="old" name="old_image[]">
                                 </form>
                             </div> <!-- end card-body-->
                         </div>
@@ -218,23 +227,24 @@
 <script>
     function editEvent(id){
 //        console.log("EDIT ID:"+id);
-            $.ajax({
-            url: "<?php echo base_url('admin/Event/edit_event/') ?>" + id,
+    $.ajax({
+    url: "<?php echo base_url('admin/Event/edit_event/') ?>" + id,
             success: function (data) {
 
-                data = JSON.parse(data);
-//                console.log(data['event_id']);
-                $("#eventid").val(data['event_id']);
-                $("#name").val(data['name']);
-                $("#phone").val(data['phone']);
-                $("#title").val(data['title']);
-                $("#email").val(data['email']);
-                $("#module_access").val(data['sponser_list']);
-                $("#link").val(data['youtube_link']);
+            data = JSON.parse(data);
+            console.log(data);
+            $("#eventid").val(data['event_id']);
+            $("#name").val(data['name']);
+            $("#phone").val(data['phone']);
+            $("#title").val(data['title']);
+            $("#email").val(data['email']);
+            $("#module_access").val(data['sponser_list']);
+            $("#link").val(data['youtube_link']);
+            $("#old").val(data['image']);
             }
-        })
+    })
     }
-    
+
 </script> 
 
 <script>
@@ -248,12 +258,12 @@
             confirmButtonColor: '#FDA81A',
             cancelButtonColor: '#B22E06',
             confirmButtonText: 'Yes, Delete it!'
-    }).then((result) => {
+    }).then((result) = > {
     if (result.value) {
     Swal.fire({title:"Data Deleted!",
             text:"",
             type:"success",
-            confirmButtonClass:"btn btn-confirm mt-2"}).then((result) => {
+            confirmButtonClass:"btn btn-confirm mt-2"}).then((result) = > {
     if (result.value){
     window.location.href = "<?php echo base_url() ?>admin/event/delete/" + id;
     }
@@ -299,7 +309,7 @@
     Swal.fire({title:"Added!",
             text:"",
             type:"success",
-            confirmButtonClass:"btn btn-confirm mt-2"}).then((result) => {
+            confirmButtonClass:"btn btn-confirm mt-2"}).then((result) = > {
     if (result.value){
     $('#EventForm').attr('action', '<?php echo base_url(); ?>admin/event/add_event');
     $('#EventForm').submit();
@@ -318,66 +328,66 @@
 <script>
     $('#module_access').select2();
 </script>
-<script>
+<!--<script>
    window.onload = function(){   
 
-								    if(window.File && window.FileList && window.FileReader)
-								    {
-								        $('#files').on("change", function(event) {
-								            var files = event.target.files; //FileList object
-								            var output = document.getElementById("result");
-								            for(var i = 0; i< files.length; i++)
-								            {
-								                var file = files[i];
-								                //Only pics
-								                // if(!file.type.match('image'))
-								                if(file.type.match('image.*')){
-								                    if(this.files[0].size < 2097152){    
-								                  // continue;
-								                    var picReader = new FileReader();
-								                    picReader.addEventListener("load",function(event){
-								                        var picFile = event.target;
-								                        var div = document.createElement("div");
-								                        div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
-								                                "title='preview image'/>";
-								                        output.insertBefore(div,null);            
-								                    });
-								                    //Read the image
-								                    $('#clear, #result').show();
-								                    picReader.readAsDataURL(file);
-								                    }else{
-								                        alert("Image Size is too big. Minimum size is 2MB.");
-								                        $(this).val("");
-								                    }
-								                }else{
-								                alert("You can only upload image file.");
-								                $(this).val("");
-								            }
-								            }                               
-								           
-								        });
-								    }
-								    else
-								    {
-								        console.log("Your browser does not support File API");
-								    }
-								}
-								
-								   $('#files').on("click", function() {
-								        $('.thumbnail').parent().remove();
-								        $('result').hide();
-								        $(this).val("");
-								    });
-								
-								    $('#clear').on("click", function() {
-								        $('.thumbnail').parent().remove();
-								        $('#result').hide();
-								        $('#files').val("");
-								        $(this).hide();
-								    });
-								
+                                                                    if(window.File && window.FileList && window.FileReader)
+                                                                    {
+                                                                        $('#files').on("change", function(event) {
+                                                                            var files = event.target.files; //FileList object
+                                                                            var output = document.getElementById("result");
+                                                                            for(var i = 0; i< files.length; i++)
+                                                                            {
+                                                                                var file = files[i];
+                                                                                //Only pics
+                                                                                // if(!file.type.match('image'))
+                                                                                if(file.type.match('image.*')){
+                                                                                    if(this.files[0].size < 2097152){    
+                                                                                  // continue;
+                                                                                    var picReader = new FileReader();
+                                                                                    picReader.addEventListener("load",function(event){
+                                                                                        var picFile = event.target;
+                                                                                        var div = document.createElement("div");
+                                                                                        div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
+                                                                                                "title='preview image'/>";
+                                                                                        output.insertBefore(div,null);            
+                                                                                    });
+                                                                                    //Read the image
+                                                                                    $('#clear, #result').show();
+                                                                                    picReader.readAsDataURL(file);
+                                                                                    }else{
+                                                                                        alert("Image Size is too big. Minimum size is 2MB.");
+                                                                                        $(this).val("");
+                                                                                    }
+                                                                                }else{
+                                                                                alert("You can only upload image file.");
+                                                                                $(this).val("");
+                                                                            }
+                                                                            }                               
+                                                                           
+                                                                        });
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        console.log("Your browser does not support File API");
+                                                                    }
+                                                                }
+                                                                
+                                                                   $('#files').on("click", function() {
+                                                                        $('.thumbnail').parent().remove();
+                                                                        $('result').hide();
+                                                                        $(this).val("");
+                                                                    });
+                                                                
+                                                                    $('#clear').on("click", function() {
+                                                                        $('.thumbnail').parent().remove();
+                                                                        $('#result').hide();
+                                                                        $('#files').val("");
+                                                                        $(this).hide();
+                                                                    });
+                                                                
 
-</script>
+</script>-->
 
 
 

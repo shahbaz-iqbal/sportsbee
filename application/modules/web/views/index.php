@@ -13,7 +13,7 @@
         <img class="mySlides" src="<?php echo base_url('application/assets/images/dashboard3.png'); ?>" style="width:100%; height: auto;">
     </div> 
     <!--start videos section -->
-    <div class="container">
+<!--    <div class="container">
         <div class="recentpost_grid_heading" style="margin-bottom: 20px !important;">
             <h2 style="color: #fff;">Recent Posts</h2>
         </div>
@@ -44,7 +44,7 @@
             </div>
 
         </div>
-    </div>
+    </div>-->
     <!--end videos section -->
     <!-- ============================================================== -->
     <!-- Start Point table here -->
