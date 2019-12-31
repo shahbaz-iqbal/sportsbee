@@ -486,7 +486,7 @@
                     $('#addressspan').text("Please Enter Address!");
                     document.forms["msform"]["address"].style.border = "1px solid red";
                     check = 1;
-                } check=0;
+                } //check=0;
                 if (check == 1) {
                     swal('missing fields', 'Please Fill the Required Fields', 'error');
                 } else {

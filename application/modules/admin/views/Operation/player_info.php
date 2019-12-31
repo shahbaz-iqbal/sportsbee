@@ -63,9 +63,9 @@
                                             </td>
                                              <td>
                                                 <?php if ($user->player_as == 2) { ?>
-                                               <img src="<?php echo base_url(); ?>assets/uploads/captian.jpg" alt="Smiley face" height="42" width="42" style="margin-left: 10px;">
+                                               <img src="<?php echo base_url(); ?>assets/uploads/captian.jpg" alt="Smiley face" height="22" width="22" style="margin-left: 10px;">
                                                 <?php } else { ?>
-                                               <img src="<?php echo base_url(); ?>assets/uploads/bowler.png" alt="Smiley face" height="42" width="42" style="margin-left: 10px;">
+                                               <img src="<?php echo base_url(); ?>assets/uploads/bowler.png" alt="Smiley face" height="22" width="22" style="margin-left: 10px;">
                                                 <?php } ?>
                                             </td>
                                             <td><?php echo $user->name; ?></td>
